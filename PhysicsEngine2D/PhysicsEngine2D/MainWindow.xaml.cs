@@ -23,8 +23,8 @@ namespace PhysicsEngine2D {
 
     public partial class MainWindow : Window {
 
-        readonly Time timeSettings = new(20);
-        readonly DispatcherTimer Time = new();
+        private readonly Time time = new((int)Math.Round(PhysicsSettings.FixedTimeStep * 1000));
+        private readonly DispatcherTimer dispatcherTimer = new();
         private Renderer renderer;
         private PhysicsEngine physicsEngine;
         private World world = new();
@@ -46,15 +46,15 @@ namespace PhysicsEngine2D {
         }
 
         void SetupTime() {
-            Time.Stop();
-            Time.Tick += FixedUpdate;
-            Time.Interval = timeSettings.FixedTimeStep;
+            dispatcherTimer.Stop();
+            dispatcherTimer.Tick += FixedUpdate;
+            dispatcherTimer.Interval = time.FixedTimeStep;
         }
 
         void SetupWorld() {
             Circle2D newCircle = new Circle2D();
             newCircle.Body.position = new Vector2(250, 250);
-            newCircle.Body.forceAccum += new Vector2(0, -300);
+            newCircle.Body.AddForce(new Vector2(-50,-1000));
             //newCircle.Body.velocity = new Vector2(6,6);
             //newCircle.Body.acceleration = new Vector2(20, 20);
             //newCircle.Body.forceAccum = new Vector2(22,22);
@@ -66,26 +66,26 @@ namespace PhysicsEngine2D {
         }
 
         void SetupPhysicsEngine() {
-            physicsEngine = new(new PhysicsSettings(new Vector2(0, 9.81)), world);
+            physicsEngine = new(world);
         }
         #endregion
 
         public void StartSimulation() {
-            Time.Start();
+            dispatcherTimer.Start();
         }
 
         public void StopSimulation() {
-            Time.Stop();
+            dispatcherTimer.Stop();
         }
 
         public void ResetSimulation() {
-            Time.Stop();
+            dispatcherTimer.Stop();
         }
 
         void FixedUpdate(object? sender, EventArgs e) {
             physicsEngine.FixedUpdate();
             renderer.Render();
-            timeSettings.FixedUpdate();
+            time.FixedUpdate();
 
 
 

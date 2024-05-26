@@ -8,22 +8,19 @@ using PhysicsLibrary;
 namespace Physics2D {
     public class PhysicsEngine {
 
-        public PhysicsSettings PhysicsSettings { get; private set; }
-
         private EulerIntegrator integrator;
         private CollisionSolver collisionSolver;
         private World world;
 
-        public PhysicsEngine(PhysicsSettings physicsSettings, World world) {
-            PhysicsSettings = physicsSettings;
-            integrator = new EulerIntegrator(PhysicsSettings);
+        public PhysicsEngine(World world) {
+            integrator = new EulerIntegrator();
             collisionSolver = new CollisionSolver();
             this.world = world;
         }
 
         public void FixedUpdate() {
             foreach (var body in world.bodies) {
-                body.forceAccum += PhysicsSettings.Gravity;
+                body.AddForce(PhysicsSettings.Gravity);
                 integrator.Integrate(body);
             }
 

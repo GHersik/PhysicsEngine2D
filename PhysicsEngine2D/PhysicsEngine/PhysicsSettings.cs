@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PhysicsLibrary;
+﻿using PhysicsLibrary;
 
 namespace Physics2D {
-    public class PhysicsSettings {
+    public static class PhysicsSettings {
 
-        public Vector2 Gravity { get; private set; }
+        public static readonly Vector2 Gravity = new(0, 9.81);
 
-        public double FixedTimeStep { get; private set; }
+        public static readonly double FixedTimeStep = 0.030;
 
-        public PhysicsSettings(Vector2 gravity, double fixedTimeStep = 0.030) {
-            Gravity = gravity;
-            FixedTimeStep = fixedTimeStep;
-        }
     }
 }

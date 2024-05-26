@@ -18,8 +18,16 @@ namespace PhysicsLibrary {
             position = Vector2.Zero;
             velocity = Vector2.Zero;
             acceleration = Vector2.Zero;
-            damping = .7;
-            inverseMass = .5;
+            damping = .3;
+            inverseMass = 1;
+            forceAccum = Vector2.Zero;
+        }
+
+        public void AddForce(Vector2 force) {
+            forceAccum += force;
+        }
+
+        public void ClearAccumulator() {
             forceAccum = Vector2.Zero;
         }
 
