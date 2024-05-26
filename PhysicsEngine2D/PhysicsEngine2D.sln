@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicsEngine2D", "PhysicsEngine2D\PhysicsEngine2D.csproj", "{59CA5E31-E1F2-4935-B14F-AFC83185C31B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationWindow", "PhysicsEngine2D\SimulationWindow.csproj", "{59CA5E31-E1F2-4935-B14F-AFC83185C31B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicsLibrary", "PhysicsLibrary\PhysicsLibrary.csproj", "{CF5F0F22-0BC7-486E-8463-89A25A7490A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physics2D", "PhysicsEngine\Physics2D.csproj", "{B68F89BF-F912-43C1-AC4E-8998181D0DAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{59CA5E31-E1F2-4935-B14F-AFC83185C31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59CA5E31-E1F2-4935-B14F-AFC83185C31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59CA5E31-E1F2-4935-B14F-AFC83185C31B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5F0F22-0BC7-486E-8463-89A25A7490A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5F0F22-0BC7-486E-8463-89A25A7490A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5F0F22-0BC7-486E-8463-89A25A7490A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5F0F22-0BC7-486E-8463-89A25A7490A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68F89BF-F912-43C1-AC4E-8998181D0DAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B68F89BF-F912-43C1-AC4E-8998181D0DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B68F89BF-F912-43C1-AC4E-8998181D0DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B68F89BF-F912-43C1-AC4E-8998181D0DAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhysicsLibrary {
-    public class Transform {
-
-        public Vector2 Position { get; private set; }
+namespace PhysicsLibrary.Collider {
+    public class Collider {
 
 
     }

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace PhysicsLibrary {
     public partial struct Vector2 {
 
@@ -20,6 +19,11 @@ namespace PhysicsLibrary {
             this.y = y;
         }
 
+        public void Invert() {
+            x = -x;
+            y = -y;
+        }
+
         public void Normalize() {
             double magnitude = Magnitude;
             if (magnitude == 0) {
@@ -31,6 +35,11 @@ namespace PhysicsLibrary {
             y /= magnitude;
         }
 
-        public override string ToString() => $"({x},{y})";
+        public void AddScaledVector(Vector2 vector, double scale) {
+            x += vector.x * scale;
+            y += vector.y * scale;
+        }
+
+        public override readonly string ToString() => $"({x},{y})";
     }
 }

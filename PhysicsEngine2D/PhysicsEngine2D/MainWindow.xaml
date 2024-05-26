@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhysicsEngine2D"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="SimulationWindow" Height="760" Width="1080" ResizeMode="NoResize" Background="Black"
+        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    </Grid>
+    <Canvas Name="EditorView" Height="760" Width="1080" Background="Black" Focusable="True" 
+           VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock FontSize="20" Foreground="White" FontFamily="Press Start 2P"  FontWeight="DemiBold"   Canvas.Top="64" TextAlignment="Center"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="46" VerticalAlignment="Top" Width="520" Canvas.Left="280">Time Driven Simulation</TextBlock>
+
+        <Canvas Name="SceneView" Height="500" Width="500" Background="black" Focusable="True" 
+           VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Top="130" Canvas.Left="480">
+        </Canvas>
+        
+        <Rectangle Name="SceneBorder" Width="500" Height="500" Canvas.Left="480" StrokeThickness="3" Stroke="#FF4D96FF" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Name="canvasMatrixTop" FontSize="15" Foreground="#FF4D96FF"  FontWeight="bold"   Canvas.Top="100" TextAlignment="Center" Canvas.Left="470" TextWrapping="WrapWithOverflow" Height="21" Width="48" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Roboto Mono"><Run Language="pl-pl" Text="(0, 0)"/></TextBlock>
+        <TextBlock FontSize="15" Foreground="#FF4D96FF"  FontWeight="bold"   Canvas.Top="640" TextAlignment="Center" Canvas.Left="905" TextWrapping="WrapWithOverflow" Height="21" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Roboto Mono"><Run Language="pl-pl" Text="(500, 500)"/></TextBlock>
+                
+    </Canvas>
 </Window>
