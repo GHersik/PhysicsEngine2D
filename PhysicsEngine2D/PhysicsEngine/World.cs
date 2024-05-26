@@ -10,5 +10,14 @@ namespace Physics2D {
 
         public HashSet<Body> bodies = new HashSet<Body>();
 
+        public void NewWorld() {
+            bodies.Clear();
+
+        }
+
+        public void AddBody(Body body) {
+            bodies.Add(body);
+        }
+
     }
 }

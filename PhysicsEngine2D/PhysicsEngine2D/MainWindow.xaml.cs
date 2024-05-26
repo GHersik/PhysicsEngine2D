@@ -17,21 +17,23 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Physics2D;
 using PhysicsLibrary;
+using SimulationWindow;
 
 namespace PhysicsEngine2D {
 
     public partial class MainWindow : Window {
 
-        readonly Time timeSettings = new(30);
+        readonly Time timeSettings = new(20);
         readonly DispatcherTimer Time = new();
-        readonly PhysicsEngine physicsEngine = new(new PhysicsSettings(new Vector2(0, -9.81)));
+        private Renderer renderer;
+        private PhysicsEngine physicsEngine;
+        private World world = new();
 
         public MainWindow() {
             InitializeComponent();
             Setup();
 
-            //StartSimulation();
-
+            StartSimulation();
         }
 
         #region Initialization
@@ -39,11 +41,8 @@ namespace PhysicsEngine2D {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             SetupTime();
-            SetupSimulation();
-        }
-
-        void SetupRigidBodies() {
-
+            SetupWorld();
+            SetupPhysicsEngine();
         }
 
         void SetupTime() {
@@ -52,8 +51,22 @@ namespace PhysicsEngine2D {
             Time.Interval = timeSettings.FixedTimeStep;
         }
 
-        void SetupSimulation() {
-            SceneView.Children.Add(new Circle2D());
+        void SetupWorld() {
+            Circle2D newCircle = new Circle2D();
+            newCircle.Body.position = new Vector2(250, 250);
+            newCircle.Body.forceAccum += new Vector2(0, -300);
+            //newCircle.Body.velocity = new Vector2(6,6);
+            //newCircle.Body.acceleration = new Vector2(20, 20);
+            //newCircle.Body.forceAccum = new Vector2(22,22);
+            SceneView.Children.Add(newCircle);
+            world.AddBody(newCircle.Body);
+
+            Circle2D[] cirlces = { newCircle };
+            renderer = new(cirlces);
+        }
+
+        void SetupPhysicsEngine() {
+            physicsEngine = new(new PhysicsSettings(new Vector2(0, 9.81)), world);
         }
         #endregion
 
@@ -71,7 +84,10 @@ namespace PhysicsEngine2D {
 
         void FixedUpdate(object? sender, EventArgs e) {
             physicsEngine.FixedUpdate();
+            renderer.Render();
             timeSettings.FixedUpdate();
+
+
 
             //foreach (var sceneEntity in ) {
 

@@ -18,8 +18,8 @@ namespace PhysicsLibrary {
             position = Vector2.Zero;
             velocity = Vector2.Zero;
             acceleration = Vector2.Zero;
-            damping = 0;
-            inverseMass = 0;
+            damping = .7;
+            inverseMass = .5;
             forceAccum = Vector2.Zero;
         }
 
