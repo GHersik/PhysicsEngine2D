@@ -1,25 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SimulationWindow.SceneManagement;
 
 namespace PhysicsEngine2D {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window {
+
+        private SceneEngine sceneEngine;
+        private SceneLoader sceneLoader;
+
+        #region Initialization
         public MainWindow() {
             InitializeComponent();
+            Setup();
+            EnableInput(false);
+
+            SceneManager sceneManager = new SceneManager(SceneView);
+            sceneEngine = new SceneEngine(sceneManager);
+            sceneLoader = new SceneLoader(sceneManager, SceneFade);
+            StartSimulation();
+        }
+
+        private void Setup() {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private async void StartSimulation() {
+            Task sceneLoad = sceneLoader.LoadDefaultSceneAsync();
+            await sceneLoad;
+
+            EnableInput(true);
+            sceneEngine.StartTime();
+        }
+        #endregion
+
+        public void TimeButton_Click(object sender, RoutedEventArgs e) {
+            if (sceneEngine.IsRunning)
+                SetSimulationTime(false);
+            else
+                SetSimulationTime(true);
+        }
+
+        private void SetSimulationTime(bool value) {
+            if (value) {
+                sceneEngine.StartTime();
+                TimeButton.Content = "Stop Time";
+            }
+            else {
+                sceneEngine.StopTime();
+                TimeButton.Content = "Start Time";
+            }
+        }
+
+        private async void Generate_Click(object sender, RoutedEventArgs e) {
+            SetSimulationTime(false);
+            EnableInput(false);
+            Task sceneLoadTask = sceneLoader.LoadSceneAsync(SceneLoader.Scene.Circles);
+            await sceneLoadTask;
+            EnableInput(true);
+            SetSimulationTime(true);
+        }
+
+        private void EnableInput(bool value) {
+            TimeButton.IsEnabled = value;
+            GenerateButton.IsEnabled = value;
+            PickSimulationCB.IsEnabled = value;
         }
     }
 }
