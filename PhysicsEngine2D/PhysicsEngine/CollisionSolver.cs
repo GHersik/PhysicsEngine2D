@@ -1,6 +1,6 @@
 ﻿using PhysicsLibrary;
 
-namespace Physics2D {
+namespace Physics {
     internal class CollisionSolver {
 
     }

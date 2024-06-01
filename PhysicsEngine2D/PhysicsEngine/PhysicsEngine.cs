@@ -1,32 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Physics.Integrators;
 using PhysicsLibrary;
 
-namespace Physics2D {
+namespace Physics {
     public class PhysicsEngine {
 
-        private EulerIntegrator integrator;
+        private EulerIntegrator eulerIntegrator;
         private CollisionSolver collisionSolver;
-        private World world;
+        private PhysicsWorld physicsWorld;
 
-        public PhysicsEngine(World world) {
-            integrator = new EulerIntegrator();
+        public PhysicsEngine() {
+            eulerIntegrator = new EulerIntegrator();
             collisionSolver = new CollisionSolver();
-            this.world = world;
+            physicsWorld = new PhysicsWorld();
         }
 
+        public PhysicsEngine(Collection<Body> physicsObjects) {
+            eulerIntegrator = new EulerIntegrator();
+            collisionSolver = new CollisionSolver();
+            physicsWorld = new PhysicsWorld();
+            physicsWorld.ReplaceRegistry(physicsObjects);
+        }
+
+        public void ReplacePhysicsRegistry(Collection<Body> physicsObjects) => physicsWorld.ReplaceRegistry(physicsObjects);
+
+        public bool AddObject(Body body) => physicsWorld.AddBody(body);
+
+        public bool RemoveObject(Body body) => physicsWorld.RemoveBody(body);
+
+        public bool Contains(Body body) => physicsWorld.Contains(body);
+
+        public void Clear() => physicsWorld.Clear();
+
         public void FixedUpdate() {
-            foreach (var body in world.bodies) {
+            foreach (var body in physicsWorld) {
                 body.AddForce(PhysicsSettings.Gravity);
-                integrator.Integrate(body);
+                eulerIntegrator.Integrate(body);
             }
 
 
             //solve motions
-            //detect collisions
+            //detect collisions // callcollisionmethods
             //solve collisions
         }
     }

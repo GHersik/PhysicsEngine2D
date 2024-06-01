@@ -23,7 +23,5 @@ namespace PhysicsLibrary {
         public static Vector2 operator -(Vector2 a, double scalar) => new(a.x - scalar, a.y - scalar);
         public static Vector2 operator *(Vector2 vectorToMultiply, double scalar) => new(vectorToMultiply.x * scalar, vectorToMultiply.y * scalar);
         public static Vector2 operator /(Vector2 vectorToDivide, double scalar) => new(vectorToDivide.x / scalar, vectorToDivide.y / scalar);
-
-
     }
 }

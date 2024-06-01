@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PhysicsLibrary {
-    public class BodyForceRegistry {
+    public class CircleCollider : Collider {
 
+        public double Radius { get; set; }
 
     }
 }
