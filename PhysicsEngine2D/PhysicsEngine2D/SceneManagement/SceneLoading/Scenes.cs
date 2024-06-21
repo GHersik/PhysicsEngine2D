@@ -12,16 +12,22 @@ namespace PhysicsEngine2D {
 
         private readonly Random rnd = new Random();
 
-        private Entity[] allPossibleEntities = { new Entity(new Circle2D()) };
-
-        public SceneData CirclesScene() {
+        public SceneData GravityAndMass() {
             SceneData scene = new SceneData();
-            Entity circleEntity = new(new Circle2D());
-            circleEntity.Body.position = new Vector2(20, 20);
-            circleEntity.Body.AddForce(new Vector2(3000, -1000));
-            scene.AddEntity(circleEntity);
+            for (int i = 1; i < 18; i++)
+                for (int j = 1; j < 18; j++)
+                    scene.AddEntity(InstantiateCircle(new Vector2(i * 28, j * 28), 1, ColorSettings.YellowBrush));
 
+            scene.AddEntity(InstantiateCircle(new Vector2(250, 250), 3, ColorSettings.BlueBrush));
             return scene;
+        }
+
+        private Entity InstantiateCircle(Vector2 initPosition, double radius, SolidColorBrush color) {
+            int massAndForceMultiplier = rnd.Next(4, 8);
+            Entity circleEntity = new(new Circle2D(radius * massAndForceMultiplier, color), new CircleCollider(radius * massAndForceMultiplier), new PhysicsLibrary.Transform(initPosition));
+            circleEntity.Body.SetMass(massAndForceMultiplier);
+            circleEntity.Body.AddForce(new Vector2(rnd.Next(100, 1000), rnd.Next(100, 1000)));
+            return circleEntity;
         }
     }
 }

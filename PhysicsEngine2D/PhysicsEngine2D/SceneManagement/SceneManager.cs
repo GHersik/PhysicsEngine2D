@@ -24,7 +24,7 @@ namespace SimulationWindow.SceneManagement {
             ClearSceneData();
             sceneData = newSceneData;
             sceneRenderer.ReplaceCurrentRenderers(sceneData);
-            physicsEngine.ReplacePhysicsRegistry(sceneData.RetrieveCurrentPhysicsBodies());
+            physicsEngine.PhysicsWorld.ReplaceRegistry(sceneData.RetrieveCurrentPhysicsBodies());
         }
 
         public bool AddEntity(Entity entity) {
@@ -33,7 +33,7 @@ namespace SimulationWindow.SceneManagement {
 
             sceneData.AddEntity(entity);
             sceneRenderer.AddEntityToRender(entity);
-            physicsEngine.AddObject(entity.Body);
+            physicsEngine.PhysicsWorld.AddBody(entity);
             return true;
         }
 
@@ -43,13 +43,13 @@ namespace SimulationWindow.SceneManagement {
 
             sceneData.RemoveEntity(entity);
             sceneRenderer.RemoveEntityFromRender(entity);
-            physicsEngine.RemoveObject(entity.Body);
+            physicsEngine.PhysicsWorld.RemoveBody(entity);
             return true;
         }
 
         public void ClearSceneData() {
             sceneData.Clear();
-            physicsEngine.Clear();
+            physicsEngine.PhysicsWorld.Clear();
             sceneRenderer.ClearRenderer();
         }
 

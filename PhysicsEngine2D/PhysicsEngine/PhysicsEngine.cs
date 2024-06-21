@@ -10,37 +10,34 @@ using PhysicsLibrary;
 namespace Physics {
     public class PhysicsEngine {
 
+        public PhysicsWorld PhysicsWorld { get; private set; }
+        public BodyForceRegistry ForceRegistry { get; private set; }
+
+
         private EulerIntegrator eulerIntegrator;
-        private CollisionSolver collisionSolver;
-        private PhysicsWorld physicsWorld;
+        private ContactResolver contactResolver;
 
         public PhysicsEngine() {
+            PhysicsWorld = new PhysicsWorld();
+            ForceRegistry = new BodyForceRegistry();
             eulerIntegrator = new EulerIntegrator();
-            collisionSolver = new CollisionSolver();
-            physicsWorld = new PhysicsWorld();
+            contactResolver = new ContactResolver();
         }
 
-        public PhysicsEngine(Collection<Body> physicsObjects) {
+        public PhysicsEngine(Collection<IPhysicsEntity> physicsObjects) {
             eulerIntegrator = new EulerIntegrator();
-            collisionSolver = new CollisionSolver();
-            physicsWorld = new PhysicsWorld();
-            physicsWorld.ReplaceRegistry(physicsObjects);
+            ForceRegistry = new BodyForceRegistry();
+            contactResolver = new ContactResolver();
+            PhysicsWorld = new PhysicsWorld();
+            PhysicsWorld.ReplaceRegistry(physicsObjects);
         }
-
-        public void ReplacePhysicsRegistry(Collection<Body> physicsObjects) => physicsWorld.ReplaceRegistry(physicsObjects);
-
-        public bool AddObject(Body body) => physicsWorld.AddBody(body);
-
-        public bool RemoveObject(Body body) => physicsWorld.RemoveBody(body);
-
-        public bool Contains(Body body) => physicsWorld.Contains(body);
-
-        public void Clear() => physicsWorld.Clear();
 
         public void FixedUpdate() {
-            foreach (var body in physicsWorld) {
-                body.AddForce(PhysicsSettings.Gravity);
-                eulerIntegrator.Integrate(body);
+            foreach (var physicsEntity in PhysicsWorld) {
+                physicsEntity.Body.AddForce(PhysicsSettings.Gravity);
+                ForceRegistry.UpdateForces();
+                eulerIntegrator.Integrate(physicsEntity);
+                
             }
 
 

@@ -3,7 +3,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using PhysicsLibrary;
 
-namespace PhysicsEngine2D {
+namespace PhysicsEngine2D
+{
     public class Circle2D : Shape, IRenderer {
 
         private double radius;
@@ -15,6 +16,8 @@ namespace PhysicsEngine2D {
             Fill = color;
         }
 
+        public Circle2D(double radius) : this(radius, ColorSettings.YellowBrush) { }
+
         public Circle2D() : this(5, ColorSettings.YellowBrush) { }
 
         protected override Geometry DefiningGeometry {
@@ -25,7 +28,7 @@ namespace PhysicsEngine2D {
 
         public void Draw(Vector2 position) => RenderTransform = new TranslateTransform(position.x - radius, position.y - radius);
 
-        public UIElement UIElement { get => this; }
+        public UIElement UIElement => this;
 
     }
 }

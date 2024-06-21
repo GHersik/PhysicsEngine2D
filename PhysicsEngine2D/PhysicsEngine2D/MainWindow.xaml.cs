@@ -60,7 +60,7 @@ namespace PhysicsEngine2D {
         private async void Generate_Click(object sender, RoutedEventArgs e) {
             SetSimulationTime(false);
             EnableInput(false);
-            Task sceneLoadTask = sceneLoader.LoadSceneAsync(SceneLoader.Scene.Circles);
+            Task sceneLoadTask = sceneLoader.LoadSceneAsync(SceneLoader.Scene.GravityAndMass);
             await sceneLoadTask;
             EnableInput(true);
             SetSimulationTime(true);

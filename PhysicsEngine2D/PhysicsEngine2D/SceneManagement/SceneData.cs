@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace PhysicsEngine2D {
     public class SceneData : IEnumerable<Entity> {
@@ -45,10 +44,10 @@ namespace PhysicsEngine2D {
 
         public void Clear() => sceneEntities.Clear();
 
-        public Collection<Body> RetrieveCurrentPhysicsBodies() {
-            Collection<Body> bodies = new Collection<Body>();
+        public Collection<IPhysicsEntity> RetrieveCurrentPhysicsBodies() {
+            Collection<IPhysicsEntity> bodies = new Collection<IPhysicsEntity>();
             foreach (var entity in sceneEntities)
-                bodies.Add(entity.Body);
+                bodies.Add(entity);
 
             return bodies;
         }

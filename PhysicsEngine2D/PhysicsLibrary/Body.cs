@@ -2,7 +2,9 @@
 namespace PhysicsLibrary {
     public class Body {
 
-        public Vector2 position;
+        public double mass { get; private set; }
+        public double inverseMass { get; private set; }
+        public Vector2 forceAccumulator { get; private set; }
 
         public Vector2 velocity;
 
@@ -10,25 +12,20 @@ namespace PhysicsLibrary {
 
         public double damping;
 
-        public double inverseMass;
-
-        public Vector2 forceAccumulator;
-
         public Body() {
-            position = Vector2.Zero;
             velocity = Vector2.Zero;
             acceleration = Vector2.Zero;
             damping = .995;
             inverseMass = 1;
+            mass = 1;
             forceAccumulator = Vector2.Zero;
         }
 
-        public void AddForce(Vector2 force) {
-            forceAccumulator += force;
-        }
+        public void SetMass(double mass) => this.mass = mass;
 
-        public void ClearAccumulator() {
-            forceAccumulator = Vector2.Zero;
-        }
+        public void AddForce(Vector2 force) => forceAccumulator += force;
+
+        public void ClearAccumulator() => forceAccumulator = Vector2.Zero;
+
     }
 }

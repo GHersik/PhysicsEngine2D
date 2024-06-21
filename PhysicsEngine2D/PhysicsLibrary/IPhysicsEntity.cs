@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace PhysicsLibrary {
-    public interface PhysicsEntity {
+    public interface IPhysicsEntity {
 
-        public Body Body { get; protected set; }
+        public Transform Transform { get; }
+
+        public Body Body { get; }
+
+        public Collider Collider { get; }
 
         public abstract void OnCollisionEnter2D();
 
