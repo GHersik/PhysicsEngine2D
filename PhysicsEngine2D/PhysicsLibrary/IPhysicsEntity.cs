@@ -1,18 +1,19 @@
 ﻿
+
 namespace PhysicsLibrary {
     public interface IPhysicsEntity {
 
-        public Transform Transform { get; }
+        public Transform transform { get; }
 
-        public Body Body { get; }
+        public Body body { get; }
 
-        public Collider Collider { get; }
+        public Collider2D collider { get; }
 
-        public abstract void OnCollisionEnter2D();
+        public abstract void OnCollisionEnter2D(Collision2D collision);
 
-        public abstract void OnCollisionExit2D();
+        public abstract void OnCollisionExit2D(Collision2D collision);
 
-        public abstract void OnCollisionStay2D();
+        public abstract void OnCollisionStay2D(Collision2D collision);
 
         public abstract void OnTriggerEnter2D();
 

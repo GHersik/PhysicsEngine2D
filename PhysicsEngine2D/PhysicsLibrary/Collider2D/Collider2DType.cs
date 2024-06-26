@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PhysicsLibrary {
-    public abstract class Collider {
-
-        public abstract Vector2 FindFurthestPoint(Vector2 direction);
-
+    public enum Collider2DType {
+        Circle,
+        Box
     }
 }

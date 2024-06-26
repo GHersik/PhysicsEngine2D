@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using SimulationWindow.SceneManagement;
 
 namespace PhysicsEngine2D {
@@ -60,7 +61,11 @@ namespace PhysicsEngine2D {
         private async void Generate_Click(object sender, RoutedEventArgs e) {
             SetSimulationTime(false);
             EnableInput(false);
-            Task sceneLoadTask = sceneLoader.LoadSceneAsync(SceneLoader.Scene.GravityAndMass);
+
+            int sceneIndex = PickSimulationCB.SelectedIndex;
+            SceneLoader.Scene enumValue = (SceneLoader.Scene)Enum.ToObject(typeof(SceneLoader.Scene), sceneIndex);
+
+            Task sceneLoadTask = sceneLoader.LoadSceneAsync(enumValue);
             await sceneLoadTask;
             EnableInput(true);
             SetSimulationTime(true);

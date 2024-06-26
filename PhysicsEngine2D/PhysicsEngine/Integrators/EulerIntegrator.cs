@@ -5,13 +5,13 @@ namespace Physics.Integrators {
 
         public void Integrate(IPhysicsEntity physicsEntity) {
             UpdateLinearPosition(physicsEntity);
-            UpdateLinearVelocity(physicsEntity.Body);
-            ImposeDrag(physicsEntity.Body);
-            physicsEntity.Body.ClearAccumulator();
+            UpdateLinearVelocity(physicsEntity.body);
+            ImposeDrag(physicsEntity.body);
+            physicsEntity.body.ClearAccumulator();
         }
 
         private void UpdateLinearPosition(IPhysicsEntity physicsEntity) {
-            physicsEntity.Transform.position.AddScaledVector(physicsEntity.Body.velocity, PhysicsSettings.FixedTimeStep);
+            physicsEntity.transform.position.AddScaledVector(physicsEntity.body.velocity, PhysicsSettings.FixedTimeStep);
         }
 
         private void UpdateLinearVelocity(Body rigidBody) {

@@ -3,9 +3,10 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using PhysicsLibrary;
 
-namespace PhysicsEngine2D
-{
+namespace PhysicsEngine2D {
     public class Circle2D : Shape, IRenderer {
+
+        public UIElement UIElement => this;
 
         private double radius;
 
@@ -18,7 +19,7 @@ namespace PhysicsEngine2D
 
         public Circle2D(double radius) : this(radius, ColorSettings.YellowBrush) { }
 
-        public Circle2D() : this(5, ColorSettings.YellowBrush) { }
+        public Circle2D() : this(6, ColorSettings.YellowBrush) { }
 
         protected override Geometry DefiningGeometry {
             get {
@@ -28,7 +29,7 @@ namespace PhysicsEngine2D
 
         public void Draw(Vector2 position) => RenderTransform = new TranslateTransform(position.x - radius, position.y - radius);
 
-        public UIElement UIElement => this;
+        public void SetColor(SolidColorBrush color) => Fill = color;
 
     }
 }

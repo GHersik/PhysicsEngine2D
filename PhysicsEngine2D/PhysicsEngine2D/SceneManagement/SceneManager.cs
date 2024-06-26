@@ -24,7 +24,7 @@ namespace SimulationWindow.SceneManagement {
             ClearSceneData();
             sceneData = newSceneData;
             sceneRenderer.ReplaceCurrentRenderers(sceneData);
-            physicsEngine.PhysicsWorld.ReplaceRegistry(sceneData.RetrieveCurrentPhysicsBodies());
+            physicsEngine.PhysicsWorld.ReplaceRegistry(sceneData.RetrievePhysicsEntities());
         }
 
         public bool AddEntity(Entity entity) {

@@ -12,10 +12,8 @@ namespace Physics {
         public static TimeSpan TotalTimeElapsed { get; private set; }
         public static TimeSpan FixedTimeStep = TimeSpan.FromMilliseconds(30);
 
+        public static void FixedUpdate() => TotalTimeElapsed += FixedTimeStep;
 
-
-        public static void FixedUpdate() {
-            TotalTimeElapsed += FixedTimeStep;
-        }
+        public static void ResetSimulationTime() => TotalTimeElapsed = TimeSpan.Zero;
     }
 }

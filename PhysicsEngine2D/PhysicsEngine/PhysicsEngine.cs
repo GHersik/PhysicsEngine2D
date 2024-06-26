@@ -13,37 +13,36 @@ namespace Physics {
         public PhysicsWorld PhysicsWorld { get; private set; }
         public BodyForceRegistry ForceRegistry { get; private set; }
 
-
         private EulerIntegrator eulerIntegrator;
+        private CollisionDetector collisionDetector;
         private ContactResolver contactResolver;
 
         public PhysicsEngine() {
-            PhysicsWorld = new PhysicsWorld();
-            ForceRegistry = new BodyForceRegistry();
             eulerIntegrator = new EulerIntegrator();
+            collisionDetector = new CollisionDetector();
             contactResolver = new ContactResolver();
+            ForceRegistry = new BodyForceRegistry();
+            PhysicsWorld = new PhysicsWorld();
         }
 
         public PhysicsEngine(Collection<IPhysicsEntity> physicsObjects) {
             eulerIntegrator = new EulerIntegrator();
-            ForceRegistry = new BodyForceRegistry();
+            collisionDetector = new CollisionDetector();
             contactResolver = new ContactResolver();
+            ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();
             PhysicsWorld.ReplaceRegistry(physicsObjects);
         }
 
         public void FixedUpdate() {
             foreach (var physicsEntity in PhysicsWorld) {
-                physicsEntity.Body.AddForce(PhysicsSettings.Gravity);
+                physicsEntity.body.AddForce(PhysicsSettings.Gravity);
                 ForceRegistry.UpdateForces();
                 eulerIntegrator.Integrate(physicsEntity);
-                
             }
 
-
-            //solve motions
-            //detect collisions // callcollisionmethods
-            //solve collisions
+            List<Collision2D> collisions = collisionDetector.DetectCollisions(PhysicsWorld.GetPhysicsEntityArray());
+            contactResolver.ResolveContacts(collisions);
         }
     }
 }

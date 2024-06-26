@@ -50,6 +50,8 @@ namespace Physics {
                 yield return physicsEntity;
         }
 
+        public IPhysicsEntity[] GetPhysicsEntityArray() { return physicsEntities.ToArray(); }
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -10,7 +10,8 @@ namespace SimulationWindow.SceneManagement {
     public class SceneLoader {
 
         public enum Scene {
-            GravityAndMass,
+            Ambient,
+            BrownianMotion,
             Boxes
         }
 
@@ -42,7 +43,7 @@ namespace SimulationWindow.SceneManagement {
         }
 
         public async Task LoadDefaultSceneAsync() {
-            SceneData newSceneData = GetProperSceneData(Scene.GravityAndMass);
+            SceneData newSceneData = GetProperSceneData(Scene.Ambient);
             sceneManager.SetNewSceneData(newSceneData);
             sceneManager.Update();
             await Task.Delay(1000);
@@ -53,10 +54,12 @@ namespace SimulationWindow.SceneManagement {
 
         private SceneData GetProperSceneData(Scene scene) {
             switch (scene) {
-                case Scene.GravityAndMass:
-                    return scenes.GravityAndMass();
+                case Scene.Ambient:
+                    return scenes.Ambient();
+                case Scene.BrownianMotion:
+                    return scenes.BrownianMotion();
                 default:
-                    return scenes.GravityAndMass();
+                    return scenes.Ambient();
             }
         }
 

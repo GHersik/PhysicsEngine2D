@@ -44,7 +44,7 @@ namespace PhysicsEngine2D {
 
         public void Clear() => sceneEntities.Clear();
 
-        public Collection<IPhysicsEntity> RetrieveCurrentPhysicsBodies() {
+        public Collection<IPhysicsEntity> RetrievePhysicsEntities() {
             Collection<IPhysicsEntity> bodies = new Collection<IPhysicsEntity>();
             foreach (var entity in sceneEntities)
                 bodies.Add(entity);
