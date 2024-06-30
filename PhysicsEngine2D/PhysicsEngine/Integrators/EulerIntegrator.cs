@@ -3,15 +3,15 @@
 namespace Physics.Integrators {
     internal class EulerIntegrator {
 
-        public void Integrate(Body rigidBody) {
-            UpdateLinearPosition(rigidBody);
-            UpdateLinearVelocity(rigidBody);
-            ImposeDrag(rigidBody);
-            rigidBody.ClearAccumulator();
+        public void Integrate(IPhysicsEntity physicsEntity) {
+            UpdateLinearPosition(physicsEntity);
+            UpdateLinearVelocity(physicsEntity.body);
+            ImposeDrag(physicsEntity.body);
+            physicsEntity.body.ClearAccumulator();
         }
 
-        private void UpdateLinearPosition(Body rigidBody) {
-            rigidBody.position.AddScaledVector(rigidBody.velocity, PhysicsSettings.FixedTimeStep);
+        private void UpdateLinearPosition(IPhysicsEntity physicsEntity) {
+            physicsEntity.transform.position.AddScaledVector(physicsEntity.body.velocity, PhysicsSettings.FixedTimeStep);
         }
 
         private void UpdateLinearVelocity(Body rigidBody) {

@@ -17,21 +17,29 @@ namespace PhysicsLibrary {
                 this.body = body;
             }
 
-            public void UpdateForces(double timeStep) {
+            public void UpdateForce(double timeStep) {
                 forceGenerator.UpdateForce(body, timeStep);
-
-
             }
         }
 
-        private List<BodyForceRegistration> forceRegistrations = new List<BodyForceRegistration>();
+        private HashSet<BodyForceRegistration> forceRegistrations = new HashSet<BodyForceRegistration>();
 
-        public void Add(Body body, IForceGenerator forceGenerator) {
+        public bool Add(Body body, IForceGenerator forceGenerator) {
+            BodyForceRegistration registration = new BodyForceRegistration(forceGenerator, body);
+            if (forceRegistrations.Contains(registration))
+                return false;
 
+            forceRegistrations.Add(registration);
+            return true;
         }
 
-        public void Remove(BodyForceRegistry registry) {
+        public bool Remove(Body body, IForceGenerator forceGenerator) {
+            BodyForceRegistration registration = new BodyForceRegistration(forceGenerator, body);
+            if (!forceRegistrations.Contains(registration))
+                return false;
 
+            forceRegistrations.Remove(registration);
+            return true;
         }
 
         public void Clear() {
@@ -40,7 +48,7 @@ namespace PhysicsLibrary {
 
         public void UpdateForces() {
             foreach (BodyForceRegistration registry in forceRegistrations)
-                registry.UpdateForces(PhysicsSettings.FixedTimeStep);
+                registry.UpdateForce(PhysicsSettings.FixedTimeStep);
         }
     }
 }

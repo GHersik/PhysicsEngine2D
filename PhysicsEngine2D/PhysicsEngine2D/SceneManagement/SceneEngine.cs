@@ -34,7 +34,7 @@ namespace SimulationWindow.SceneManagement {
 
         private void FixedUpdate(object? state) {
             if (Application.Current != null && !Application.Current.Dispatcher.HasShutdownStarted) {
-                sceneManager.FixedUpdate();
+                Application.Current.Dispatcher.Invoke(() => { sceneManager.FixedUpdate(); });
                 Application.Current.Dispatcher.Invoke(() => { sceneManager.Update(); });
                 Time.FixedUpdate();
             }

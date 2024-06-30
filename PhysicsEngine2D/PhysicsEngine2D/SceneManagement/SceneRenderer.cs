@@ -12,22 +12,22 @@ namespace PhysicsEngine2D {
         public void ReplaceCurrentRenderers(SceneData scene) {
             ClearRenderer();
             foreach (var entity in scene)
-                canvas.Children.Add(entity.Renderer.UIElement);
+                canvas.Children.Add(entity.renderer.UIElement);
         }
 
         public bool AddEntityToRender(Entity entity) {
-            if (canvas.Children.Contains(entity.Renderer.UIElement))
+            if (canvas.Children.Contains(entity.renderer.UIElement))
                 return false;
 
-            canvas.Children.Add(entity.Renderer.UIElement);
+            canvas.Children.Add(entity.renderer.UIElement);
             return true;
         }
 
         public bool RemoveEntityFromRender(Entity entity) {
-            if (!canvas.Children.Contains(entity.Renderer.UIElement))
+            if (!canvas.Children.Contains(entity.renderer.UIElement))
                 return false;
 
-            canvas.Children.Remove(entity.Renderer.UIElement);
+            canvas.Children.Remove(entity.renderer.UIElement);
             return true;
         }
 

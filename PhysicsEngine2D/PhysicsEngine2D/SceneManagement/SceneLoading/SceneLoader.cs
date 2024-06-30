@@ -5,21 +5,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using static SimulationWindow.SceneManagement.SceneLoader;
 
 namespace SimulationWindow.SceneManagement {
     public class SceneLoader {
 
         public enum Scene {
-            Circles,
-            Boxes
+            Ambient,
+            BrownianMotion,
+            BoxVsCircle
         }
 
         private Scenes scenes = new Scenes();
         private SceneManager sceneManager;
 
         private Rectangle fadeRect;
-        private readonly SolidColorBrush FadeBrush = ColorSettings.BlueBrush;
+        private readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 77, 150, 255));
         private readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
         private byte colorFadeAlpha;
         private CancellationTokenSource? cts;
@@ -43,7 +43,7 @@ namespace SimulationWindow.SceneManagement {
         }
 
         public async Task LoadDefaultSceneAsync() {
-            SceneData newSceneData = GetProperSceneData(Scene.Circles);
+            SceneData newSceneData = GetProperSceneData(Scene.Ambient);
             sceneManager.SetNewSceneData(newSceneData);
             sceneManager.Update();
             await Task.Delay(1000);
@@ -54,10 +54,14 @@ namespace SimulationWindow.SceneManagement {
 
         private SceneData GetProperSceneData(Scene scene) {
             switch (scene) {
-                case Scene.Circles:
-                    return scenes.CirclesScene();
+                case Scene.Ambient:
+                    return scenes.Ambient();
+                case Scene.BrownianMotion:
+                    return scenes.BrownianMotion();
+                case Scene.BoxVsCircle:
+                    return scenes.CircleVsBox();
                 default:
-                    return scenes.CirclesScene();
+                    return scenes.Ambient();
             }
         }
 

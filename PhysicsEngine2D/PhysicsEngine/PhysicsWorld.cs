@@ -8,47 +8,49 @@ using System.Threading.Tasks;
 using PhysicsLibrary;
 
 namespace Physics {
-    internal class PhysicsWorld : IEnumerable<Body> {
+    public class PhysicsWorld : IEnumerable<IPhysicsEntity> {
 
-        private HashSet<Body> bodies = new HashSet<Body>();
+        private HashSet<IPhysicsEntity> physicsEntities = new HashSet<IPhysicsEntity>();
 
         public PhysicsWorld() {
-            bodies.Clear();
+            physicsEntities.Clear();
         }
 
-        public PhysicsWorld(Collection<Body> physicsObjects) {
+        public PhysicsWorld(Collection<IPhysicsEntity> physicsObjects) {
             ReplaceRegistry(physicsObjects);
         }
 
-        public void ReplaceRegistry(Collection<Body> physicsObjects) {
-            bodies.Clear();
-            bodies = physicsObjects.ToHashSet();
+        public void ReplaceRegistry(Collection<IPhysicsEntity> physicsObjects) {
+            physicsEntities.Clear();
+            physicsEntities = physicsObjects.ToHashSet();
         }
 
-        public bool AddBody(Body bodyToAdd) {
-            if (bodies.Contains(bodyToAdd))
+        public bool AddBody(IPhysicsEntity physicsEntity) {
+            if (physicsEntities.Contains(physicsEntity))
                 return false;
 
-            bodies.Add(bodyToAdd);
+            physicsEntities.Add(physicsEntity);
             return true;
         }
 
-        public bool RemoveBody(Body bodyToRemove) {
-            if (!bodies.Contains(bodyToRemove))
+        public bool RemoveBody(IPhysicsEntity physicsEntity) {
+            if (!physicsEntities.Contains(physicsEntity))
                 return false;
 
-            bodies.Remove(bodyToRemove);
+            physicsEntities.Remove(physicsEntity);
             return true;
         }
 
-        public bool Contains(Body body) => bodies.Contains(body);
+        public bool Contains(IPhysicsEntity physicsEntity) => physicsEntities.Contains(physicsEntity);
 
-        public void Clear() => bodies.Clear();
+        public void Clear() => physicsEntities.Clear();
 
-        public IEnumerator<Body> GetEnumerator() {
-            foreach (var body in bodies)
-                yield return body;
+        public IEnumerator<IPhysicsEntity> GetEnumerator() {
+            foreach (var physicsEntity in physicsEntities)
+                yield return physicsEntity;
         }
+
+        public IPhysicsEntity[] GetPhysicsEntityArray() { return physicsEntities.ToArray(); }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
