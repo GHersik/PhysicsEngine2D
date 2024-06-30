@@ -22,5 +22,6 @@ namespace PhysicsLibrary {
 
         public void ClearAccumulator() => forceAccumulator = Vector2.Zero;
 
+        public void SetKinematic(bool value) => inverseMass = value ? 0 : 1;
     }
 }

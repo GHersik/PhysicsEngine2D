@@ -10,12 +10,10 @@ using System.Windows.Media;
 namespace PhysicsEngine2D {
     public class Box2DEntity : Entity {
 
-        //Random random = new Random();
-
         public Box2DEntity(Vector2 position, double width, double height, SolidColorBrush color) {
             transform = new PhysicsLibrary.Transform(position);
             renderer = new Box2D(width, height, color);
-            collider = new BoxCollider2D(new Vector2(-width / 2, -height / 2), new Vector2(width / 2, height / 2));
+            collider = new BoxCollider2D(this, new Vector2(-width / 2, -height / 2), new Vector2(width / 2, height / 2));
             body = new Body();
         }
 
@@ -27,9 +25,5 @@ namespace PhysicsEngine2D {
 
         public Box2DEntity() : this(new Vector2(250, 250), 10, 10, ColorSettings.BlueBrush) { }
 
-        public override void Update() {
-            //SolidColorBrush randomColor = new SolidColorBrush(Color.FromArgb(255, (byte)random.Next(0,255), (byte)random.Next(0, 255), (byte)random.Next(0, 255)));
-            //renderer.SetColor(randomColor);
-        }
     }
 }

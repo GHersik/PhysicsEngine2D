@@ -11,6 +11,7 @@ using PhysicsLibrary;
 
 namespace PhysicsEngine2D {
     public class Box2D : Shape, IRenderer {
+        
         public UIElement UIElement => this;
 
         private double width;

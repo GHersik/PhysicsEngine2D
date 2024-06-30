@@ -12,7 +12,7 @@ namespace SimulationWindow.SceneManagement {
         public enum Scene {
             Ambient,
             BrownianMotion,
-            Boxes
+            BoxVsCircle
         }
 
         private Scenes scenes = new Scenes();
@@ -58,6 +58,8 @@ namespace SimulationWindow.SceneManagement {
                     return scenes.Ambient();
                 case Scene.BrownianMotion:
                     return scenes.BrownianMotion();
+                case Scene.BoxVsCircle:
+                    return scenes.CircleVsBox();
                 default:
                     return scenes.Ambient();
             }

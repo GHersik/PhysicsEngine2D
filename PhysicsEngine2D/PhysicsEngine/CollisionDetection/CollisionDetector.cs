@@ -36,17 +36,17 @@ namespace Physics {
 
         private bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
             collisionData = null;
-            switch (physicsEntityA.collider.ColliderType) {
+            switch (physicsEntityA.collider.type) {
                 case Collider2DType.Circle:
-                    switch (physicsEntityB.collider.ColliderType) {
+                    switch (physicsEntityB.collider.type) {
                         case Collider2DType.Circle:
-                            return Collisions. CircleCircleCollision((CircleCollider2D)physicsEntityA.collider, (CircleCollider2D)physicsEntityB.collider, out collisionData);
+                            return Collisions.CircleCircleCollision((CircleCollider2D)physicsEntityA.collider, (CircleCollider2D)physicsEntityB.collider, out collisionData);
                         case Collider2DType.Box:
                             return Collisions.CircleBoxCollision((CircleCollider2D)physicsEntityA.collider, (BoxCollider2D)physicsEntityB.collider, out collisionData);
                     }
                     break;
                 case Collider2DType.Box:
-                    switch (physicsEntityB.collider.ColliderType) {
+                    switch (physicsEntityB.collider.type) {
                         case Collider2DType.Circle:
                             return Collisions.CircleBoxCollision((CircleCollider2D)physicsEntityB.collider, (BoxCollider2D)physicsEntityA.collider, out collisionData);
                         case Collider2DType.Box:

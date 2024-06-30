@@ -8,12 +8,12 @@ namespace PhysicsLibrary {
     public class Collision2D {
 
         public Collider2D ColliderA { get; private set; }
-        public Collider2D? ColliderB { get; private set; }
+        public Collider2D ColliderB { get; private set; }
         public int ContactCount => contacts.Count;
 
         private List<ContactPoint2D> contacts = new List<ContactPoint2D>();
 
-        public Collision2D(Collider2D colliderA, Collider2D? colliderB) {
+        public Collision2D(Collider2D colliderA, Collider2D colliderB) {
             this.ColliderA = colliderA;
             this.ColliderB = colliderB;
         }

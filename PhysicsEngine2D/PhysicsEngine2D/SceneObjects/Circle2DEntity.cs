@@ -10,6 +10,8 @@ using System.Windows.Media;
 namespace PhysicsEngine2D {
     public class Circle2DEntity : Entity {
 
+        private SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(255, 107, 203, 119));
+
         public Circle2DEntity(Vector2 position, double radius, SolidColorBrush color) {
             transform = new PhysicsLibrary.Transform(position);
             renderer = new Circle2D(radius, color);
@@ -25,7 +27,12 @@ namespace PhysicsEngine2D {
 
 
         public override void OnCollisionEnter2D(Collision2D collision) {
-            renderer.SetColor(ColorSettings.GreenBrush);
+            byte r = (byte)(brush.Color.R);
+            byte g = (byte)(brush.Color.G + 2);
+            byte b = (byte)(brush.Color.B);
+
+            brush = new SolidColorBrush(Color.FromArgb(255, r, g, b));
+            renderer.SetColor(brush);
         }
 
         public override void OnCollisionExit2D(Collision2D collision) {

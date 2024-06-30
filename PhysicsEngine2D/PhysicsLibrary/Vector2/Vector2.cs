@@ -5,7 +5,8 @@ namespace PhysicsLibrary {
         public double x;
         public double y;
 
-        public readonly double Magnitude => Math.Sqrt((x * x) + (y * y));
+        public readonly double Magnitude => Math.Sqrt(SqrMagnitude);
+        public readonly double SqrMagnitude => x * x + y * y;
         public readonly Vector2 Normalized {
             get {
                 Vector2 normalized = new Vector2(x, y);
