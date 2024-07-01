@@ -41,13 +41,13 @@ namespace PhysicsEngine2D {
         }
 
         private void AddWalls(SceneData sceneData) {
-            Box2DEntity right = new(new Vector2(500, 250), 10, 520, ColorSettings.TransparentBrush);
+            Box2DEntity right = new(new Vector2(520, 250), 40, 580, ColorSettings.TransparentBrush);
             right.body.SetKinematic(true);
-            Box2DEntity left = new(new Vector2(0, 250), 10, 520, ColorSettings.TransparentBrush);
+            Box2DEntity left = new(new Vector2(-20, 250), 40, 580, ColorSettings.TransparentBrush);
             left.body.SetKinematic(true);
-            Box2DEntity top = new(new Vector2(250, 0), 520, 10, ColorSettings.TransparentBrush);
+            Box2DEntity top = new(new Vector2(250, -20), 580, 40, ColorSettings.TransparentBrush);
             top.body.SetKinematic(true);
-            Box2DEntity bottom = new(new Vector2(250, 500), 520, 10, ColorSettings.TransparentBrush);
+            Box2DEntity bottom = new(new Vector2(250, 520), 580, 40, ColorSettings.TransparentBrush);
             bottom.body.SetKinematic(true);
 
             sceneData.AddEntity(right);
