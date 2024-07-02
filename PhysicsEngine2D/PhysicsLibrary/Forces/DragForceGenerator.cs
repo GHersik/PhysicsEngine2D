@@ -16,7 +16,7 @@ namespace PhysicsLibrary.Forces {
         }
 
         public void UpdateForce(Body body, double duration = 0) {
-            Vector2 force = body.velocity;
+            Vector2 force = body.Velocity;
 
             double dragCoefficient = force.Magnitude;
             dragCoefficient = velocityDragCoefficient * dragCoefficient + velocityDragSquaredCoefficient * dragCoefficient;

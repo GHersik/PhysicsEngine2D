@@ -11,8 +11,8 @@ namespace PhysicsEngine2D {
 
     public partial class MainWindow : Window {
 
-        private SceneEngine sceneEngine;
-        private SceneLoader sceneLoader;
+        SceneEngine sceneEngine;
+        SceneLoader sceneLoader;
 
         #region Initialization
         public MainWindow() {
@@ -26,12 +26,12 @@ namespace PhysicsEngine2D {
             StartSimulation();
         }
 
-        private void Setup() {
+        void Setup() {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
-        private async void StartSimulation() {
+        async void StartSimulation() {
             Task sceneLoad = sceneLoader.LoadDefaultSceneAsync();
             await sceneLoad;
 
@@ -47,7 +47,7 @@ namespace PhysicsEngine2D {
                 SetSimulationTime(true);
         }
 
-        private void SetSimulationTime(bool value) {
+        void SetSimulationTime(bool value) {
             if (value) {
                 sceneEngine.StartTime();
                 TimeButton.Content = "Stop Time";
@@ -58,7 +58,7 @@ namespace PhysicsEngine2D {
             }
         }
 
-        private async void Generate_Click(object sender, RoutedEventArgs e) {
+        async void Generate_Click(object sender, RoutedEventArgs e) {
             SetSimulationTime(false);
             EnableInput(false);
 
@@ -71,7 +71,7 @@ namespace PhysicsEngine2D {
             SetSimulationTime(true);
         }
 
-        private void EnableInput(bool value) {
+        void EnableInput(bool value) {
             TimeButton.IsEnabled = value;
             GenerateButton.IsEnabled = value;
             PickSimulationCB.IsEnabled = value;

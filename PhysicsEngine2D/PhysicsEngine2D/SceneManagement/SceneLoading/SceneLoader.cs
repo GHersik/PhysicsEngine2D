@@ -19,7 +19,7 @@ namespace SimulationWindow.SceneManagement {
         private SceneManager sceneManager;
 
         private Rectangle fadeRect;
-        private readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+        private readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 75, 64, 56));
         private readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
         private byte colorFadeAlpha;
         private CancellationTokenSource? cts;

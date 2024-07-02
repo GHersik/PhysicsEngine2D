@@ -14,7 +14,14 @@ namespace PhysicsLibrary {
                 return normalized;
             }
         }
-
+        public readonly Vector2 Inverted {
+            get {
+                Vector2 inverted = new Vector2(x, y);
+                inverted.Invert();
+                return inverted;
+            }
+        }
+            
         public Vector2(double x = 0, double y = 0) {
             this.x = x;
             this.y = y;

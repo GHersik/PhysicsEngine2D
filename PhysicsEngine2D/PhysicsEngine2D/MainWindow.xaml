@@ -8,121 +8,66 @@
         Title="Simulation" Height="760" Width="1080" ResizeMode="NoResize" Background="Black"
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    <Canvas Name="EditorView" Height="744" Width="1080" Background="White" Focusable="True" 
+    <Canvas Name="EditorView" Height="744" Width="1080" Background="#FFF1F1F1" Focusable="True" 
            VerticalAlignment="Center" HorizontalAlignment="Center">
 
         <!--Title-->
-        <TextBlock FontSize="22" Foreground="Black" FontFamily="Cambria Math"  FontWeight="DemiBold"   Canvas.Top="99" TextAlignment="Center"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="21" VerticalAlignment="Top" Width="500" Canvas.Left="480">Simulation Window</TextBlock>
-        <TextBlock FontSize="22" Foreground="Black" FontFamily="Cambria Math"  FontWeight="DemiBold"   Canvas.Top="126"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Height="25" VerticalAlignment="Center" Width="390" Canvas.Left="90">Settings</TextBlock>
+        <TextBlock FontSize="22" Foreground="#FF4B4038" FontFamily="Cambria Math"   Canvas.Top="63" TextAlignment="Center"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Height="21" VerticalAlignment="Center" Width="500" Canvas.Left="480" FontWeight="Bold"><Run Text="Simulation "/><Run Text="Bound"/><Run Language="pl-pl" Text="aries"/></TextBlock>
+        <TextBlock Foreground="#FFEBE3BE" FontFamily="Cambria Math"  FontWeight="DemiBold"   Canvas.Top="112"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="17" VerticalAlignment="Top" Width="370" Canvas.Left="80" FontSize="14">Physics Settings</TextBlock>
 
         <!--Buttons-->
-        <Button Click="Generate_Click" Name="GenerateButton" Canvas.Left="820" Canvas.Top="672" Width="120" Height="30" Background="Black" BorderBrush="Black" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontFamily="Cambria Math" >Generate
+        <Button Click="Generate_Click" Name="GenerateButton" Canvas.Left="820" Canvas.Top="636" Width="120" Height="30" Background="#FF4B4038" BorderBrush="#FF4B4038" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFEBE3BE" FontWeight="Bold" FontFamily="Cambria Math" >Generate
         </Button>
-        <Button Click="TimeButton_Click" Name="TimeButton" Canvas.Left="540" Canvas.Top="672" Width="120" Height="30" Background="Black" BorderBrush="Black" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontFamily="Cambria Math" >Stop Time
+        <Button Click="TimeButton_Click" Name="TimeButton" Canvas.Left="540" Canvas.Top="636" Width="120" Height="30" Background="#FF4B4038" BorderBrush="#FF4B4038" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFEBE3BE" FontWeight="Bold" FontFamily="Cambria Math" >Stop Time
         </Button>
-        <ComboBox Name="PickSimulationCB" Style="{DynamicResource ComboBoxEventDrivenSimulation}" Canvas.Left="673" Canvas.Top="672" HorizontalAlignment="Center" VerticalAlignment="Top" Width="136" Background="Black" BorderBrush="Black" Foreground="White" BorderThickness="0,0,0,0" SelectedIndex="0" FontWeight="Bold" Panel.ZIndex="2" FontFamily="Cambria Math" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-            <ComboBoxItem Background="Black" BorderBrush="Black" OpacityMask="Black" Foreground="White">
+        <ComboBox Name="PickSimulationCB" Style="{DynamicResource ComboBoxEventDrivenSimulation}" Canvas.Left="673" Canvas.Top="636" HorizontalAlignment="Center" VerticalAlignment="Top" Width="136" Background="#FF4B4038" BorderBrush="#FF4B4038" Foreground="#FFEBE3BE" BorderThickness="0,0,0,0" SelectedIndex="0" FontWeight="Bold" Panel.ZIndex="2" FontFamily="Cambria Math" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <ComboBoxItem Background="#FF4B4038" BorderBrush="#FF4B4038" OpacityMask="#FF4B4038" Foreground="#FFEBE3BE">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White">Ambient</TextBlock>
+                    <TextBlock Foreground="#FFEBE3BE">Ambient</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
-            <ComboBoxItem Background="Black" BorderBrush="Black" Foreground="Black" OpacityMask="Black">
+            <ComboBoxItem Background="#FF4B4038" BorderBrush="#FF4B4038" Foreground="#FF4B4038" OpacityMask="#FF4B4038">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White">Brownian Motion</TextBlock>
+                    <TextBlock Foreground="#FFEBE3BE">Brownian Motion</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
-            <ComboBoxItem Background="Black" BorderBrush="Black" Foreground="Black" OpacityMask="Black">
+            <ComboBoxItem Background="#FF4B4038" BorderBrush="#FF4B4038" Foreground="#FF4B4038" OpacityMask="#FF4B4038">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White">Fast Particles</TextBlock>
+                    <TextBlock Foreground="#FFEBE3BE">Circle vs Box</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
-            <ComboBoxItem Background="Black" BorderBrush="Black" Foreground="Black" OpacityMask="Black">
+            <ComboBoxItem Background="#FF4B4038" BorderBrush="#FF4B4038" Foreground="#FF4B4038" OpacityMask="#FF4B4038">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White">Billiard Sample</TextBlock>
+                    <TextBlock Foreground="#FFEBE3BE">Billiard Sample</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
-            <ComboBoxItem Background="Black" BorderBrush="Black" Foreground="Black" OpacityMask="Black">
+            <ComboBoxItem Background="#FF4B4038" BorderBrush="#FF4B4038" Foreground="#FF4B4038" OpacityMask="#FF4B4038">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White">1600 Particles</TextBlock>
+                    <TextBlock Foreground="#FFEBE3BE">1600 Particles</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
         </ComboBox>
 
         <!--SceneView-->
-        <Canvas Name="SceneView" Height="500" Width="500" Background="White" Focusable="True" 
-           VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Top="130" Canvas.Left="480">
+        <Canvas Name="SceneView" Height="500" Width="500" Background="#FFF1F1F1" Focusable="True" 
+           VerticalAlignment="Top" HorizontalAlignment="Center" Canvas.Top="94" Canvas.Left="480">
         </Canvas>
-        <Rectangle Name="SceneBorder" Width="500" Height="500" Canvas.Left="480" StrokeThickness="3" Stroke="Black" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBlock Name="canvasMatrixTop" FontSize="15" Foreground="Black"   Canvas.Top="108" TextAlignment="Center" Canvas.Left="470" TextWrapping="WrapWithOverflow" Height="21" Width="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Lucida Fax"><Run Language="pl-pl" Text="(0, 0)"/></TextBlock>
-        <TextBlock FontSize="15" Foreground="Black"   Canvas.Top="635" TextAlignment="Center" Canvas.Left="891" TextWrapping="WrapWithOverflow" Height="21" Width="105" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Lucida Fax"><Run Language="pl-pl" Text="(500, 500)"/></TextBlock>
+        <Rectangle Name="SceneBorder" Width="500" Height="500" Canvas.Left="480" StrokeThickness="0" Stroke="#FF4B4038" Canvas.Top="94" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Name="canvasMatrixTop" FontSize="15" Foreground="#FF4B4038"   Canvas.Top="74" TextAlignment="Center" Canvas.Left="476" TextWrapping="WrapWithOverflow" Height="17" Width="37" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Cambria Math"><Run Language="pl-pl" Text="(0, 0)"/></TextBlock>
 
         <!--Fade-->
-        <Rectangle Name="SceneFade" Width="500" Height="500" Canvas.Left="480" StrokeThickness="3" Stroke="Black" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="White" Panel.ZIndex="10"/>
-        <TextBlock FontSize="20" Foreground="Black" FontFamily="Cambria Math"   Canvas.Top="339"  TextWrapping="WrapWithOverflow" Height="25" Width="204" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="110"><Run Text="Collisions per second"/></TextBlock>
-        <TextBlock FontSize="20" Foreground="Black" FontFamily="Cambria Math"   Canvas.Top="191"  TextWrapping="WrapWithOverflow" Height="25" Width="120" Canvas.Left="110" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="pl-pl" Text="Gravity"/></TextBlock>
-        <TextBlock x:Name="canvasMatrixTop_Copy1" FontSize="15" Foreground="Black"   Canvas.Top="193" TextAlignment="Center" Canvas.Left="342" TextWrapping="WrapWithOverflow" Height="21" Width="48" FontFamily="Lucida Fax" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="pl-pl" Text="["/><Run Text="0, 0"/><Run Language="pl-pl" Text="]"/></TextBlock>
-        <TextBlock FontSize="20" Foreground="Black" FontFamily="Cambria Math"   Canvas.Top="163"  TextWrapping="WrapWithOverflow" Height="25" Width="120" Canvas.Left="110" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="pl-pl" Text="TimeStep"/></TextBlock>
-        <TextBlock x:Name="canvasMatrixTop_Copy2" FontSize="15" Foreground="Black"   Canvas.Top="167" TextAlignment="Center" Canvas.Left="342" TextWrapping="WrapWithOverflow" Height="21" Width="48" FontFamily="Lucida Fax" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="pl-pl" Text="0.02"/></TextBlock>
-        <TextBlock FontSize="22" Foreground="Black" FontFamily="Cambria Math"  FontWeight="DemiBold"   Canvas.Top="252"  TextWrapping="WrapWithOverflow" Height="25" Width="390" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="90"><Run Language="pl-pl" Text="Statistics"/></TextBlock>
-        <TextBlock x:Name="canvasMatrixTop_Copy" FontSize="15" Foreground="Black"   Canvas.Top="341" TextAlignment="Center" Canvas.Left="342" TextWrapping="WrapWithOverflow" Height="21" Width="48" FontFamily="Lucida Fax" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="0"/></TextBlock>
-        <TextBlock FontSize="20" Foreground="Black" FontFamily="Cambria Math"   Canvas.Top="313"  TextWrapping="WrapWithOverflow" Height="25" Width="204" Canvas.Left="110" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="pl-pl" Text="Total physics objects"/></TextBlock>
-        <TextBlock x:Name="canvasMatrixTop_Copy3" FontSize="15" Foreground="Black"   Canvas.Top="315" TextAlignment="Center" Canvas.Left="342" TextWrapping="WrapWithOverflow" Height="21" Width="48" FontFamily="Lucida Fax" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="0"/></TextBlock>
-        <TextBlock FontSize="20" Foreground="Black" FontFamily="Cambria Math"   Canvas.Top="287"  TextWrapping="WrapWithOverflow" Height="25" Width="204" Canvas.Left="110" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="pl-pl" Text="Simulation time"/></TextBlock>
-        <TextBlock x:Name="canvasMatrixTop_Copy4" FontSize="15" Foreground="Black"   Canvas.Top="289" TextAlignment="Center" Canvas.Left="342" TextWrapping="WrapWithOverflow" Height="21" Width="62" FontFamily="Lucida Fax" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="0"/><Run Language="pl-pl" Text=":00:00"/></TextBlock>
-        <TextBlock FontSize="20" Foreground="Black" FontFamily="Cambria Math"   Canvas.Top="365"  TextWrapping="WrapWithOverflow" Height="25" Width="204" Canvas.Left="110" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="pl-pl" Text="Frames per second"/></TextBlock>
-        <TextBlock x:Name="canvasMatrixTop_Copy5" FontSize="15" Foreground="Black"   Canvas.Top="367" TextAlignment="Center" Canvas.Left="342" TextWrapping="WrapWithOverflow" Height="21" Width="48" FontFamily="Lucida Fax" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="0"/></TextBlock>
-        <Line Width="323" Height="1" HorizontalAlignment="Left" Canvas.Top="157" VerticalAlignment="Center" Fill="Black" Stroke="Black" Canvas.Left="83" OpacityMask="Black" StrokeThickness="2" X1="400"/>
-        <Line Width="323" Height="1" Canvas.Top="283" Fill="Black" Stroke="Black" Canvas.Left="83" OpacityMask="Black" StrokeThickness="2" X1="400" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBlock FontSize="22" Foreground="Black" FontFamily="Cambria Math"  FontWeight="DemiBold"   Canvas.Top="420"  TextWrapping="WrapWithOverflow" Height="25" Width="390" Canvas.Left="90" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="Tracked Physics Object"/></TextBlock>
-        <Line Width="323" Height="1" Canvas.Top="451" Fill="Black" Stroke="Black" Canvas.Left="83" OpacityMask="Black" StrokeThickness="2" X1="400" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Rectangle Name="SceneFade" Width="500" Height="500" Canvas.Left="480" StrokeThickness="1" Stroke="#FF4B4038" Canvas.Top="94" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FFF1F1F1" Panel.ZIndex="10"/>
+        <TextBlock FontSize="14" Foreground="#FFEBE3BE" FontFamily="Cambria Math"   Canvas.Top="154"  TextWrapping="WrapWithOverflow" Height="15" Width="120" Canvas.Left="118" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="TimeStep"/></TextBlock>
+        <Rectangle x:Name="SceneFade_Copy" Width="340" Height="500" Canvas.Left="80" StrokeThickness="0" Canvas.Top="94" Fill="#FF4B4038" Panel.ZIndex="-1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock FontSize="14" Foreground="#FFEBE3BE" FontFamily="Cambria Math"   Canvas.Top="154"  TextWrapping="WrapWithOverflow" Height="15" Width="94" Canvas.Left="280" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Right"><Run Language="pl-pl" Text="0.02"/></TextBlock>
+        <Rectangle x:Name="SceneFade_Copy1" Width="360" Height="31" Canvas.Left="60" StrokeThickness="0" Stroke="#8E7641" Canvas.Top="105" Fill="#FF61544A" Panel.ZIndex="-1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock x:Name="canvasMatrixTop_Copy" FontSize="15" Foreground="#FF4B4038"   Canvas.Top="599" TextAlignment="Center" Canvas.Left="915" TextWrapping="WrapWithOverflow" Height="17" Width="69" FontFamily="Cambria Math" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Text="("/><Run Text="50"/><Run Text="0,"/><Run Text=" 500)"/></TextBlock>
+        <TextBlock Foreground="#FFEBE3BE" FontFamily="Cambria Math"  FontWeight="DemiBold"   Canvas.Top="289"  TextWrapping="WrapWithOverflow" Height="17" Width="370" Canvas.Left="80" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="Physics Statistics"/></TextBlock>
+        <Rectangle x:Name="SceneFade_Copy2" Width="360" Height="31" Canvas.Left="60" StrokeThickness="0" Stroke="#8E7641" Canvas.Top="282" Fill="#FF61544A" Panel.ZIndex="-1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Canvas>
 
     <!--Settings-->
     <Window.Resources>
-
-        <!--ButtonStyle-->
-        <LinearGradientBrush x:Key="ButtonMouseOverBackground" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#FFECF4FC" Offset="0.0"/>
-            <GradientStop Color="Black" Offset="1.0"/>
-        </LinearGradientBrush>
-
-        <!-- Define the custom button style -->
-        <Style x:Key="CustomButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="LightGray"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="5,2"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Border x:Name="border" 
-                                    Background="{TemplateBinding Background}" 
-                                    BorderBrush="{TemplateBinding BorderBrush}" 
-                                    BorderThickness="{TemplateBinding BorderThickness}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonMouseOverBackground}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="DarkBlue"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="DarkGray"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="Gray"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="DarkGray"/>
-                                <Setter Property="Foreground" Value="DarkGray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <!--MyComboBoxStyle-->
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -133,7 +78,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FFEBE3BE"/>
         <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="AllowDrop" Value="true"/>
@@ -151,45 +96,45 @@
             </Setter>
         </Style>
         <LinearGradientBrush x:Key="ComboBox.Static.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#FFF0F0F0" Offset="0.0"/>
-            <GradientStop Color="Black" Offset="1.0"/>
+            <GradientStop Color="#FFEBE3BE" Offset="0.0"/>
+            <GradientStop Color="#FF4B4038" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FFACACAC"/>
-        <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="White"/>
-        <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#FFEBE3BE"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFEBE3BE"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
         <LinearGradientBrush x:Key="ComboBox.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#FFECF4FC" Offset="0.0"/>
-            <GradientStop Color="Black" Offset="1.0"/>
+            <GradientStop Color="#FFEBE3BE" Offset="0.0"/>
+            <GradientStop Color="#FF4B4038" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FF000000"/>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FF000000"/>
-        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFEBE3BE"/>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#FF000000"/>
         <LinearGradientBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#FFEBF4FC" Offset="0.0"/>
-            <GradientStop Color="#FFDCECFC" Offset="1.0"/>
+            <GradientStop Color="#FF4B4038" Offset="0.0"/>
+            <GradientStop Color="#FFEBE3BE" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#FF000000"/>
         <LinearGradientBrush x:Key="ComboBox.Pressed.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#FFDAECFC" Offset="0.0"/>
-            <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
+            <GradientStop Color="#FF4B4038" Offset="0.0"/>
+            <GradientStop Color="#FFEBE3BE" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FF000000"/>
         <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#FF000000"/>
-        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
-        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="Black"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFEBE3BE"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FF4B4038"/>
         <LinearGradientBrush x:Key="ComboBox.Pressed.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#FAF9F6" Offset="0.0"/>
-            <GradientStop Color="#FAF9F6" Offset="1.0"/>
+            <GradientStop Color="#FFEBE3BE" Offset="0.0"/>
+            <GradientStop Color="#FFEBE3BE" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FF000000"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FFF0F0F0"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Border" Color="#FFD9D9D9"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
-        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background" Color="#FFEBE3BE"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Border" Color="#FFBFBFBF"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Border" Color="Transparent"/>
@@ -201,7 +146,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border x:Name="templateRoot" Background="#FF000000" BorderBrush="#FFACACAC" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                        <Border x:Name="templateRoot" Background="#FF4B4038" BorderBrush="#FFACACAC" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                             <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Right" Margin="0" SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
                                 <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="{StaticResource ComboBox.Static.Glyph}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
                             </Border>
