@@ -50,11 +50,11 @@ namespace PhysicsEngine2D {
         void SetSimulationTime(bool value) {
             if (value) {
                 sceneEngine.StartTime();
-                TimeButton.Content = "Stop Time";
+                TimeButton.Content = "STOP TIME";
             }
             else {
                 sceneEngine.StopTime();
-                TimeButton.Content = "Start Time";
+                TimeButton.Content = "START TIME";
             }
         }
 

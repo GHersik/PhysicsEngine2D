@@ -16,10 +16,10 @@ namespace PhysicsEngine2D {
             SceneData scene = new SceneData();
             for (int i = 1; i < 10; i++)
                 for (int j = 1; j < 10; j++) {
-                    SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(80, 255), (byte)rnd.Next(80, 255), (byte)rnd.Next(80, 255)));
+                    //SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(80, 255), (byte)rnd.Next(80, 255), (byte)rnd.Next(80, 255)));
                     Vector2 position = new Vector2(i * 50 + rnd.Next(-18, 18), j * 50 + rnd.Next(-18, 18));
                     int massAndForceMultiplier = rnd.Next(4, 8);
-                    Circle2DEntity circle = new Circle2DEntity(position, massAndForceMultiplier, randomColor);
+                    Circle2DEntity circle = new Circle2DEntity(position, massAndForceMultiplier, ColorSettings.WhiteBrush);
                     circle.body.Mass = massAndForceMultiplier;
                     circle.body.AddForce(new Vector2(rnd.Next(-4000, 4000), rnd.Next(-1000, 1000)));
                     circle.body.Damping = 1;
@@ -43,7 +43,7 @@ namespace PhysicsEngine2D {
                     scene.AddEntity(circle);
                 }
 
-            Circle2DEntity bigCircle = new Circle2DEntity(new Vector2(250, 400), 20, ColorSettings.BlueBrush);
+            Circle2DEntity bigCircle = new Circle2DEntity(new Vector2(250, 400), 20, ColorSettings.YellowBrush);
             bigCircle.body.Mass = 20;
             scene.AddEntity(bigCircle);
 
@@ -61,7 +61,7 @@ namespace PhysicsEngine2D {
             bigCircle.body.Restitution = .7;
             scene.AddEntity(bigCircle);
 
-            Box2DEntity boxEntity = new(new Vector2(250, 400), 100, 40, ColorSettings.GreenBrush);
+            Box2DEntity boxEntity = new(new Vector2(250, 400), 100, 40, ColorSettings.WhiteBrush);
             boxEntity.body.SetKinematic(true);
             scene.AddEntity(boxEntity);
 
