@@ -26,6 +26,5 @@ namespace PhysicsLibrary {
         public static Vector2 operator /(Vector2 vectorToDivide, double scalar) => new(vectorToDivide.x / scalar, vectorToDivide.y / scalar);
         public static bool operator ==(Vector2 a, Vector2 b) => a.x == b.x && a.y == b.y;
         public static bool operator !=(Vector2 a, Vector2 b) => a.x != b.x || a.y != b.y;
-
     }
 }

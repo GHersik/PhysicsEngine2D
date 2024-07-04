@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public static class ColorSettings {
         public static SolidColorBrush BlueBrush { get; } = new SolidColorBrush(Color.FromArgb(255, 77, 150, 255));
         public static SolidColorBrush YellowBrush { get; } = new SolidColorBrush(Color.FromArgb(255, 255, 217, 61));

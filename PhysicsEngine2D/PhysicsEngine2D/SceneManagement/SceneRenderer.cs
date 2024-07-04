@@ -1,9 +1,9 @@
 ﻿using System.Windows.Controls;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class SceneRenderer {
 
-        private Canvas canvas;
+        Canvas canvas;
 
         public SceneRenderer(Canvas canvas) {
             this.canvas = canvas;

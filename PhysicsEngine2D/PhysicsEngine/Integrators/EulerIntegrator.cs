@@ -1,6 +1,6 @@
 ﻿using PhysicsLibrary;
 
-namespace Physics.Integrators {
+namespace Physics {
     internal class EulerIntegrator {
 
         public void Integrate(IPhysicsEntity physicsEntity) {
@@ -18,7 +18,6 @@ namespace Physics.Integrators {
             Vector2 resultingAcc = rigidBody.Acceleration;
             resultingAcc.AddScaledVector(rigidBody.ForceAccumulator, rigidBody.InverseMass);
             rigidBody.Velocity.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
-            //rigidBody.Velocity.AddScaledVector(resultingAcc, .02);
             rigidBody.ClearAccumulator();
         }
 

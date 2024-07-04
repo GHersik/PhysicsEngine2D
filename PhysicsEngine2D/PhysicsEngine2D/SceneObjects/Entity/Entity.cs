@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Entity : IPhysicsEntity {
 
         public IRenderer renderer { get; protected set; }

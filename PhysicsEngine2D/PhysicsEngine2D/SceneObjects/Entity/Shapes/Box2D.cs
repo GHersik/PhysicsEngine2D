@@ -1,21 +1,15 @@
-﻿using PhysicsEngine2D;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Windows;
 using System.Windows.Shapes;
 using PhysicsLibrary;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Box2D : Shape, IRenderer {
-        
+
         public UIElement UIElement => this;
 
-        private double width;
-        private double height;
+        double width;
+        double height;
 
         public Box2D(double width, double height, SolidColorBrush color) {
             this.width = width;

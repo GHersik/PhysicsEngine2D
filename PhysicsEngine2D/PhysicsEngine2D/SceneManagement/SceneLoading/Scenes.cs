@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using PhysicsLibrary;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
 
     public class Scenes {
 

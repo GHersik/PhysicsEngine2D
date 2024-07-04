@@ -1,10 +1,4 @@
-﻿using Physics.CollisionDetection.Collisions;
-using PhysicsLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PhysicsLibrary;
 
 namespace Physics {
     internal class CollisionDetector {
@@ -15,7 +9,7 @@ namespace Physics {
             return collisionsDetected;
         }
 
-        private List<Collision2D> BroadPhase(IPhysicsEntity[] physicsEntities) {
+        List<Collision2D> BroadPhase(IPhysicsEntity[] physicsEntities) {
             List<Collision2D> collisionsToResolve = new List<Collision2D>();
             if (physicsEntities.Length < 1)
                 return collisionsToResolve;
@@ -30,11 +24,11 @@ namespace Physics {
             return collisionsToResolve;
         }
 
-        private void NarrowPhase() {
+        void NarrowPhase() {
 
         }
 
-        private bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
+        bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
             collisionData = null;
             switch (physicsEntityA.collider.type) {
                 case Collider2DType.Circle:

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Box2DEntity : Entity {
 
         public Box2DEntity(Vector2 position, double width, double height, SolidColorBrush color) {

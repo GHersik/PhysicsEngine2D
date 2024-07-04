@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace SimulationWindow.SceneManagement {
+namespace SimulationWindow {
     public class SceneLoader {
 
         public enum Scene {
@@ -21,7 +21,7 @@ namespace SimulationWindow.SceneManagement {
         SceneManager sceneManager;
 
         Rectangle fadeRect;
-        readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 73, 136, 203));
+        readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 63, 116, 173));
         readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
         byte colorFadeAlpha;
         CancellationTokenSource? cts;

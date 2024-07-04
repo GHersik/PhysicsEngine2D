@@ -1,11 +1,6 @@
 ﻿using PhysicsLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Physics.CollisionDetection.Collisions {
+namespace Physics {
     internal static class Collisions {
 
         public static bool CircleCircleCollision(CircleCollider2D circleA, CircleCollider2D circleB, out Collision2D? collision) {

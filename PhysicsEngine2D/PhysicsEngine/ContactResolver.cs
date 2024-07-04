@@ -1,5 +1,4 @@
-﻿using Physics.CollisionDetection.Collisions;
-using PhysicsLibrary;
+﻿using PhysicsLibrary;
 
 namespace Physics {
     internal class ContactResolver {
@@ -34,7 +33,7 @@ namespace Physics {
 
         public void ResolveEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
             Vector2 impulse = CalculateSingleEntityImpulse(entity.body, contacts);
-            entity.body.Velocity += impulse;
+            entity.body.AddForce(impulse, ForceMode.VelocityChange);
             SeparateSingleEntity(entity, contacts);
         }
 
@@ -68,8 +67,8 @@ namespace Physics {
 
         public void ResolveEntities(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
             Vector2 twoBodyImpulse = CalculateBodiesImpulse(entityA.body, entityB.body, contacts);
-            entityA.body.Velocity -= twoBodyImpulse / entityA.body.Mass;
-            entityB.body.Velocity += twoBodyImpulse / entityB.body.Mass;
+            entityA.body.AddForce(twoBodyImpulse.Inverted, ForceMode.Impulse);
+            entityB.body.AddForce(twoBodyImpulse, ForceMode.Impulse);
             SeparateBodies(entityA, entityB, contacts);
         }
 

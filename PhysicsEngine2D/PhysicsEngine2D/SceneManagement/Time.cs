@@ -13,7 +13,7 @@ namespace Physics {
         public static double AccumulatedTime { get; private set; } = 0;
 
         public static void FixedUpdate() => AccumulatedTime += PhysicsSettings.FixedTimeStep;
+        public static void ResetSimulationTime() => AccumulatedTime = 0;
 
-        public static void ResetSimulationTime() => TotalTimeElapsed = TimeSpan.Zero;
     }
 }

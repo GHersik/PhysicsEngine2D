@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public interface IRenderer {
 
         public abstract void Draw(Vector2 position);

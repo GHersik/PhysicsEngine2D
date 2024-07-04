@@ -5,6 +5,7 @@ namespace PhysicsLibrary {
         public Vector2 Velocity = Vector2.Zero;
         public Vector2 Acceleration { get; private set; } = Vector2.Zero;
         public Vector2 ForceAccumulator { get; private set; } = Vector2.Zero;
+        public Vector2 TotalForce { get; private set; } = Vector2.Zero;
         public double InverseMass { get; private set; } = 1;
 
         double mass = 1;

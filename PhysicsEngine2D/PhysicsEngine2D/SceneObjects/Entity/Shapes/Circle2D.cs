@@ -3,12 +3,12 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using PhysicsLibrary;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Circle2D : Shape, IRenderer {
 
         public UIElement UIElement => this;
 
-        private double radius;
+        double radius;
 
         public Circle2D(double radius, SolidColorBrush color) {
             this.radius = radius;

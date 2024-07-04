@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Circle2DEntity : Entity {
 
         //private SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(255, 107, 203, 119));

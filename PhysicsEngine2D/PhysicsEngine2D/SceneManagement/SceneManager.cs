@@ -1,18 +1,13 @@
 ﻿using PhysicsEngine2D;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Physics;
 using System.Windows.Controls;
 
-namespace SimulationWindow.SceneManagement {
+namespace SimulationWindow {
     public class SceneManager {
 
-        private SceneData sceneData;
-        private SceneRenderer sceneRenderer;
-        private PhysicsEngine physicsEngine;
+        SceneData sceneData;
+        SceneRenderer sceneRenderer;
+        PhysicsEngine physicsEngine;
 
         public SceneManager(Canvas canvas) {
             sceneData = new SceneData();

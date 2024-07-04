@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using PhysicsEngine2D;
-using Physics;
-using SimulationWindow;
-using System.Windows.Threading;
 using System.Threading;
 using System.Windows;
 using PhysicsLibrary;
 
-namespace SimulationWindow.SceneManagement {
+namespace SimulationWindow {
     public class SceneEngine {
 
         public bool IsRunning => timer != null;
