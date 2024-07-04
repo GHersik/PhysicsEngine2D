@@ -4,7 +4,7 @@ namespace Physics {
     internal class EulerIntegrator {
 
         public void Integrate(IPhysicsEntity physicsEntity) {
-            UpdateLinearVelocity(physicsEntity.body);
+            ConsumeForces(physicsEntity.body);
             if (EvaluateSleepTolerance(physicsEntity.body)) {
                 physicsEntity.body.Velocity = Vector2.Zero;
                 return;
@@ -14,10 +14,15 @@ namespace Physics {
             ImposeDrag(physicsEntity.body);
         }
 
-        void UpdateLinearVelocity(Body rigidBody) {
+        void ConsumeForces(Body rigidBody) {
             Vector2 resultingAcc = rigidBody.Acceleration;
             resultingAcc.AddScaledVector(rigidBody.ForceAccumulator, rigidBody.InverseMass);
+            //Vector2 totalForce = resultingAcc;
+            //totalForce.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
+            rigidBody.TotalForce = resultingAcc;
+
             rigidBody.Velocity.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
+            //rigidBody.Velocity += totalForce;
             rigidBody.ClearAccumulator();
         }
 

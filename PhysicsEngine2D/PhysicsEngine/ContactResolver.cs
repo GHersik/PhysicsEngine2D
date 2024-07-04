@@ -40,8 +40,10 @@ namespace Physics {
         public Vector2 CalculateSingleEntityImpulse(Body body, List<ContactPoint2D> contacts) {
             Vector2 totalImpulse = Vector2.Zero;
             double restitution = body.Restitution;
-            if (EvaluateVelocityThreshold(body.Velocity))
+            if (EvaluateVelocityThreshold(body.Velocity)) {
                 restitution = 0;
+                body.AddForce(body.TotalForce.Inverted, ForceMode.Impulse);
+            }
             foreach (var contact in contacts) {
                 Vector2 normal = contact.Normal;
                 double relativeVelocityAlongNormal = Vector2.Dot(body.Velocity, normal);
@@ -77,8 +79,11 @@ namespace Physics {
             Vector2 relativeVelocity = bodyB.Velocity - bodyA.Velocity;
             double restitution = Math.Min(bodyA.Restitution, bodyB.Restitution);
             double massOverSum = 1 / bodyA.Mass + 1 / bodyB.Mass;
-            if (EvaluateVelocityThreshold(relativeVelocity))
+            if (EvaluateVelocityThreshold(relativeVelocity)) {
                 restitution = 0;
+                bodyA.AddForce(bodyA.TotalForce.Inverted, ForceMode.Acceleration);
+                bodyB.AddForce(bodyB.TotalForce.Inverted, ForceMode.Acceleration);
+            }
             foreach (var contact in contacts) {
                 double relativeVelocityAlongNormal = Vector2.Dot(relativeVelocity, contact.Normal);
                 if (relativeVelocityAlongNormal < 0)

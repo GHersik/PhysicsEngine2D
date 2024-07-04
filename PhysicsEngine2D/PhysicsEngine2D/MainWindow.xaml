@@ -18,7 +18,7 @@
         </Canvas.Background>
 
         <!--Title-->
-        <TextBlock FontSize="16" Foreground="#FFF1F1F1"   Canvas.Top="58" TextAlignment="Center"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="21" VerticalAlignment="Top" Width="500" Canvas.Left="480" FontFamily="Cascadia Code ExtraLight"><Run Language="pl-pl" Text="SIMULATION BOUNDARIES"/></TextBlock>
+        <TextBlock FontSize="16" Foreground="#FFF1F1F1"   Canvas.Top="50" TextAlignment="Center"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="500" Canvas.Left="480" FontFamily="Cascadia Code ExtraLight"><Run Language="pl-pl" Text="SIMULATION BOUNDARIES"/></TextBlock>
         <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"  FontWeight="DemiBold"   Canvas.Top="101"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="17" VerticalAlignment="Top" Width="370" Canvas.Left="110" FontSize="14"><Run Language="pl-pl" Text="PHYSICS SETTINGS"/></TextBlock>
 
         <!--Buttons-->
@@ -60,9 +60,15 @@
 
         <!--Fade-->
         <Rectangle Name="SceneFade" Width="500" Height="500" Canvas.Left="480" StrokeThickness="1" Stroke="#FFF1F1F1" Canvas.Top="94" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF3F74AD" Panel.ZIndex="10"/>
+
+        <Image Source="/Resources/Images/Boundaries.png" Canvas.Left="460" Canvas.Top="74" Width="540" HorizontalAlignment="Center" VerticalAlignment="Top" Height="540">
+        </Image>
+
+        <Image Source="/Resources/Images/Grid.png" Canvas.Left="480" Canvas.Top="94" Width="500" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.2">
+        </Image>
         <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="152"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="156" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="TIMESTEP"/></TextBlock>
         <TextBlock Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="152"  TextWrapping="WrapWithOverflow" Height="14" Width="91" Canvas.Left="314" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Right" FontWeight="UltraLight"><Run Language="pl-pl" Text="0.02"/></TextBlock>
-        <TextBlock x:Name="canvasMatrixTop_Copy" Foreground="#FFF1F1F1"   Canvas.Top="594" TextAlignment="Center" Canvas.Left="909" TextWrapping="WrapWithOverflow" Height="17" Width="84" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="UltraLight"><Run Text="("/><Run Text="50"/><Run Text="0,"/><Run Text=" 500)"/></TextBlock>
+        <TextBlock x:Name="canvasMatrixTop_Copy" Foreground="#FFF1F1F1"   Canvas.Top="596" TextAlignment="Center" Canvas.Left="909" TextWrapping="WrapWithOverflow" Height="17" Width="84" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="UltraLight"><Run Text="("/><Run Text="50"/><Run Text="0,"/><Run Text=" 500)"/></TextBlock>
 
 
         <!--Visuals-->
