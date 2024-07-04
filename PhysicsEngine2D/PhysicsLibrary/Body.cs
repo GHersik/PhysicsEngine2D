@@ -11,7 +11,7 @@ namespace PhysicsLibrary {
         double mass = 1;
         public double Mass {
             get { return mass; }
-            set { mass = Math.Clamp(value, 0.1, 9999); }
+            set { mass = Math.Clamp(value, 0.01, 9999); }
         }
 
         double restitution = 1;

@@ -28,6 +28,7 @@ namespace SimulationWindow {
 
             AddWalls(scene);
             PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetNewFixedTimeStep(.02);
             return scene;
         }
 
@@ -39,7 +40,7 @@ namespace SimulationWindow {
                     Circle2DEntity circle = new Circle2DEntity(position, 4, ColorSettings.YellowBrush);
                     circle.body.Mass = 4;
                     circle.body.Damping = 1;
-                    circle.body.AddForce(new Vector2(rnd.Next(-400, 400), rnd.Next(-400, 400)), ForceMode.Impulse);
+                    circle.body.AddForce(new Vector2(rnd.Next(-300, 300), rnd.Next(-300, 300)), ForceMode.Impulse);
                     scene.AddEntity(circle);
                 }
 
@@ -49,23 +50,28 @@ namespace SimulationWindow {
 
             AddWalls(scene);
             PhysicsSettings.SetNewGravity(Vector2.Zero);
+            PhysicsSettings.SetNewFixedTimeStep(.02);
             return scene;
         }
 
-        public SceneData CircleVsBox() {
+        public SceneData RestingContact() {
             SceneData scene = new SceneData();
 
-            Circle2DEntity bigCircle = new Circle2DEntity(new Vector2(250, 100), 20, ColorSettings.YellowBrush);
+            Circle2DEntity bigCircle = new Circle2DEntity(new Vector2(250, 100), 20, ColorSettings.TransparentBrush);
             bigCircle.body.Mass = 20;
             bigCircle.body.Damping = .9;
             bigCircle.body.Restitution = .7;
+            bigCircle.renderer.SetBounds(ColorSettings.YellowBrush, 1.5);
             scene.AddEntity(bigCircle);
 
-            Box2DEntity boxEntity = new(new Vector2(250, 400), 100, 40, ColorSettings.WhiteBrush);
+            Box2DEntity boxEntity = new(new Vector2(250, 400), 100, 40, ColorSettings.TransparentBrush);
             boxEntity.body.SetKinematic(true);
+            boxEntity.renderer.SetBounds(ColorSettings.YellowBrush, 3);
             scene.AddEntity(boxEntity);
 
+            AddWalls(scene);
             PhysicsSettings.SetNewGravity(new Vector2(0, 200));
+            PhysicsSettings.SetNewFixedTimeStep(.02);
             return scene;
         }
 
@@ -89,6 +95,29 @@ namespace SimulationWindow {
 
             AddWalls(scene);
             PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetNewFixedTimeStep(.02);
+            return scene;
+        }
+
+        public SceneData Tunneling() {
+            SceneData scene = new SceneData();
+
+            Circle2DEntity bigCircle = new Circle2DEntity(new Vector2(100, 250), 20, ColorSettings.TransparentBrush);
+            bigCircle.body.Mass = 20;
+            bigCircle.body.Damping = 1;
+            bigCircle.body.Restitution = .7;
+            bigCircle.body.AddForce(new Vector2(10000, 0), ForceMode.Impulse);
+            bigCircle.renderer.SetBounds(ColorSettings.YellowBrush, 1.5);
+            scene.AddEntity(bigCircle);
+
+            Box2DEntity boxEntity = new(new Vector2(350, 250), 40, 100, ColorSettings.TransparentBrush);
+            boxEntity.body.SetKinematic(true);
+            boxEntity.renderer.SetBounds(ColorSettings.YellowBrush, 3);
+            scene.AddEntity(boxEntity);
+
+            AddWalls(scene);
+            PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetNewFixedTimeStep(.07);
             return scene;
         }
 
@@ -105,6 +134,7 @@ namespace SimulationWindow {
 
             AddWalls(scene);
             PhysicsSettings.SetNewGravity(PhysicsSettings.EarthGravity);
+            PhysicsSettings.SetNewFixedTimeStep(.02);
             return scene;
         }
 

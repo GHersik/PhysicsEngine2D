@@ -38,12 +38,17 @@
             </ComboBoxItem>
             <ComboBoxItem Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FF4988CB" OpacityMask="#FF4988CB">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="#FFF1F1F1">CIRCLE VS BOX</TextBlock>
+                    <TextBlock Foreground="#FFF1F1F1">RESTING CONTACT</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
             <ComboBoxItem Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FF4988CB" OpacityMask="#FF4988CB">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="#FFF1F1F1">BILLIARD SAMPLE</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FF4988CB" OpacityMask="#FF4988CB">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="#FFF1F1F1">TUNNELING</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
             <ComboBoxItem Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FF4988CB" OpacityMask="#FF4988CB">

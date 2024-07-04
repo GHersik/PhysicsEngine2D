@@ -40,9 +40,11 @@ namespace Physics {
         public Vector2 CalculateSingleEntityImpulse(Body body, List<ContactPoint2D> contacts) {
             Vector2 totalImpulse = Vector2.Zero;
             double restitution = body.Restitution;
+            //double velocityFromAcc = body.TotalForce;
+
             if (EvaluateVelocityThreshold(body.Velocity)) {
                 restitution = 0;
-                body.AddForce(body.TotalForce.Inverted, ForceMode.Impulse);
+                body.AddForce(-body.TotalForce * 2, ForceMode.Acceleration);
             }
             foreach (var contact in contacts) {
                 Vector2 normal = contact.Normal;

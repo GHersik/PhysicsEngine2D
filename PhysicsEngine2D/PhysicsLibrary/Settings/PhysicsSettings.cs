@@ -14,6 +14,6 @@ namespace PhysicsLibrary {
 
         public static void SetNewGravity(Vector2 gravity) => Gravity = gravity;
 
-        public static void SetNewFixedTimeStep(double value) => FixedTimeStep = value;
+        public static void SetNewFixedTimeStep(double value) => FixedTimeStep = Math.Clamp(value, 0.01, 0.1);
     }
 }

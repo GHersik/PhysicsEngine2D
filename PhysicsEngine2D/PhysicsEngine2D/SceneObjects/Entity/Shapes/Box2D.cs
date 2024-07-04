@@ -31,7 +31,11 @@ namespace SimulationWindow {
 
         public void Draw(Vector2 position) => RenderTransform = new TranslateTransform(position.x - width / 2, position.y - height / 2);
 
-        public void SetColor(SolidColorBrush color) => Fill = color;
+        public void SetFillColor(SolidColorBrush color) => Fill = color;
 
+        public void SetBounds(SolidColorBrush color, double thickness) {
+            Stroke = color;
+            StrokeThickness = thickness;
+        }
     }
 }

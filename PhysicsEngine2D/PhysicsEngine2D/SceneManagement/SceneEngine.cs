@@ -10,7 +10,7 @@ namespace SimulationWindow {
 
         SceneManager sceneManager;
         Timer? timer;
-        readonly double fixedTimeStep = PhysicsSettings.FixedTimeStep;
+        //readonly double fixedTimeStep = PhysicsSettings.FixedTimeStep;
         readonly TimeSpan interval = TimeSpan.FromMilliseconds(4);
         double accumulatedTime = 0.0;
         DateTime lastUpdateTime;
@@ -36,9 +36,9 @@ namespace SimulationWindow {
 
             accumulatedTime += deltaTime;
 
-            while (accumulatedTime >= fixedTimeStep) {
+            while (accumulatedTime >= PhysicsSettings.FixedTimeStep) {
                 sceneManager.FixedUpdate();
-                accumulatedTime -= fixedTimeStep;
+                accumulatedTime -= PhysicsSettings.FixedTimeStep;
             }
 
             if (Application.Current != null && !Application.Current.Dispatcher.HasShutdownStarted) {

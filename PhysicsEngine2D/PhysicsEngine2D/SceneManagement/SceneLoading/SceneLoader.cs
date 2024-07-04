@@ -14,6 +14,7 @@ namespace SimulationWindow {
             BrownianMotion,
             BoxVsCircle,
             BilliardSample,
+            Tunneling,
             LargeSet
         }
 
@@ -58,8 +59,9 @@ namespace SimulationWindow {
             switch (scene) {
                 case Scene.Ambient: return scenes.Ambient();
                 case Scene.BrownianMotion: return scenes.BrownianMotion();
-                case Scene.BoxVsCircle: return scenes.CircleVsBox();
+                case Scene.BoxVsCircle: return scenes.RestingContact();
                 case Scene.BilliardSample: return scenes.BilliardSample();
+                case Scene.Tunneling: return scenes.Tunneling();
                 case Scene.LargeSet: return scenes.LargeSet();
                 default: return scenes.Ambient();
             }
