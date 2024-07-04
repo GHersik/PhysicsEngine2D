@@ -28,8 +28,8 @@ namespace SimulationWindow {
                 }
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
-            PhysicsSettings.SetNewFixedTimeStep(.03);
+            PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetFixedTimeStep(.03);
             return scene;
         }
 
@@ -51,8 +51,8 @@ namespace SimulationWindow {
             scene.AddEntity(bigCircle);
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(Vector2.Zero);
-            PhysicsSettings.SetNewFixedTimeStep(.02);
+            PhysicsSettings.SetGravity(Vector2.Zero);
+            PhysicsSettings.SetFixedTimeStep(.02);
             return scene;
         }
 
@@ -72,8 +72,8 @@ namespace SimulationWindow {
             scene.AddEntity(boxEntity);
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(new Vector2(0, 200));
-            PhysicsSettings.SetNewFixedTimeStep(.06);
+            PhysicsSettings.SetGravity(new Vector2(0, 200));
+            PhysicsSettings.SetFixedTimeStep(.06);
             return scene;
         }
 
@@ -97,8 +97,8 @@ namespace SimulationWindow {
             scene.AddEntity(whiteBall);
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
-            PhysicsSettings.SetNewFixedTimeStep(.01);
+            PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetFixedTimeStep(.01);
             return scene;
         }
 
@@ -119,8 +119,8 @@ namespace SimulationWindow {
             scene.AddEntity(boxEntity);
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
-            PhysicsSettings.SetNewFixedTimeStep(.07);
+            PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetFixedTimeStep(.07);
             return scene;
         }
 
@@ -141,8 +141,8 @@ namespace SimulationWindow {
             scene.AddEntity(boxEntity);
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
-            PhysicsSettings.SetNewFixedTimeStep(.07);
+            PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetFixedTimeStep(.07);
             return scene;
         }
 
@@ -163,8 +163,8 @@ namespace SimulationWindow {
             scene.AddEntity(boxEntity);
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(PhysicsSettings.NoGravity);
-            PhysicsSettings.SetNewFixedTimeStep(.07);
+            PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
+            PhysicsSettings.SetFixedTimeStep(.07);
             return scene;
         }
 
@@ -181,8 +181,8 @@ namespace SimulationWindow {
                 }
 
             AddWalls(scene);
-            PhysicsSettings.SetNewGravity(PhysicsSettings.EarthGravity);
-            PhysicsSettings.SetNewFixedTimeStep(.02);
+            PhysicsSettings.SetGravity(PhysicsSettings.EarthGravity);
+            PhysicsSettings.SetFixedTimeStep(.02);
             return scene;
         }
 
