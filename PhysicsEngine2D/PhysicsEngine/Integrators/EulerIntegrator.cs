@@ -18,6 +18,7 @@ namespace Physics.Integrators {
             Vector2 resultingAcc = rigidBody.Acceleration;
             resultingAcc.AddScaledVector(rigidBody.ForceAccumulator, rigidBody.InverseMass);
             rigidBody.Velocity.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
+            //rigidBody.Velocity.AddScaledVector(resultingAcc, .02);
             rigidBody.ClearAccumulator();
         }
 

@@ -17,26 +17,41 @@ namespace SimulationWindow.SceneManagement {
 
         public bool IsRunning => timer != null;
 
-        private SceneManager sceneManager;
-        private Timer? timer;
-        private readonly TimeSpan interval = TimeSpan.FromMilliseconds((int)(PhysicsSettings.FixedTimeStep * 1000));
+        SceneManager sceneManager;
+        Timer? timer;
+        readonly double fixedTimeStep = PhysicsSettings.FixedTimeStep;
+        readonly TimeSpan interval = TimeSpan.FromMilliseconds(4);
+        double accumulatedTime = 0.0;
+        DateTime lastUpdateTime;
 
         public SceneEngine(SceneManager sceneManager) {
             this.sceneManager = sceneManager;
         }
 
-        public void StartTime() => timer = new Timer(FixedUpdate, null, TimeSpan.Zero, interval);
+        public void StartTime() {
+            lastUpdateTime = DateTime.UtcNow;
+            timer = new Timer(FixedUpdate, null, TimeSpan.Zero, interval);
+        }
 
         public void StopTime() {
             timer?.Dispose();
             timer = null;
         }
 
-        private void FixedUpdate(object? state) {
+        void FixedUpdate(object? state) {
+            DateTime currentTime = DateTime.UtcNow;
+            double deltaTime = (currentTime - lastUpdateTime).TotalSeconds;
+            lastUpdateTime = currentTime;
+
+            accumulatedTime += deltaTime;
+
+            while (accumulatedTime >= fixedTimeStep) {
+                sceneManager.FixedUpdate();
+                accumulatedTime -= fixedTimeStep;
+            }
+
             if (Application.Current != null && !Application.Current.Dispatcher.HasShutdownStarted) {
-                Application.Current.Dispatcher.Invoke(() => { sceneManager.FixedUpdate(); });
-                Application.Current.Dispatcher.Invoke(() => { sceneManager.Update(); });
-                Time.FixedUpdate();
+                Application.Current.Dispatcher.Invoke(() => sceneManager.Update());
             }
         }
     }

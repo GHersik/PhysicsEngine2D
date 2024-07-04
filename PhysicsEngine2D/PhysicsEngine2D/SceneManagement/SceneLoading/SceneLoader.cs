@@ -12,17 +12,19 @@ namespace SimulationWindow.SceneManagement {
         public enum Scene {
             Ambient,
             BrownianMotion,
-            BoxVsCircle
+            BoxVsCircle,
+            BilliardSample,
+            LargeSet
         }
 
-        private Scenes scenes = new Scenes();
-        private SceneManager sceneManager;
+        Scenes scenes = new Scenes();
+        SceneManager sceneManager;
 
-        private Rectangle fadeRect;
-        private readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 73, 136, 203));
-        private readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
-        private byte colorFadeAlpha;
-        private CancellationTokenSource? cts;
+        Rectangle fadeRect;
+        readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 73, 136, 203));
+        readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
+        byte colorFadeAlpha;
+        CancellationTokenSource? cts;
 
         public SceneLoader(SceneManager sceneManager, Rectangle fadeRectangle) {
             this.sceneManager = sceneManager;
@@ -52,36 +54,26 @@ namespace SimulationWindow.SceneManagement {
             await taskShow;
         }
 
-        private SceneData GetProperSceneData(Scene scene) {
+        SceneData GetProperSceneData(Scene scene) {
             switch (scene) {
-                case Scene.Ambient:
-                    return scenes.Ambient();
-                case Scene.BrownianMotion:
-                    return scenes.BrownianMotion();
-                case Scene.BoxVsCircle:
-                    return scenes.CircleVsBox();
-                default:
-                    return scenes.Ambient();
+                case Scene.Ambient: return scenes.Ambient();
+                case Scene.BrownianMotion: return scenes.BrownianMotion();
+                case Scene.BoxVsCircle: return scenes.CircleVsBox();
+                case Scene.BilliardSample: return scenes.BilliardSample();
+                case Scene.LargeSet: return scenes.LargeSet();
+                default: return scenes.Ambient();
             }
         }
 
-        public async Task FadeShow(Rectangle rectToFade) {
-            await StartFade(rectToFade, 0, 255);
-        }
+        public async Task FadeShow(Rectangle rectToFade) => await StartFade(rectToFade, 0, 255);
 
-        public async Task FadeShow() {
-            await StartFade(fadeRect, 0, 255);
-        }
+        public async Task FadeShow() => await StartFade(fadeRect, 0, 255);
 
-        public async Task FadeHide(Rectangle rectToFade) {
-            await StartFade(rectToFade, 255, 0);
-        }
+        public async Task FadeHide(Rectangle rectToFade) => await StartFade(rectToFade, 255, 0);
 
-        public async Task FadeHide() {
-            await StartFade(fadeRect, 255, 0);
-        }
+        public async Task FadeHide() => await StartFade(fadeRect, 255, 0);
 
-        private async Task StartFade(Rectangle rectToFade, byte startAlpha, byte endAlpha) {
+        async Task StartFade(Rectangle rectToFade, byte startAlpha, byte endAlpha) {
             StopCurrentFade();
             fadeRect = rectToFade;
             colorFadeAlpha = startAlpha;
@@ -94,7 +86,7 @@ namespace SimulationWindow.SceneManagement {
             }
         }
 
-        private async Task FadeUpdate(byte targetAlpha, CancellationToken cancellationToken) {
+        async Task FadeUpdate(byte targetAlpha, CancellationToken cancellationToken) {
             if (fadeRect == null) return;
 
             while (colorFadeAlpha != targetAlpha) {
@@ -106,7 +98,7 @@ namespace SimulationWindow.SceneManagement {
             }
         }
 
-        private void StopCurrentFade() {
+        void StopCurrentFade() {
             if (cts != null) {
                 cts.Cancel();
                 cts.Dispose();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhysicsLibrary.Forces {
+namespace PhysicsLibrary {
     public class DragForceGenerator : IForceGenerator {
 
         double velocityDragCoefficient;

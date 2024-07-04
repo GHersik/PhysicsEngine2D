@@ -27,7 +27,14 @@ namespace PhysicsLibrary {
 
         public Body() { }
 
-        public void AddForce(Vector2 force) => ForceAccumulator += force;
+        public void AddForce(Vector2 force, ForceMode mode = ForceMode.Force) {
+            switch (mode) {
+                case ForceMode.Force: ForceAccumulator += force / mass; break;
+                case ForceMode.Acceleration: ForceAccumulator += force; break;
+                case ForceMode.Impulse: Velocity += force / mass; break;
+                case ForceMode.VelocityChange: Velocity += force; break;
+            }
+        }
 
         public void ClearAccumulator() => ForceAccumulator = Vector2.Zero;
 

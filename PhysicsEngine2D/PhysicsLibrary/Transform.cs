@@ -9,6 +9,7 @@ namespace PhysicsLibrary {
     public class Transform {
 
         public Vector2 position;
+        public Vector2 PreviousPosition { get; set; }
 
         public Transform(Vector2 position) {
             this.position = position;
