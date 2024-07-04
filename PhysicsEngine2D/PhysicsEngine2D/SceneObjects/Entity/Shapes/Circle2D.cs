@@ -23,7 +23,7 @@ namespace SimulationWindow {
 
         protected override Geometry DefiningGeometry {
             get {
-                return new EllipseGeometry(new Rect(0, 0, Width - 2, Height - 2));
+                return new EllipseGeometry(new Rect(0, 0, Width - 1, Height - 1));
             }
         }
 

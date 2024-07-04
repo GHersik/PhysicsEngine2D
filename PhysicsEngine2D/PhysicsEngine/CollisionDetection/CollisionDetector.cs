@@ -30,6 +30,9 @@ namespace Physics {
 
         bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
             collisionData = null;
+            if (physicsEntityA.body.InverseMass == 0 && physicsEntityB.body.InverseMass == 0)
+                return false;
+
             switch (physicsEntityA.collider.type) {
                 case Collider2DType.Circle:
                     switch (physicsEntityB.collider.type) {

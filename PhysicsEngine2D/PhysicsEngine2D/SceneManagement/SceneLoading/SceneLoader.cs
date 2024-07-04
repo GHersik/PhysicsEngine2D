@@ -15,6 +15,7 @@ namespace SimulationWindow {
             BoxVsCircle,
             BilliardSample,
             Tunneling,
+            MarginalBounds,
             LargeSet
         }
 
@@ -62,6 +63,7 @@ namespace SimulationWindow {
                 case Scene.BoxVsCircle: return scenes.RestingContact();
                 case Scene.BilliardSample: return scenes.BilliardSample();
                 case Scene.Tunneling: return scenes.Tunneling();
+                case Scene.MarginalBounds: return scenes.MarginalBounds();
                 case Scene.LargeSet: return scenes.LargeSet();
                 default: return scenes.Ambient();
             }

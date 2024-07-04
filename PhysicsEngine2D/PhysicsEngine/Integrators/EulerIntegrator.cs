@@ -17,12 +17,8 @@ namespace Physics {
         void ConsumeForces(Body rigidBody) {
             Vector2 resultingAcc = rigidBody.Acceleration;
             resultingAcc.AddScaledVector(rigidBody.ForceAccumulator, rigidBody.InverseMass);
-            //Vector2 totalForce = resultingAcc;
-            //totalForce.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
             rigidBody.TotalForce = resultingAcc;
-
             rigidBody.Velocity.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
-            //rigidBody.Velocity += totalForce;
             rigidBody.ClearAccumulator();
         }
 

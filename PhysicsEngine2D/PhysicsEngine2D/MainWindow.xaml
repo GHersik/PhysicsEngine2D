@@ -22,10 +22,11 @@
         <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"  FontWeight="DemiBold"   Canvas.Top="101"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="17" VerticalAlignment="Top" Width="370" Canvas.Left="110" FontSize="14"><Run Language="pl-pl" Text="PHYSICS SETTINGS"/></TextBlock>
 
         <!--Buttons-->
+
         <Button Click="Generate_Click" x:Name="GenerateButton" Canvas.Left="820" Canvas.Top="636" Width="120" Height="30" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF1F1F1" FontWeight="Bold" FontFamily="Cascadia Mono ExtraLight" Content="GENERATE" />
         <Button Click="TimeButton_Click" Name="TimeButton" Canvas.Left="540" Canvas.Top="636" Width="120" Height="30" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF1F1F1" FontWeight="Bold" FontFamily="Cascadia Mono ExtraLight" >STOP TIME
         </Button>
-        <ComboBox Name="PickSimulationCB" Style="{DynamicResource ComboBoxEventDrivenSimulation}" Canvas.Left="673" Canvas.Top="636" HorizontalAlignment="Center" VerticalAlignment="Top" Width="136" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FFF1F1F1" BorderThickness="1,1,1,1" SelectedIndex="0" FontWeight="Bold" Panel.ZIndex="2" FontFamily="Cascadia Mono ExtraLight" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+<ComboBox Name="PickSimulationCB" Style="{DynamicResource ComboBoxEventDrivenSimulation}" Canvas.Left="673" Canvas.Top="636" HorizontalAlignment="Center" VerticalAlignment="Top" Width="136" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FFF1F1F1" BorderThickness="1,1,1,1" SelectedIndex="0" FontWeight="Bold" Panel.ZIndex="2" FontFamily="Cascadia Mono ExtraLight" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <ComboBoxItem Background="#FFF1F1F1" BorderBrush="#FFF1F1F1" OpacityMask="#FFF1F1F1" Foreground="#FFF1F1F1">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight">AMBIENT</TextBlock>
@@ -49,6 +50,11 @@
             <ComboBoxItem Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FF4988CB" OpacityMask="#FF4988CB">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="#FFF1F1F1">TUNNELING</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FF4988CB" OpacityMask="#FF4988CB">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="#FFF1F1F1">MARGINAL BOUNDS</TextBlock>
                 </StackPanel>
             </ComboBoxItem>
             <ComboBoxItem Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FF4988CB" OpacityMask="#FF4988CB">

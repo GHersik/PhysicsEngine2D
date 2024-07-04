@@ -40,38 +40,28 @@ namespace Physics {
         public Vector2 CalculateSingleEntityImpulse(Body body, List<ContactPoint2D> contacts) {
             Vector2 totalImpulse = Vector2.Zero;
             double restitution = body.Restitution;
-            //double velocityFromAcc = body.TotalForce;
-
             if (EvaluateVelocityThreshold(body.Velocity)) {
                 restitution = 0;
-                body.AddForce(-body.TotalForce * 2, ForceMode.Acceleration);
+                body.AddForce(-body.TotalForce, ForceMode.Acceleration);
             }
             foreach (var contact in contacts) {
-                Vector2 normal = contact.Normal;
-                double relativeVelocityAlongNormal = Vector2.Dot(body.Velocity, normal);
+                double relativeVelocityAlongNormal = Vector2.Dot(body.Velocity, contact.Normal);
                 if (relativeVelocityAlongNormal < 0) {
-                    Vector2 impulse = -(1 + restitution) * relativeVelocityAlongNormal * normal;
+                    Vector2 impulse = -(1 + restitution) * relativeVelocityAlongNormal * contact.Normal;
                     totalImpulse += impulse;
                 }
             }
             return totalImpulse;
         }
 
-        public void SeparateSingleEntity(IPhysicsEntity physicsEntity, List<ContactPoint2D> contacts) {
-            Vector2 maxSeparation = Vector2.Zero;
-            double maxPenetration = 0;
-            foreach (var contact in contacts) {
-                if (contact.Separation > maxPenetration) {
-                    maxPenetration = contact.Separation;
-                    maxSeparation = contact.Normal * contact.Separation * PhysicsSettings.DefaultContactOffset;
-                }
-            }
-            physicsEntity.transform.position += maxSeparation;
+        public void SeparateSingleEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
+            Vector2 correction = CalculateSeparationCorrection(contacts);
+            entity.transform.position += correction;
         }
 
         public void ResolveEntities(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
             Vector2 twoBodyImpulse = CalculateBodiesImpulse(entityA.body, entityB.body, contacts);
-            entityA.body.AddForce(twoBodyImpulse.Inverted, ForceMode.Impulse);
+            entityA.body.AddForce(-twoBodyImpulse, ForceMode.Impulse);
             entityB.body.AddForce(twoBodyImpulse, ForceMode.Impulse);
             SeparateBodies(entityA, entityB, contacts);
         }
@@ -83,8 +73,8 @@ namespace Physics {
             double massOverSum = 1 / bodyA.Mass + 1 / bodyB.Mass;
             if (EvaluateVelocityThreshold(relativeVelocity)) {
                 restitution = 0;
-                bodyA.AddForce(bodyA.TotalForce.Inverted, ForceMode.Acceleration);
-                bodyB.AddForce(bodyB.TotalForce.Inverted, ForceMode.Acceleration);
+                bodyA.AddForce(-bodyA.TotalForce, ForceMode.Acceleration);
+                bodyB.AddForce(-bodyB.TotalForce, ForceMode.Acceleration);
             }
             foreach (var contact in contacts) {
                 double relativeVelocityAlongNormal = Vector2.Dot(relativeVelocity, contact.Normal);
@@ -94,22 +84,27 @@ namespace Physics {
             return totalImpulse;
         }
 
-        public void SeparateBodies(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, List<ContactPoint2D> contacts) {
+        public void SeparateBodies(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
+            Vector2 correction = CalculateSeparationCorrection(contacts);
+            double totalMass = entityA.body.Mass + entityB.body.Mass;
+            double massProportionA = entityA.body.Mass / totalMass;
+            double massProportionB = entityB.body.Mass / totalMass;
+            Vector2 separationA = massProportionB * correction;
+            Vector2 separationB = massProportionA * correction;
+            entityA.transform.position -= separationA;
+            entityB.transform.position += separationB;
+        }
+
+        Vector2 CalculateSeparationCorrection(List<ContactPoint2D> contacts) {
             Vector2 maxSeparation = Vector2.Zero;
-            double maxPenetration = 0;
+            double maxPenetration = double.MaxValue;
             foreach (var contact in contacts) {
-                if (contact.Separation > maxPenetration) {
+                if (contact.Separation < maxPenetration) {
                     maxPenetration = contact.Separation;
-                    maxSeparation = contact.Normal * contact.Separation * PhysicsSettings.DefaultContactOffset;
+                    maxSeparation = contact.Normal * (contact.Separation + PhysicsSettings.DefaultContactOffset);
                 }
             }
-            double totalMass = physicsEntityA.body.Mass + physicsEntityB.body.Mass;
-            double massProportionA = physicsEntityA.body.Mass / totalMass;
-            double massProportionB = physicsEntityB.body.Mass / totalMass;
-            Vector2 separationA = massProportionB * maxSeparation;
-            Vector2 separationB = massProportionA * maxSeparation;
-            physicsEntityA.transform.position -= separationA;
-            physicsEntityB.transform.position += separationB;
+            return maxSeparation;
         }
 
         bool EvaluateVelocityThreshold(Vector2 velocity) {
