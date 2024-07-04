@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 namespace SimulationWindow {
     public class Entity : IPhysicsEntity {
 
-        public IRenderer renderer { get; protected set; }
+        public IRenderer Renderer { get; protected set; }
 
-        public Transform transform { get; protected set; }
+        public Transform Transform { get; protected set; }
 
-        public Body body { get; protected set; }
+        public Body Body { get; protected set; }
 
-        public Collider2D collider { get; protected set; }
+        public Collider2D Collider { get; protected set; }
 
         public Entity() {
-            this.renderer = new Circle2D();
-            this.transform = new Transform();
-            this.body = new Body();
-            this.collider = new CircleCollider2D(this);
+            this.Renderer = new Circle2D();
+            this.Transform = new Transform();
+            this.Body = new Body();
+            this.Collider = new CircleCollider2D(this);
         }
 
-        public void DrawEntity() => renderer.Draw(transform.position);
+        public void DrawEntity() => Renderer.Draw(Transform.position);
 
         public virtual void FixedUpdate() { }
 

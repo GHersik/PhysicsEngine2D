@@ -9,7 +9,7 @@ namespace SimulationWindow {
 
         public int SceneEntitiesAmount => sceneEntities.Count;
 
-        HashSet<Entity> sceneEntities = new HashSet<Entity>();
+        HashSet<Entity> sceneEntities = new();
 
         public SceneData() {
             sceneEntities.Clear();
@@ -45,7 +45,7 @@ namespace SimulationWindow {
         public void Clear() => sceneEntities.Clear();
 
         public Collection<IPhysicsEntity> RetrievePhysicsEntities() {
-            Collection<IPhysicsEntity> bodies = new Collection<IPhysicsEntity>();
+            Collection<IPhysicsEntity> bodies = new();
             foreach (var entity in sceneEntities)
                 bodies.Add(entity);
 

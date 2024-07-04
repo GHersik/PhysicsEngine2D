@@ -9,35 +9,35 @@ namespace Physics {
                     continue;
 
                 List<ContactPoint2D> contacts = RetrieveContacts(collision);
-                Resolve(collision.ColliderA.attachedEntity, collision.ColliderB.attachedEntity, contacts);
+                Resolve(collision.ColliderA.AttachedEntity, collision.ColliderB.AttachedEntity, contacts);
                 SendCollisionMessages(collision);
             }
         }
 
-        public List<ContactPoint2D> RetrieveContacts(Collision2D collision) {
-            List<ContactPoint2D> contacts = new List<ContactPoint2D>();
+        public static List<ContactPoint2D> RetrieveContacts(Collision2D collision) {
+            List<ContactPoint2D> contacts = new();
             collision.GetContacts(contacts);
             return contacts;
         }
 
-        public void Resolve(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
-            if (entityA.body.InverseMass == 0 && entityB.body.InverseMass == 0)
+        public static void Resolve(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
+            if (entityA.Body.InverseMass == 0 && entityB.Body.InverseMass == 0)
                 return;
-            else if (entityB.body.InverseMass == 0 && entityA.body.InverseMass != 0)
+            else if (entityB.Body.InverseMass == 0 && entityA.Body.InverseMass != 0)
                 ResolveEntity(entityA, contacts);
-            else if (entityA.body.InverseMass == 0 && entityB.body.InverseMass != 0)
+            else if (entityA.Body.InverseMass == 0 && entityB.Body.InverseMass != 0)
                 ResolveEntity(entityB, contacts);
             else
                 ResolveEntities(entityA, entityB, contacts);
         }
 
-        public void ResolveEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
-            Vector2 impulse = CalculateSingleEntityImpulse(entity.body, contacts);
-            entity.body.AddForce(impulse, ForceMode.VelocityChange);
+        public static void ResolveEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
+            Vector2 impulse = CalculateSingleEntityImpulse(entity.Body, contacts);
+            entity.Body.AddForce(impulse, ForceMode.VelocityChange);
             SeparateSingleEntity(entity, contacts);
         }
 
-        public Vector2 CalculateSingleEntityImpulse(Body body, List<ContactPoint2D> contacts) {
+        public static Vector2 CalculateSingleEntityImpulse(Body body, List<ContactPoint2D> contacts) {
             Vector2 totalImpulse = Vector2.Zero;
             double restitution = body.Restitution;
             if (EvaluateVelocityThreshold(body.Velocity)) {
@@ -54,19 +54,19 @@ namespace Physics {
             return totalImpulse;
         }
 
-        public void SeparateSingleEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
+        public static void SeparateSingleEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
             Vector2 correction = CalculateSeparationCorrection(contacts);
-            entity.transform.position += correction;
+            entity.Transform.position += correction;
         }
 
-        public void ResolveEntities(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
-            Vector2 twoBodyImpulse = CalculateBodiesImpulse(entityA.body, entityB.body, contacts);
-            entityA.body.AddForce(-twoBodyImpulse, ForceMode.Impulse);
-            entityB.body.AddForce(twoBodyImpulse, ForceMode.Impulse);
+        public static void ResolveEntities(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
+            Vector2 twoBodyImpulse = CalculateBodiesImpulse(entityA.Body, entityB.Body, contacts);
+            entityA.Body.AddForce(-twoBodyImpulse, ForceMode.Impulse);
+            entityB.Body.AddForce(twoBodyImpulse, ForceMode.Impulse);
             SeparateBodies(entityA, entityB, contacts);
         }
 
-        public Vector2 CalculateBodiesImpulse(Body bodyA, Body bodyB, List<ContactPoint2D> contacts) {
+        public static Vector2 CalculateBodiesImpulse(Body bodyA, Body bodyB, List<ContactPoint2D> contacts) {
             Vector2 totalImpulse = Vector2.Zero;
             Vector2 relativeVelocity = bodyB.Velocity - bodyA.Velocity;
             double restitution = Math.Min(bodyA.Restitution, bodyB.Restitution);
@@ -84,18 +84,18 @@ namespace Physics {
             return totalImpulse;
         }
 
-        public void SeparateBodies(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
+        public static void SeparateBodies(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
             Vector2 correction = CalculateSeparationCorrection(contacts);
-            double totalMass = entityA.body.Mass + entityB.body.Mass;
-            double massProportionA = entityA.body.Mass / totalMass;
-            double massProportionB = entityB.body.Mass / totalMass;
+            double totalMass = entityA.Body.Mass + entityB.Body.Mass;
+            double massProportionA = entityA.Body.Mass / totalMass;
+            double massProportionB = entityB.Body.Mass / totalMass;
             Vector2 separationA = massProportionB * correction;
             Vector2 separationB = massProportionA * correction;
-            entityA.transform.position -= separationA;
-            entityB.transform.position += separationB;
+            entityA.Transform.position -= separationA;
+            entityB.Transform.position += separationB;
         }
 
-        Vector2 CalculateSeparationCorrection(List<ContactPoint2D> contacts) {
+        static Vector2 CalculateSeparationCorrection(List<ContactPoint2D> contacts) {
             Vector2 maxSeparation = Vector2.Zero;
             double maxPenetration = double.MaxValue;
             foreach (var contact in contacts) {
@@ -107,15 +107,15 @@ namespace Physics {
             return maxSeparation;
         }
 
-        bool EvaluateVelocityThreshold(Vector2 velocity) {
+        static bool EvaluateVelocityThreshold(Vector2 velocity) {
             if (Math.Abs(velocity.x) < PhysicsSettings.VelocityThreshold && Math.Abs(velocity.y) < PhysicsSettings.VelocityThreshold)
                 return true;
             return false;
         }
 
-        public void SendCollisionMessages(Collision2D contact) {
-            contact.ColliderA.attachedEntity.OnCollisionEnter2D(contact);
-            contact.ColliderB.attachedEntity.OnCollisionEnter2D(contact);
+        public static void SendCollisionMessages(Collision2D contact) {
+            contact.ColliderA.AttachedEntity.OnCollisionEnter2D(contact);
+            contact.ColliderB.AttachedEntity.OnCollisionEnter2D(contact);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace SimulationWindow {
 
         public UIElement UIElement => this;
 
-        double radius;
+        readonly double radius;
 
         public Circle2D(double radius, SolidColorBrush color) {
             this.radius = radius;

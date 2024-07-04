@@ -5,7 +5,7 @@ using PhysicsLibrary;
 namespace Physics {
     public class PhysicsWorld : IEnumerable<IPhysicsEntity> {
 
-        private HashSet<IPhysicsEntity> physicsEntities = new HashSet<IPhysicsEntity>();
+        private HashSet<IPhysicsEntity> physicsEntities = new();
 
         public PhysicsWorld() {
             physicsEntities.Clear();

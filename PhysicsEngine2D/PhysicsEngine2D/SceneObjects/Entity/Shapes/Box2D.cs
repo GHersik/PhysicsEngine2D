@@ -8,8 +8,8 @@ namespace SimulationWindow {
 
         public UIElement UIElement => this;
 
-        double width;
-        double height;
+        readonly double width;
+        readonly double height;
 
         public Box2D(double width, double height, SolidColorBrush color) {
             this.width = width;

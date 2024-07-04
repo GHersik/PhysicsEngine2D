@@ -9,14 +9,14 @@ namespace PhysicsLibrary {
         public readonly double SqrMagnitude => x * x + y * y;
         public readonly Vector2 Normalized {
             get {
-                Vector2 normalized = new Vector2(x, y);
+                Vector2 normalized = new(x, y);
                 normalized.Normalize();
                 return normalized;
             }
         }
         public readonly Vector2 Inverted {
             get {
-                Vector2 inverted = new Vector2(x, y);
+                Vector2 inverted = new(x, y);
                 inverted.Invert();
                 return inverted;
             }

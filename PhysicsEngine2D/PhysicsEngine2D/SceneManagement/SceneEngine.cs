@@ -8,9 +8,8 @@ namespace SimulationWindow {
 
         public bool IsRunning => timer != null;
 
-        SceneManager sceneManager;
+        readonly SceneManager sceneManager;
         Timer? timer;
-        //readonly double fixedTimeStep = PhysicsSettings.FixedTimeStep;
         readonly TimeSpan interval = TimeSpan.FromMilliseconds(4);
         double accumulatedTime = 0.0;
         DateTime lastUpdateTime;

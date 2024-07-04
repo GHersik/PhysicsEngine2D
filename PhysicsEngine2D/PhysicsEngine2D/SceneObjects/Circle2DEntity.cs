@@ -13,10 +13,10 @@ namespace SimulationWindow {
         //private SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(255, 107, 203, 119));
 
         public Circle2DEntity(Vector2 position, double radius, SolidColorBrush color) {
-            transform = new PhysicsLibrary.Transform(position);
-            renderer = new Circle2D(radius, color);
-            collider = new CircleCollider2D(this, radius);
-            body = new Body();
+            Transform = new PhysicsLibrary.Transform(position);
+            Renderer = new Circle2D(radius, color);
+            Collider = new CircleCollider2D(this, radius);
+            Body = new Body();
         }
 
         public Circle2DEntity(Vector2 position, double radius) : this(position, radius, ColorSettings.YellowBrush) { }

@@ -4,14 +4,14 @@ namespace Physics {
     internal class EulerIntegrator {
 
         public void Integrate(IPhysicsEntity physicsEntity) {
-            ConsumeForces(physicsEntity.body);
-            if (EvaluateSleepTolerance(physicsEntity.body)) {
-                physicsEntity.body.Velocity = Vector2.Zero;
+            ConsumeForces(physicsEntity.Body);
+            if (EvaluateSleepTolerance(physicsEntity.Body)) {
+                physicsEntity.Body.Velocity = Vector2.Zero;
                 return;
             }
 
             UpdateLinearPosition(physicsEntity);
-            ImposeDrag(physicsEntity.body);
+            ImposeDrag(physicsEntity.Body);
         }
 
         void ConsumeForces(Body rigidBody) {
@@ -29,7 +29,7 @@ namespace Physics {
         }
 
         void UpdateLinearPosition(IPhysicsEntity physicsEntity) {
-            physicsEntity.transform.position.AddScaledVector(physicsEntity.body.Velocity, PhysicsSettings.FixedTimeStep);
+            physicsEntity.Transform.position.AddScaledVector(physicsEntity.Body.Velocity, PhysicsSettings.FixedTimeStep);
         }
 
         void ImposeDrag(Body rigidBody) {

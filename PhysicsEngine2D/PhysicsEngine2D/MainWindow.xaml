@@ -26,7 +26,7 @@
         <Button Click="Generate_Click" x:Name="GenerateButton" Canvas.Left="820" Canvas.Top="636" Width="120" Height="30" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF1F1F1" FontWeight="Bold" FontFamily="Cascadia Mono ExtraLight" Content="GENERATE" />
         <Button Click="TimeButton_Click" Name="TimeButton" Canvas.Left="540" Canvas.Top="636" Width="120" Height="30" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF1F1F1" FontWeight="Bold" FontFamily="Cascadia Mono ExtraLight" >STOP TIME
         </Button>
-<ComboBox Name="PickSimulationCB" Style="{DynamicResource ComboBoxEventDrivenSimulation}" Canvas.Left="673" Canvas.Top="636" HorizontalAlignment="Center" VerticalAlignment="Top" Width="136" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FFF1F1F1" BorderThickness="1,1,1,1" SelectedIndex="0" FontWeight="Bold" Panel.ZIndex="2" FontFamily="Cascadia Mono ExtraLight" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        <ComboBox Name="PickSimulationCB" Style="{DynamicResource ComboBoxEventDrivenSimulation}" Canvas.Left="673" Canvas.Top="636" HorizontalAlignment="Center" VerticalAlignment="Top" Width="136" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Foreground="#FFF1F1F1" BorderThickness="1,1,1,1" SelectedIndex="0" FontWeight="Bold" Panel.ZIndex="2" FontFamily="Cascadia Mono ExtraLight" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <ComboBoxItem Background="#FFF1F1F1" BorderBrush="#FFF1F1F1" OpacityMask="#FFF1F1F1" Foreground="#FFF1F1F1">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight">AMBIENT</TextBlock>
@@ -72,11 +72,9 @@
         <!--Fade-->
         <Rectangle Name="SceneFade" Width="500" Height="500" Canvas.Left="480" StrokeThickness="1" Stroke="#FFF1F1F1" Canvas.Top="94" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF3F74AD" Panel.ZIndex="10"/>
 
-        <Image Source="/Resources/Images/Boundaries.png" Canvas.Left="460" Canvas.Top="74" Width="540" HorizontalAlignment="Center" VerticalAlignment="Top" Height="540">
-        </Image>
+        <Image Source="/Resources/Images/Boundaries.png" Canvas.Left="460" Canvas.Top="74" Width="540" HorizontalAlignment="Center" VerticalAlignment="Top" Height="540"/>
 
-        <Image Source="/Resources/Images/Grid.png" Canvas.Left="480" Canvas.Top="94" Width="500" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.2">
-        </Image>
+        <Image Source="/Resources/Images/Grid.png" Canvas.Left="480" Canvas.Top="94" Width="500" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.2"/>
         <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="152"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="156" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="TIMESTEP"/></TextBlock>
         <TextBlock Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="152"  TextWrapping="WrapWithOverflow" Height="14" Width="91" Canvas.Left="314" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Right" FontWeight="UltraLight"><Run Language="pl-pl" Text="0.02"/></TextBlock>
         <TextBlock x:Name="canvasMatrixTop_Copy" Foreground="#FFF1F1F1"   Canvas.Top="596" TextAlignment="Center" Canvas.Left="909" TextWrapping="WrapWithOverflow" Height="17" Width="84" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="UltraLight"><Run Text="("/><Run Text="50"/><Run Text="0,"/><Run Text=" 500)"/></TextBlock>

@@ -6,7 +6,7 @@ namespace PhysicsLibrary {
         public Collider2D ColliderB { get; private set; }
         public int ContactCount => contacts.Count;
 
-        List<ContactPoint2D> contacts = new List<ContactPoint2D>();
+        readonly List<ContactPoint2D> contacts = new();
 
         public Collision2D(Collider2D colliderA, Collider2D colliderB) {
             this.ColliderA = colliderA;

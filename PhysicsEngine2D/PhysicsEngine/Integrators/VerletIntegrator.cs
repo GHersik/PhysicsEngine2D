@@ -2,16 +2,16 @@
 
 namespace Physics {
     internal class VerletIntegrator {
-        public void Integrate(IPhysicsEntity physicsEntity, double fixedTimeStep) {
-            //// Update position
-            //UpdateLinearPosition(physicsEntity, fixedTimeStep);
+        //public void Integrate(IPhysicsEntity physicsEntity, double fixedTimeStep) {
+        //    //// Update position
+        //    //UpdateLinearPosition(physicsEntity, fixedTimeStep);
 
-            //// Update velocity based on the new and old positions
-            //UpdateLinearVelocity(physicsEntity, fixedTimeStep);
+        //    //// Update velocity based on the new and old positions
+        //    //UpdateLinearVelocity(physicsEntity, fixedTimeStep);
 
-            //// Impose drag if necessary
-            //ImposeDrag(physicsEntity.body);
-        }
+        //    //// Impose drag if necessary
+        //    //ImposeDrag(physicsEntity.body);
+        //}
 
         //void UpdateLinearPosition(IPhysicsEntity physicsEntity, double fixedTimeStep) {
         //    Body body = physicsEntity.body;

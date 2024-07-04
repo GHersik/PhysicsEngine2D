@@ -9,8 +9,8 @@ namespace PhysicsEngine2D {
 
     public partial class MainWindow : Window {
 
-        SceneEngine sceneEngine;
-        SceneLoader sceneLoader;
+        readonly SceneEngine sceneEngine;
+        readonly SceneLoader sceneLoader;
 
         #region Initialization
         public MainWindow() {
@@ -18,7 +18,7 @@ namespace PhysicsEngine2D {
             Setup();
             EnableInput(false);
 
-            SceneManager sceneManager = new SceneManager(SceneView);
+            SceneManager sceneManager = new(SceneView);
             sceneEngine = new SceneEngine(sceneManager);
             sceneLoader = new SceneLoader(sceneManager, SceneFade);
             StartSimulation();

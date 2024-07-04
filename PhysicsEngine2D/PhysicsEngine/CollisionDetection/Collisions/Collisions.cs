@@ -4,7 +4,7 @@ namespace Physics {
     internal static class Collisions {
 
         public static bool CircleCircleCollision(CircleCollider2D circleA, CircleCollider2D circleB, out Collision2D? collision) {
-            Vector2 distanceDiff = circleB.attachedEntity.transform.position - circleA.attachedEntity.transform.position;
+            Vector2 distanceDiff = circleB.AttachedEntity.Transform.position - circleA.AttachedEntity.Transform.position;
             double sqrDistance = distanceDiff.SqrMagnitude;
             double radiusSum = circleA.Radius + circleB.Radius;
             double radiusSumSqr = radiusSum * radiusSum;
@@ -13,7 +13,7 @@ namespace Physics {
                 double distance = Math.Sqrt(sqrDistance);
                 Vector2 normal = distanceDiff.Normalized;
                 double separation = radiusSum - distance;
-                Vector2 point = circleA.attachedEntity.transform.position + (normal * (circleA.Radius - separation / 2));
+                Vector2 point = circleA.AttachedEntity.Transform.position + (normal * (circleA.Radius - separation / 2));
                 collision.AddContact(new ContactPoint2D(point, separation, normal));
                 return true;
             }
@@ -22,7 +22,7 @@ namespace Physics {
         }
 
         public static bool CircleBoxCollision(CircleCollider2D circle, BoxCollider2D box, out Collision2D? collision) {
-            Vector2 circleCenter = circle.attachedEntity.transform.position;
+            Vector2 circleCenter = circle.AttachedEntity.Transform.position;
             Vector2 closestPoint = box.ClosestPoint(circleCenter);
             Vector2 distance = circleCenter - closestPoint;
 

@@ -5,17 +5,17 @@ namespace PhysicsLibrary {
         public double Radius { get; private set; }
 
         public CircleCollider2D(IPhysicsEntity physicsEntity, double radius) {
-            attachedEntity = physicsEntity;
+            AttachedEntity = physicsEntity;
             Radius = radius;
-            type = Collider2DType.Circle;
+            Type = Collider2DType.Circle;
         }
 
         public CircleCollider2D(IPhysicsEntity physicsEntity) : this(physicsEntity, 3) { }
 
         public override Vector2 ClosestPoint(Vector2 point) {
-            Vector2 direction = point - attachedEntity.transform.position;
+            Vector2 direction = point - AttachedEntity.Transform.position;
             direction.Normalize();
-            return attachedEntity.transform.position + (direction * Radius);
+            return AttachedEntity.Transform.position + (direction * Radius);
         }
     }
 }

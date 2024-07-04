@@ -2,8 +2,8 @@
 namespace PhysicsLibrary {
     public class DragForceGenerator : IForceGenerator {
 
-        double velocityDragCoefficient;
-        double velocityDragSquaredCoefficient;
+        readonly double velocityDragCoefficient;
+        readonly double velocityDragSquaredCoefficient;
 
         public DragForceGenerator(double velDragCoef, double velDragSquaredCoef) {
             velocityDragCoefficient = velDragCoef;

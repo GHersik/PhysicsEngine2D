@@ -19,12 +19,10 @@ namespace SimulationWindow {
             LargeSet
         }
 
-        Scenes scenes = new Scenes();
-        SceneManager sceneManager;
-
-        Rectangle fadeRect;
-        readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 63, 116, 173));
+        readonly SceneManager sceneManager;
+        readonly SolidColorBrush FadeBrush = new(Color.FromArgb(255, 63, 116, 173));
         readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
+        Rectangle fadeRect;
         byte colorFadeAlpha;
         CancellationTokenSource? cts;
 
@@ -58,14 +56,14 @@ namespace SimulationWindow {
 
         SceneData GetProperSceneData(Scene scene) {
             switch (scene) {
-                case Scene.Ambient: return scenes.Ambient();
-                case Scene.BrownianMotion: return scenes.BrownianMotion();
-                case Scene.BoxVsCircle: return scenes.RestingContact();
-                case Scene.BilliardSample: return scenes.BilliardSample();
-                case Scene.Tunneling: return scenes.Tunneling();
-                case Scene.MarginalBounds: return scenes.MarginalBounds();
-                case Scene.LargeSet: return scenes.LargeSet();
-                default: return scenes.Ambient();
+                case Scene.Ambient: return Scenes.Ambient();
+                case Scene.BrownianMotion: return Scenes.BrownianMotion();
+                case Scene.BoxVsCircle: return Scenes.RestingContact();
+                case Scene.BilliardSample: return Scenes.BilliardSample();
+                case Scene.Tunneling: return Scenes.Tunneling();
+                case Scene.MarginalBounds: return Scenes.MarginalBounds();
+                case Scene.LargeSet: return Scenes.LargeSet();
+                default: return Scenes.Ambient();
             }
         }
 

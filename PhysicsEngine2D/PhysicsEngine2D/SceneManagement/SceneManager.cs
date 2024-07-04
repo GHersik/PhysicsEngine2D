@@ -6,8 +6,8 @@ namespace SimulationWindow {
     public class SceneManager {
 
         SceneData sceneData;
-        SceneRenderer sceneRenderer;
-        PhysicsEngine physicsEngine;
+        readonly SceneRenderer sceneRenderer;
+        readonly PhysicsEngine physicsEngine;
 
         public SceneManager(Canvas canvas) {
             sceneData = new SceneData();
@@ -55,7 +55,7 @@ namespace SimulationWindow {
         }
 
         public void Update() {
-            sceneRenderer.DrawScene(sceneData);
+            SceneRenderer.DrawScene(sceneData);
             foreach (Entity entity in sceneData)
                 entity.Update();
         }

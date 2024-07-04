@@ -7,9 +7,9 @@ namespace Physics {
         public PhysicsWorld PhysicsWorld { get; private set; }
         public BodyForceRegistry ForceRegistry { get; private set; }
 
-        EulerIntegrator eulerIntegrator;
-        CollisionDetector collisionDetector;
-        ContactResolver contactResolver;
+        readonly EulerIntegrator eulerIntegrator;
+        readonly CollisionDetector collisionDetector;
+        readonly ContactResolver contactResolver;
 
         public PhysicsEngine() {
             eulerIntegrator = new EulerIntegrator();
@@ -30,12 +30,12 @@ namespace Physics {
 
         public void FixedUpdate() {
             foreach (var physicsEntity in PhysicsWorld) {
-                physicsEntity.body.AddForce(PhysicsSettings.Gravity, ForceMode.Acceleration);
+                physicsEntity.Body.AddForce(PhysicsSettings.Gravity, ForceMode.Acceleration);
                 ForceRegistry.UpdateForces();
                 eulerIntegrator.Integrate(physicsEntity);
             }
 
-            List<Collision2D> collisions = collisionDetector.DetectCollisions(PhysicsWorld.GetPhysicsEntityArray());
+            List<Collision2D> collisions = CollisionDetector.DetectCollisions(PhysicsWorld.GetPhysicsEntityArray());
             contactResolver.ResolveContacts(collisions);
         }
     }
