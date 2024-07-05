@@ -6,10 +6,10 @@ namespace PhysicsLibrary {
         public static readonly Vector2 NoGravity = Vector2.Zero;
 
         public static double FixedTimeStep { get; private set; } = 0.02;
-        public static Vector2 Gravity { get; private set; } = EarthGravity;
-        public static double DefaultContactOffset { get; private set; } = 0.01;
+        public static Vector2 Gravity { get; private set; } = NoGravity;
+        public static double DefaultContactOffset { get; private set; } = 0.1;
         public static double VelocityThreshold { get; private set; } = 1;
-        public static double LinearSleepTolerance { get; private set; } = 0.01;
+        public static double LinearSleepTolerance { get; private set; } = 0.1;
 
 
         public static void SetFixedTimeStep(double value) => FixedTimeStep = Math.Clamp(value, 0.01, 0.1);

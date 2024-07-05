@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using PhysicsLibrary;
 using SimulationWindow;
 
 namespace PhysicsEngine2D {
@@ -67,6 +68,50 @@ namespace PhysicsEngine2D {
             await sceneLoadTask;
             EnableInput(true);
             SetSimulationTime(true);
+        }
+
+        void SliderGravityX(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            double value = Math.Round(e.NewValue, 3);
+            Vector2 gravityValue = new Vector2(value, PhysicsSettings.Gravity.y);
+            PhysicsSettings.SetGravity(gravityValue);
+            if (GravityText != null)
+                GravityText.Text = $"{PhysicsSettings.Gravity}";
+        }
+
+        void SliderGravityY(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            double value = Math.Round(e.NewValue, 3);
+            Vector2 gravityValue = new Vector2(PhysicsSettings.Gravity.x, value);
+            PhysicsSettings.SetGravity(gravityValue);
+            if (GravityText != null)
+                GravityText.Text = $"{PhysicsSettings.Gravity}";
+        }
+
+        void SliderTimeStep(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            double value = Math.Round(e.NewValue, 3);
+            PhysicsSettings.SetFixedTimeStep(value);
+            if (TimeStepText != null)
+                TimeStepText.Text = PhysicsSettings.FixedTimeStep.ToString();
+        }
+
+        void SliderContactOffset(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            double value = Math.Round(e.NewValue, 3);
+            PhysicsSettings.SetDefaultContactOffset(value);
+            if (ContactOffsetText != null)
+                ContactOffsetText.Text = PhysicsSettings.DefaultContactOffset.ToString();
+        }
+
+        void SliderVelocityThreshold(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            double value = Math.Round(e.NewValue, 3);
+            PhysicsSettings.SetVelocityThreshold(value);
+            if (VelocityThresholdText != null)
+                VelocityThresholdText.Text = PhysicsSettings.VelocityThreshold.ToString();
+        }
+
+        void SliderSleepTolerance(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            double value = Math.Round(e.NewValue, 3);
+            PhysicsSettings.SetSleepTolerance(value);
+            if (SleepToleranceText != null)
+                SleepToleranceText.Text = PhysicsSettings.LinearSleepTolerance.ToString();
         }
 
         void EnableInput(bool value) {
