@@ -1,5 +1,4 @@
-﻿using Physics.CollisionDetection.Collisions;
-using PhysicsLibrary;
+﻿using PhysicsLibrary;
 
 namespace Physics {
     internal class ContactResolver {
@@ -10,160 +9,113 @@ namespace Physics {
                     continue;
 
                 List<ContactPoint2D> contacts = RetrieveContacts(collision);
-                Vector2 impulseApplied = Resolve(collision.ColliderA.attachedEntity, collision.ColliderB.attachedEntity, contacts);
+                Resolve(collision.ColliderA.AttachedEntity, collision.ColliderB.AttachedEntity, contacts);
                 SendCollisionMessages(collision);
             }
         }
 
-        public List<ContactPoint2D> RetrieveContacts(Collision2D collision) {
-            List<ContactPoint2D> contacts = new List<ContactPoint2D>();
+        public static List<ContactPoint2D> RetrieveContacts(Collision2D collision) {
+            List<ContactPoint2D> contacts = new();
             collision.GetContacts(contacts);
             return contacts;
         }
 
-        public Vector2 Resolve(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
-            if (entityA.body.inverseMass == 0 && entityB.body.inverseMass == 0)
-                return Vector2.Zero;
-            else if (entityA.body.inverseMass == 0 && entityB.body.inverseMass != 0) {
-                Vector2 impulse = CalculateSingleBodyImpulse(entityB.body, contacts);
-                entityB.body.velocity -= impulse / entityB.body.mass;
-                SeparateSingleEntity(entityB, contacts);
-                return impulse;
+        public static void Resolve(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
+            if (entityA.Body.InverseMass == 0 && entityB.Body.InverseMass == 0)
+                return;
+            else if (entityB.Body.InverseMass == 0 && entityA.Body.InverseMass != 0)
+                ResolveEntity(entityA, contacts);
+            else if (entityA.Body.InverseMass == 0 && entityB.Body.InverseMass != 0)
+                ResolveEntity(entityB, contacts);
+            else
+                ResolveEntities(entityA, entityB, contacts);
+        }
+
+        public static void ResolveEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
+            Vector2 impulse = CalculateSingleEntityImpulse(entity.Body, contacts);
+            entity.Body.AddForce(impulse, ForceMode.VelocityChange);
+            SeparateSingleEntity(entity, contacts);
+        }
+
+        public static Vector2 CalculateSingleEntityImpulse(Body body, List<ContactPoint2D> contacts) {
+            Vector2 totalImpulse = Vector2.Zero;
+            double restitution = body.Restitution;
+            if (EvaluateVelocityThreshold(body.Velocity)) {
+                restitution = 0;
+                body.AddForce(-body.TotalForce, ForceMode.Acceleration);
             }
-            else if (entityB.body.inverseMass == 0 && entityA.body.inverseMass != 0) {
-                Vector2 impulse = CalculateSingleBodyImpulse(entityA.body, contacts);
-                entityA.body.velocity += impulse / entityA.body.mass;
-                SeparateSingleEntity(entityA, contacts);
-                return impulse;
+            foreach (var contact in contacts) {
+                double relativeVelocityAlongNormal = Vector2.Dot(body.Velocity, contact.Normal);
+                if (relativeVelocityAlongNormal < 0) {
+                    Vector2 impulse = -(1 + restitution) * relativeVelocityAlongNormal * contact.Normal;
+                    totalImpulse += impulse;
+                }
             }
-            Vector2 twoBodyImpulse = CalculateBodiesImpulse(entityA.body, entityB.body, contacts);
-            entityA.body.velocity -= twoBodyImpulse / entityA.body.mass;
-            entityB.body.velocity += twoBodyImpulse / entityB.body.mass;
+            return totalImpulse;
+        }
+
+        public static void SeparateSingleEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
+            Vector2 correction = CalculateSeparationCorrection(contacts);
+            entity.Transform.position += correction;
+        }
+
+        public static void ResolveEntities(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
+            Vector2 twoBodyImpulse = CalculateBodiesImpulse(entityA.Body, entityB.Body, contacts);
+            entityA.Body.AddForce(-twoBodyImpulse, ForceMode.Impulse);
+            entityB.Body.AddForce(twoBodyImpulse, ForceMode.Impulse);
             SeparateBodies(entityA, entityB, contacts);
-            return twoBodyImpulse;
         }
 
-        public Vector2 CalculateSingleBodyImpulse(Body body, List<ContactPoint2D> contacts) {
+        public static Vector2 CalculateBodiesImpulse(Body bodyA, Body bodyB, List<ContactPoint2D> contacts) {
             Vector2 totalImpulse = Vector2.Zero;
-            double massOverSum = 1 / body.mass;
+            Vector2 relativeVelocity = bodyB.Velocity - bodyA.Velocity;
+            double restitution = Math.Min(bodyA.Restitution, bodyB.Restitution);
+            double massOverSum = 1 / bodyA.Mass + 1 / bodyB.Mass;
+            if (EvaluateVelocityThreshold(relativeVelocity)) {
+                restitution = 0;
+                bodyA.AddForce(-bodyA.TotalForce, ForceMode.Acceleration);
+                bodyB.AddForce(-bodyB.TotalForce, ForceMode.Acceleration);
+            }
             foreach (var contact in contacts) {
-                Vector2 normal = contact.Normal;
-                double relativeVelocityAlongNormal = Vector2.Dot(body.velocity, normal);
-                if (relativeVelocityAlongNormal < 0) {
-                    Vector2 impulse = -(1 + body.restitution) * relativeVelocityAlongNormal * normal / massOverSum;
-                    totalImpulse += impulse;
-                }
+                double relativeVelocityAlongNormal = Vector2.Dot(relativeVelocity, contact.Normal);
+                if (relativeVelocityAlongNormal < 0)
+                    totalImpulse += -(1 + restitution) * relativeVelocityAlongNormal * contact.Normal / massOverSum;
             }
             return totalImpulse;
         }
 
-        public Vector2 CalculateBodiesImpulse(Body bodyA, Body bodyB, List<ContactPoint2D> contacts) {
-            Vector2 totalImpulse = Vector2.Zero;
-            double restitution = Math.Min(bodyA.restitution, bodyB.restitution);
-            double massOverSum = 1 / bodyA.mass + 1 / bodyB.mass;
-            foreach (var contact in contacts) {
-                Vector2 normal = contact.Normal;
-                Vector2 relativeVelocity = bodyB.velocity - bodyA.velocity;
-                double relativeVelocityAlongNormal = Vector2.Dot(relativeVelocity, normal);
-                if (relativeVelocityAlongNormal < 0) {
-                    Vector2 impulse = -(1 + restitution) * relativeVelocityAlongNormal * normal / massOverSum;
-                    totalImpulse += impulse;
-                }
-            }
-            return totalImpulse;
+        public static void SeparateBodies(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
+            Vector2 correction = CalculateSeparationCorrection(contacts);
+            double totalMass = entityA.Body.Mass + entityB.Body.Mass;
+            double massProportionA = entityA.Body.Mass / totalMass;
+            double massProportionB = entityB.Body.Mass / totalMass;
+            Vector2 separationA = massProportionB * correction;
+            Vector2 separationB = massProportionA * correction;
+            entityA.Transform.position -= separationA;
+            entityB.Transform.position += separationB;
         }
 
-        public void SeparateSingleEntity(IPhysicsEntity physicsEntity, List<ContactPoint2D> contacts) {
+        static Vector2 CalculateSeparationCorrection(List<ContactPoint2D> contacts) {
             Vector2 maxSeparation = Vector2.Zero;
-            double maxPenetration = 0;
+            double maxPenetration = double.MaxValue;
             foreach (var contact in contacts) {
-                if (contact.Separation > maxPenetration) {
+                if (contact.Separation < maxPenetration) {
                     maxPenetration = contact.Separation;
-                    maxSeparation = contact.Normal * contact.Separation * PhysicsSettings.DefaultContactOffset;
+                    maxSeparation = contact.Normal * (contact.Separation + PhysicsSettings.DefaultContactOffset);
                 }
             }
-            physicsEntity.transform.position += maxSeparation;
+            return maxSeparation;
         }
 
-        public void SeparateBodies(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, List<ContactPoint2D> contacts) {
-            Vector2 maxSeparation = Vector2.Zero;
-            double maxPenetration = 0;
-            foreach (var contact in contacts) {
-                if (contact.Separation > maxPenetration) {
-                    maxPenetration = contact.Separation;
-                    maxSeparation = contact.Normal * contact.Separation * PhysicsSettings.DefaultContactOffset;
-                }
-            }
-            double totalMass = physicsEntityA.body.mass + physicsEntityB.body.mass;
-            double massProportionA = physicsEntityA.body.mass / totalMass;
-            double massProportionB = physicsEntityB.body.mass / totalMass;
-            Vector2 separationA = massProportionB * maxSeparation;
-            Vector2 separationB = massProportionA * maxSeparation;
-            physicsEntityA.transform.position -= separationA;
-            physicsEntityB.transform.position += separationB;
+        static bool EvaluateVelocityThreshold(Vector2 velocity) {
+            if (Math.Abs(velocity.x) < PhysicsSettings.VelocityThreshold && Math.Abs(velocity.y) < PhysicsSettings.VelocityThreshold)
+                return true;
+            return false;
         }
 
-        public void SendCollisionMessages(Collision2D contact) {
-            contact.ColliderA.attachedEntity.OnCollisionEnter2D(contact);
-            contact.ColliderB?.attachedEntity.OnCollisionEnter2D(contact);
+        public static void SendCollisionMessages(Collision2D contact) {
+            contact.ColliderA.AttachedEntity.OnCollisionEnter2D(contact);
+            contact.ColliderB.AttachedEntity.OnCollisionEnter2D(contact);
         }
-
-
-        //public void ResolveCollision(Collision2D collision) {
-        //    if (collision.ContactCount < 1)
-        //        return;
-
-        //    List<ContactPoint2D> contacts = new List<ContactPoint2D>();
-        //    collision.GetContacts(contacts);
-
-        //    //Vector2 impulse = CalculateImpulse(collision);
-
-        //    //Separate(collision);
-        //    //ApplyImpulse(collision, impulse);
-        //    //SendCollisionMessages(collision);
-        //}
-
-
-        //public Vector2 CalculateImpulse(Collision2D contact) {
-        //    //List<ContactPoint2D> contacts = new List<ContactPoint2D>();
-        //    //contact.GetContacts(contacts);
-
-        //    double restitution = contact.ColliderA.attachedEntity.body.restitution;
-        //    Vector2 relativeVelocity = contact.ColliderA.attachedEntity.body.velocity;
-        //    double massOverOneSum = 1 / contact.ColliderA.attachedEntity.body.mass;
-        //    if (contact.ColliderB != null && contact.ColliderB.attachedEntity.body.inverseMass != 0) {
-        //        restitution = Math.Min(contact.ColliderA.attachedEntity.body.restitution, contact.ColliderB.attachedEntity.body.restitution);
-        //        relativeVelocity = contact.ColliderB.attachedEntity.body.velocity - contact.ColliderA.attachedEntity.body.velocity;
-        //        massOverOneSum += 1 / contact.ColliderB.attachedEntity.body.mass;
-        //    }
-
-
-
-        //    Vector2 normal = contacts[0].Normal;
-        //    double relativeVelocityAlongNormal = Vector2.Dot(relativeVelocity, normal);
-        //    if (relativeVelocityAlongNormal > 0)
-        //        return Vector2.Zero;
-
-        //    Vector2 impulse = -(1 + (float)restitution) * relativeVelocityAlongNormal * normal / (float)massOverOneSum;
-        //    return impulse;
-        //}
-
-        //public void ApplyImpulse(Collision2D contact, Vector2 impulse) {
-        //    if (impulse == Vector2.Zero)
-        //        return;
-
-        //    IPhysicsEntity entityA = contact.ColliderA.attachedEntity;
-        //    IPhysicsEntity entityB = contact.ColliderB?.attachedEntity;
-        //    entityA.body.velocity -= impulse / entityA.body.mass;
-        //    if (entityB != null && entityB.body.inverseMass != 0)
-        //        entityB.body.velocity += impulse / entityB.body.mass;
-        //}
-
-
-
-        //public void ResolveCollision(Contact contact) {
-        //    Vector2 impulse = CalculateImpulse(contact);
-        //    ApplyImpulse(contact, impulse);
-        //}
     }
 }

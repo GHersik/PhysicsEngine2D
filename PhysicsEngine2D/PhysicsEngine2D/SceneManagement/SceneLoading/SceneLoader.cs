@@ -6,23 +6,25 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace SimulationWindow.SceneManagement {
+namespace SimulationWindow {
     public class SceneLoader {
 
         public enum Scene {
             Ambient,
             BrownianMotion,
-            BoxVsCircle
+            BoxVsCircle,
+            BilliardSample,
+            Tunneling,
+            MarginalBounds,
+            LargeSet
         }
 
-        private Scenes scenes = new Scenes();
-        private SceneManager sceneManager;
-
-        private Rectangle fadeRect;
-        private readonly SolidColorBrush FadeBrush = new SolidColorBrush(Color.FromArgb(255, 77, 150, 255));
-        private readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
-        private byte colorFadeAlpha;
-        private CancellationTokenSource? cts;
+        readonly SceneManager sceneManager;
+        readonly SolidColorBrush FadeBrush = new(Color.FromArgb(255, 63, 116, 173));
+        readonly TimeSpan fadeIntervalTime = TimeSpan.FromMilliseconds(10);
+        Rectangle fadeRect;
+        byte colorFadeAlpha;
+        CancellationTokenSource? cts;
 
         public SceneLoader(SceneManager sceneManager, Rectangle fadeRectangle) {
             this.sceneManager = sceneManager;
@@ -52,36 +54,28 @@ namespace SimulationWindow.SceneManagement {
             await taskShow;
         }
 
-        private SceneData GetProperSceneData(Scene scene) {
+        SceneData GetProperSceneData(Scene scene) {
             switch (scene) {
-                case Scene.Ambient:
-                    return scenes.Ambient();
-                case Scene.BrownianMotion:
-                    return scenes.BrownianMotion();
-                case Scene.BoxVsCircle:
-                    return scenes.CircleVsBox();
-                default:
-                    return scenes.Ambient();
+                case Scene.Ambient: return Scenes.Ambient();
+                case Scene.BrownianMotion: return Scenes.BrownianMotion();
+                case Scene.BoxVsCircle: return Scenes.RestingContact();
+                case Scene.BilliardSample: return Scenes.BilliardSample();
+                case Scene.Tunneling: return Scenes.Tunneling();
+                case Scene.MarginalBounds: return Scenes.MarginalBounds();
+                case Scene.LargeSet: return Scenes.LargeSet();
+                default: return Scenes.Ambient();
             }
         }
 
-        public async Task FadeShow(Rectangle rectToFade) {
-            await StartFade(rectToFade, 0, 255);
-        }
+        public async Task FadeShow(Rectangle rectToFade) => await StartFade(rectToFade, 0, 255);
 
-        public async Task FadeShow() {
-            await StartFade(fadeRect, 0, 255);
-        }
+        public async Task FadeShow() => await StartFade(fadeRect, 0, 255);
 
-        public async Task FadeHide(Rectangle rectToFade) {
-            await StartFade(rectToFade, 255, 0);
-        }
+        public async Task FadeHide(Rectangle rectToFade) => await StartFade(rectToFade, 255, 0);
 
-        public async Task FadeHide() {
-            await StartFade(fadeRect, 255, 0);
-        }
+        public async Task FadeHide() => await StartFade(fadeRect, 255, 0);
 
-        private async Task StartFade(Rectangle rectToFade, byte startAlpha, byte endAlpha) {
+        async Task StartFade(Rectangle rectToFade, byte startAlpha, byte endAlpha) {
             StopCurrentFade();
             fadeRect = rectToFade;
             colorFadeAlpha = startAlpha;
@@ -94,7 +88,7 @@ namespace SimulationWindow.SceneManagement {
             }
         }
 
-        private async Task FadeUpdate(byte targetAlpha, CancellationToken cancellationToken) {
+        async Task FadeUpdate(byte targetAlpha, CancellationToken cancellationToken) {
             if (fadeRect == null) return;
 
             while (colorFadeAlpha != targetAlpha) {
@@ -106,7 +100,7 @@ namespace SimulationWindow.SceneManagement {
             }
         }
 
-        private void StopCurrentFade() {
+        void StopCurrentFade() {
             if (cts != null) {
                 cts.Cancel();
                 cts.Dispose();

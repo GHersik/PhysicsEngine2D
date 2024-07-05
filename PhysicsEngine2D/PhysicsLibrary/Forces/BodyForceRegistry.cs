@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace PhysicsLibrary {
     public class BodyForceRegistry {
 
@@ -17,15 +12,15 @@ namespace PhysicsLibrary {
                 this.body = body;
             }
 
-            public void UpdateForce(double timeStep) {
+            public readonly void UpdateForce(double timeStep) {
                 forceGenerator.UpdateForce(body, timeStep);
             }
         }
 
-        private HashSet<BodyForceRegistration> forceRegistrations = new HashSet<BodyForceRegistration>();
+        readonly HashSet<BodyForceRegistration> forceRegistrations = new();
 
         public bool Add(Body body, IForceGenerator forceGenerator) {
-            BodyForceRegistration registration = new BodyForceRegistration(forceGenerator, body);
+            BodyForceRegistration registration = new(forceGenerator, body);
             if (forceRegistrations.Contains(registration))
                 return false;
 
@@ -34,7 +29,7 @@ namespace PhysicsLibrary {
         }
 
         public bool Remove(Body body, IForceGenerator forceGenerator) {
-            BodyForceRegistration registration = new BodyForceRegistration(forceGenerator, body);
+            BodyForceRegistration registration = new(forceGenerator, body);
             if (!forceRegistrations.Contains(registration))
                 return false;
 

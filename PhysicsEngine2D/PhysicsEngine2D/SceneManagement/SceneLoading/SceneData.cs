@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class SceneData : IEnumerable<Entity> {
 
         public int SceneEntitiesAmount => sceneEntities.Count;
 
-        private HashSet<Entity> sceneEntities = new HashSet<Entity>();
+        HashSet<Entity> sceneEntities = new();
 
         public SceneData() {
             sceneEntities.Clear();
@@ -45,7 +45,7 @@ namespace PhysicsEngine2D {
         public void Clear() => sceneEntities.Clear();
 
         public Collection<IPhysicsEntity> RetrievePhysicsEntities() {
-            Collection<IPhysicsEntity> bodies = new Collection<IPhysicsEntity>();
+            Collection<IPhysicsEntity> bodies = new();
             foreach (var entity in sceneEntities)
                 bodies.Add(entity);
 

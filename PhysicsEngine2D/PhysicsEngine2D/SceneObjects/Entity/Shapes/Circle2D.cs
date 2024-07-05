@@ -3,12 +3,12 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using PhysicsLibrary;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Circle2D : Shape, IRenderer {
 
         public UIElement UIElement => this;
 
-        private double radius;
+        readonly double radius;
 
         public Circle2D(double radius, SolidColorBrush color) {
             this.radius = radius;
@@ -23,13 +23,17 @@ namespace PhysicsEngine2D {
 
         protected override Geometry DefiningGeometry {
             get {
-                return new EllipseGeometry(new Rect(0, 0, Width - 2, Height - 2));
+                return new EllipseGeometry(new Rect(0, 0, Width - 1, Height - 1));
             }
         }
 
         public void Draw(Vector2 position) => RenderTransform = new TranslateTransform(position.x - radius, position.y - radius);
 
-        public void SetColor(SolidColorBrush color) => Fill = color;
+        public void SetFillColor(SolidColorBrush color) => Fill = color;
 
+        public void SetBounds(SolidColorBrush color, double thickness) {
+            Stroke = color;
+            StrokeThickness = thickness;
+        }
     }
 }

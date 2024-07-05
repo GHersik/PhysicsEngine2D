@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace PhysicsLibrary {
     public class Collision2D {
 
@@ -11,7 +6,7 @@ namespace PhysicsLibrary {
         public Collider2D ColliderB { get; private set; }
         public int ContactCount => contacts.Count;
 
-        private List<ContactPoint2D> contacts = new List<ContactPoint2D>();
+        readonly List<ContactPoint2D> contacts = new();
 
         public Collision2D(Collider2D colliderA, Collider2D colliderB) {
             this.ColliderA = colliderA;

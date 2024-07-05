@@ -1,21 +1,15 @@
-﻿using PhysicsEngine2D;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Windows;
 using System.Windows.Shapes;
 using PhysicsLibrary;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Box2D : Shape, IRenderer {
-        
+
         public UIElement UIElement => this;
 
-        private double width;
-        private double height;
+        readonly double width;
+        readonly double height;
 
         public Box2D(double width, double height, SolidColorBrush color) {
             this.width = width;
@@ -37,7 +31,11 @@ namespace PhysicsEngine2D {
 
         public void Draw(Vector2 position) => RenderTransform = new TranslateTransform(position.x - width / 2, position.y - height / 2);
 
-        public void SetColor(SolidColorBrush color) => Fill = color;
+        public void SetFillColor(SolidColorBrush color) => Fill = color;
 
+        public void SetBounds(SolidColorBrush color, double thickness) {
+            Stroke = color;
+            StrokeThickness = thickness;
+        }
     }
 }

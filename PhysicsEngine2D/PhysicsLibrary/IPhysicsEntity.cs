@@ -3,11 +3,11 @@
 namespace PhysicsLibrary {
     public interface IPhysicsEntity {
 
-        public Transform transform { get; }
+        public Transform Transform { get; }
 
-        public Body body { get; }
+        public Body Body { get; }
 
-        public Collider2D collider { get; }
+        public Collider2D Collider { get; }
 
         public abstract void OnCollisionEnter2D(Collision2D collision);
 

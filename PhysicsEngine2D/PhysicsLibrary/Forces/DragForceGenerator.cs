@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PhysicsLibrary.Forces {
+﻿
+namespace PhysicsLibrary {
     public class DragForceGenerator : IForceGenerator {
 
-        double velocityDragCoefficient;
-        double velocityDragSquaredCoefficient;
+        readonly double velocityDragCoefficient;
+        readonly double velocityDragSquaredCoefficient;
 
         public DragForceGenerator(double velDragCoef, double velDragSquaredCoef) {
             velocityDragCoefficient = velDragCoef;
@@ -16,7 +11,7 @@ namespace PhysicsLibrary.Forces {
         }
 
         public void UpdateForce(Body body, double duration = 0) {
-            Vector2 force = body.velocity;
+            Vector2 force = body.Velocity;
 
             double dragCoefficient = force.Magnitude;
             dragCoefficient = velocityDragCoefficient * dragCoefficient + velocityDragSquaredCoefficient * dragCoefficient;

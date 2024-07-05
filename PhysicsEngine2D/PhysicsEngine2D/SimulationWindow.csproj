@@ -8,8 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Boundaries.png" />
+    <None Remove="Resources\Images\Grid.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PhysicsEngine\Physics.csproj" />
     <ProjectReference Include="..\PhysicsLibrary\PhysicsLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Boundaries.png" />
+    <Resource Include="Resources\Images\Grid.png" />
   </ItemGroup>
 
 </Project>

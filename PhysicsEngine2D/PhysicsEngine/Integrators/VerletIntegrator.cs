@@ -1,40 +1,42 @@
 ﻿using PhysicsLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Physics.Integrators {
+namespace Physics {
     internal class VerletIntegrator {
+        //public void Integrate(IPhysicsEntity physicsEntity, double fixedTimeStep) {
+        //    //// Update position
+        //    //UpdateLinearPosition(physicsEntity, fixedTimeStep);
 
-        //public void Integrate(Body rigidBody) {
-        //    UpdateAcceleration(rigidBody);
-        //    UpdateLinearPosition(rigidBody);
-        //    UpdateLinearVelocity(rigidBody);
-        //    rigidBody.ClearAccumulator();
+        //    //// Update velocity based on the new and old positions
+        //    //UpdateLinearVelocity(physicsEntity, fixedTimeStep);
+
+        //    //// Impose drag if necessary
+        //    //ImposeDrag(physicsEntity.body);
         //}
 
-        //private void UpdateAcceleration(Body rigidBody) {
-        //    if (rigidBody.inverseMass > 0) {
-        //        rigidBody.acceleration = rigidBody.forceAccumulator * rigidBody.inverseMass;
-        //    }
-        //    else {
-        //        rigidBody.acceleration = Vector2.Zero;
-        //    }
+        //void UpdateLinearPosition(IPhysicsEntity physicsEntity, double fixedTimeStep) {
+        //    Body body = physicsEntity.body;
+        //    Vector2 currentPosition = physicsEntity.transform.position;
+        //    Vector2 previousPosition = physicsEntity.transform.PreviousPosition;
+
+        //    Vector2 newPosition = currentPosition + (currentPosition - previousPosition) + body.Acceleration * fixedTimeStep * fixedTimeStep;
+        //    physicsEntity.transform.PreviousPosition = currentPosition;
+        //    physicsEntity.transform.position = newPosition;
+
+        //    // Clear force accumulator after updating the position
+        //    body.ClearAccumulator();
         //}
 
-        //private void UpdateLinearPosition(Body rigidBody) {
-        //    Vector2 newPosition = rigidBody.position
-        //                          + (rigidBody.position - rigidBody.previousPosition) * rigidBody.damping
-        //                          + rigidBody.acceleration * PhysicsSettings.FixedTimeStep * PhysicsSettings.FixedTimeStep;
+        //void UpdateLinearVelocity(IPhysicsEntity physicsEntity, double fixedTimeStep) {
+        //    Body body = physicsEntity.body;
+        //    Vector2 currentPosition = physicsEntity.transform.position;
+        //    Vector2 previousPosition = physicsEntity.transform.PreviousPosition;
 
-        //    rigidBody.previousPosition = rigidBody.position;
-        //    rigidBody.position = newPosition;
+        //    body.Velocity = (currentPosition - previousPosition) / fixedTimeStep;
         //}
 
-        //private void UpdateLinearVelocity(Body rigidBody) {
-        //    rigidBody.velocity = (rigidBody.position - rigidBody.previousPosition) / PhysicsSettings.FixedTimeStep;
+        //void ImposeDrag(Body body) {
+        //    // Apply drag to the velocity if needed
+        //    body.Velocity *= body.Damping;
         //}
     }
 }

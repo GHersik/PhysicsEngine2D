@@ -1,28 +1,20 @@
 ﻿using PhysicsLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Physics.CollisionDetection.Collisions {
+namespace Physics {
     internal static class Collisions {
 
         public static bool CircleCircleCollision(CircleCollider2D circleA, CircleCollider2D circleB, out Collision2D? collision) {
-            Vector2 distanceDiff = circleB.attachedEntity.transform.position - circleA.attachedEntity.transform.position;
+            Vector2 distanceDiff = circleB.AttachedEntity.Transform.position - circleA.AttachedEntity.Transform.position;
             double sqrDistance = distanceDiff.SqrMagnitude;
-            double radiusSumSqr = Math.Pow(circleA.Radius + circleB.Radius,2);
+            double radiusSum = circleA.Radius + circleB.Radius;
+            double radiusSumSqr = radiusSum * radiusSum;
             if (sqrDistance < radiusSumSqr) {
                 collision = new Collision2D(circleA, circleB);
+                double distance = Math.Sqrt(sqrDistance);
                 Vector2 normal = distanceDiff.Normalized;
-                Vector2 point = circleA.attachedEntity.transform.position + (normal * circleA.Radius);
-                double separation = Math.Abs(sqrDistance - radiusSumSqr);
+                double separation = radiusSum - distance;
+                Vector2 point = circleA.AttachedEntity.Transform.position + (normal * (circleA.Radius - separation / 2));
                 collision.AddContact(new ContactPoint2D(point, separation, normal));
-
-                //middle in between points
-                //double distance = Vector2.Distance(circleB.attachedEntity.transform.position, circleA.attachedEntity.transform.position);
-                //double distDiff = Math.Abs(distance - radiusSum) * .5f;
-                //Vector2 point = circleA.attachedEntity.transform.position + (normal * distDiff);
                 return true;
             }
             collision = null;
@@ -30,7 +22,7 @@ namespace Physics.CollisionDetection.Collisions {
         }
 
         public static bool CircleBoxCollision(CircleCollider2D circle, BoxCollider2D box, out Collision2D? collision) {
-            Vector2 circleCenter = circle.attachedEntity.transform.position;
+            Vector2 circleCenter = circle.AttachedEntity.Transform.position;
             Vector2 closestPoint = box.ClosestPoint(circleCenter);
             Vector2 distance = circleCenter - closestPoint;
 
@@ -38,7 +30,7 @@ namespace Physics.CollisionDetection.Collisions {
                 collision = new Collision2D(circle, box);
                 Vector2 normal = distance.Normalized;
                 Vector2 contactPoint = closestPoint;
-                double separation = circle.Radius - distance.Magnitude;
+                double separation = Math.Abs(circle.Radius - distance.Magnitude);
 
                 collision.AddContact(new ContactPoint2D(contactPoint, separation, normal));
                 return true;

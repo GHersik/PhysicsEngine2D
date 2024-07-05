@@ -1,27 +1,39 @@
 ﻿using PhysicsLibrary;
 
-namespace Physics.Integrators {
+namespace Physics {
     internal class EulerIntegrator {
 
         public void Integrate(IPhysicsEntity physicsEntity) {
+            ConsumeForces(physicsEntity.Body);
+            if (EvaluateSleepTolerance(physicsEntity.Body)) {
+                physicsEntity.Body.Velocity = Vector2.Zero;
+                return;
+            }
+
             UpdateLinearPosition(physicsEntity);
-            UpdateLinearVelocity(physicsEntity.body);
-            ImposeDrag(physicsEntity.body);
-            physicsEntity.body.ClearAccumulator();
+            ImposeDrag(physicsEntity.Body);
         }
 
-        private void UpdateLinearPosition(IPhysicsEntity physicsEntity) {
-            physicsEntity.transform.position.AddScaledVector(physicsEntity.body.velocity, PhysicsSettings.FixedTimeStep);
+        void ConsumeForces(Body rigidBody) {
+            Vector2 resultingAcc = rigidBody.Acceleration;
+            resultingAcc.AddScaledVector(rigidBody.ForceAccumulator, rigidBody.InverseMass);
+            rigidBody.TotalForce = resultingAcc;
+            rigidBody.Velocity.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
+            rigidBody.ClearAccumulator();
         }
 
-        private void UpdateLinearVelocity(Body rigidBody) {
-            Vector2 resultingAcc = rigidBody.acceleration;
-            resultingAcc.AddScaledVector(rigidBody.forceAccumulator, rigidBody.inverseMass);
-            rigidBody.velocity.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);
+        bool EvaluateSleepTolerance(Body body) {
+            if (Math.Abs(body.Velocity.x) < PhysicsSettings.LinearSleepTolerance && Math.Abs(body.Velocity.y) < PhysicsSettings.LinearSleepTolerance)
+                return true;
+            return false;
         }
 
-        private void ImposeDrag(Body rigidBody) {
-            rigidBody.velocity *= Math.Pow(rigidBody.damping, PhysicsSettings.FixedTimeStep);
+        void UpdateLinearPosition(IPhysicsEntity physicsEntity) {
+            physicsEntity.Transform.position.AddScaledVector(physicsEntity.Body.Velocity, PhysicsSettings.FixedTimeStep);
+        }
+
+        void ImposeDrag(Body rigidBody) {
+            rigidBody.Velocity *= Math.Pow(rigidBody.Damping, PhysicsSettings.FixedTimeStep);
         }
     }
 }

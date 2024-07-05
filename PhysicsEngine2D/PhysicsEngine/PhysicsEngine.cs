@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Physics.Integrators;
+﻿using System.Collections.ObjectModel;
 using PhysicsLibrary;
 
 namespace Physics {
@@ -13,13 +7,11 @@ namespace Physics {
         public PhysicsWorld PhysicsWorld { get; private set; }
         public BodyForceRegistry ForceRegistry { get; private set; }
 
-        private EulerIntegrator eulerIntegrator;
-        private CollisionDetector collisionDetector;
-        private ContactResolver contactResolver;
+        readonly EulerIntegrator eulerIntegrator;
+        readonly ContactResolver contactResolver;
 
         public PhysicsEngine() {
             eulerIntegrator = new EulerIntegrator();
-            collisionDetector = new CollisionDetector();
             contactResolver = new ContactResolver();
             ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();
@@ -27,7 +19,6 @@ namespace Physics {
 
         public PhysicsEngine(Collection<IPhysicsEntity> physicsObjects) {
             eulerIntegrator = new EulerIntegrator();
-            collisionDetector = new CollisionDetector();
             contactResolver = new ContactResolver();
             ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();
@@ -36,13 +27,19 @@ namespace Physics {
 
         public void FixedUpdate() {
             foreach (var physicsEntity in PhysicsWorld) {
-                physicsEntity.body.AddForce(PhysicsSettings.Gravity);
+                physicsEntity.Body.AddForce(PhysicsSettings.Gravity, ForceMode.Acceleration);
                 ForceRegistry.UpdateForces();
                 eulerIntegrator.Integrate(physicsEntity);
             }
 
-            List<Collision2D> collisions = collisionDetector.DetectCollisions(PhysicsWorld.GetPhysicsEntityArray());
+            List<Collision2D> collisions = CollisionDetector.DetectCollisions(PhysicsWorld.GetPhysicsEntityArray());
             contactResolver.ResolveContacts(collisions);
+
+            PhysicsStatistics.PhysicsEntities = PhysicsWorld.Count;
+            PhysicsStatistics.TotalFixedSteps += 1;
+            PhysicsStatistics.CollisionsThisStep = collisions.Count;
+            PhysicsStatistics.TotalCollisions += PhysicsStatistics.CollisionsThisStep;
+            PhysicsStatistics.AverageCollisionsPerStep = (double)PhysicsStatistics.TotalCollisions / PhysicsStatistics.TotalFixedSteps;
         }
     }
 }

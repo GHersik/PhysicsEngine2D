@@ -7,16 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Circle2DEntity : Entity {
 
-        private SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(255, 107, 203, 119));
+        //private SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(255, 107, 203, 119));
 
         public Circle2DEntity(Vector2 position, double radius, SolidColorBrush color) {
-            transform = new PhysicsLibrary.Transform(position);
-            renderer = new Circle2D(radius, color);
-            collider = new CircleCollider2D(this, radius);
-            body = new Body();
+            Transform = new PhysicsLibrary.Transform(position);
+            Renderer = new Circle2D(radius, color);
+            Collider = new CircleCollider2D(this, radius);
+            Body = new Body();
         }
 
         public Circle2DEntity(Vector2 position, double radius) : this(position, radius, ColorSettings.YellowBrush) { }
@@ -26,17 +26,17 @@ namespace PhysicsEngine2D {
         public Circle2DEntity() : this(new Vector2(250, 250), 10, ColorSettings.YellowBrush) { }
 
 
-        public override void OnCollisionEnter2D(Collision2D collision) {
-            byte r = (byte)(brush.Color.R);
-            byte g = (byte)(brush.Color.G + 2);
-            byte b = (byte)(brush.Color.B);
+        //public override void OnCollisionEnter2D(Collision2D collision) {
+        //    byte r = (byte)(brush.Color.R);
+        //    byte g = (byte)(brush.Color.G + 2);
+        //    byte b = (byte)(brush.Color.B);
 
-            brush = new SolidColorBrush(Color.FromArgb(255, r, g, b));
-            renderer.SetColor(brush);
-        }
+        //    brush = new SolidColorBrush(Color.FromArgb(255, r, g, b));
+        //    renderer.SetColor(brush);
+        //}
 
-        public override void OnCollisionExit2D(Collision2D collision) {
+        //public override void OnCollisionExit2D(Collision2D collision) {
 
-        }
+        //}
     }
 }

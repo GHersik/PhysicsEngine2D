@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PhysicsLibrary;
 
 namespace Physics {
     public class PhysicsWorld : IEnumerable<IPhysicsEntity> {
 
-        private HashSet<IPhysicsEntity> physicsEntities = new HashSet<IPhysicsEntity>();
+        public int Count => physicsEntities.Count;
+
+        private HashSet<IPhysicsEntity> physicsEntities = new();
 
         public PhysicsWorld() {
             physicsEntities.Clear();

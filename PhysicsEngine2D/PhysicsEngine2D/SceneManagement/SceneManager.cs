@@ -1,20 +1,17 @@
 ﻿using PhysicsEngine2D;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Physics;
 using System.Windows.Controls;
 
-namespace SimulationWindow.SceneManagement {
+namespace SimulationWindow {
     public class SceneManager {
 
-        private SceneData sceneData;
-        private SceneRenderer sceneRenderer;
-        private PhysicsEngine physicsEngine;
+        SceneData sceneData;
+        readonly MainWindow mainWindow;
+        readonly SceneRenderer sceneRenderer;
+        readonly PhysicsEngine physicsEngine;
 
-        public SceneManager(Canvas canvas) {
+        public SceneManager(MainWindow mainWindow, Canvas canvas) {
+            this.mainWindow = mainWindow;
             sceneData = new SceneData();
             sceneRenderer = new SceneRenderer(canvas);
             physicsEngine = new PhysicsEngine();
@@ -60,7 +57,8 @@ namespace SimulationWindow.SceneManagement {
         }
 
         public void Update() {
-            sceneRenderer.DrawScene(sceneData);
+            mainWindow.Update();
+            SceneRenderer.DrawScene(sceneData);
             foreach (Entity entity in sceneData)
                 entity.Update();
         }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PhysicsLibrary.Forces {
+﻿
+namespace PhysicsLibrary {
     public class GravityForceGenerator : IForceGenerator {
         public void UpdateForce(Body body, double duration = 0) {
-            if (body.inverseMass == 0) return;
-            body.AddForce(PhysicsSettings.Gravity * body.mass);
+            if (body.InverseMass == 0) return;
+            body.AddForce(PhysicsSettings.Gravity * body.Mass);
         }
     }
 }

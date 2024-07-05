@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace PhysicsEngine2D {
+namespace SimulationWindow {
     public class Box2DEntity : Entity {
 
         public Box2DEntity(Vector2 position, double width, double height, SolidColorBrush color) {
-            transform = new PhysicsLibrary.Transform(position);
-            renderer = new Box2D(width, height, color);
-            collider = new BoxCollider2D(this, new Vector2(-width / 2, -height / 2), new Vector2(width / 2, height / 2));
-            body = new Body();
+            Transform = new PhysicsLibrary.Transform(position);
+            Renderer = new Box2D(width, height, color);
+            Collider = new BoxCollider2D(this, new Vector2(-width / 2, -height / 2), new Vector2(width / 2, height / 2));
+            Body = new Body();
         }
 
         public Box2DEntity(Vector2 position, double width, double height) : this(position, width, height, ColorSettings.BlueBrush) { }
