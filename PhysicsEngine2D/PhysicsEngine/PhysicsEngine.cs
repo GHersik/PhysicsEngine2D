@@ -8,12 +8,10 @@ namespace Physics {
         public BodyForceRegistry ForceRegistry { get; private set; }
 
         readonly EulerIntegrator eulerIntegrator;
-        readonly CollisionDetector collisionDetector;
         readonly ContactResolver contactResolver;
 
         public PhysicsEngine() {
             eulerIntegrator = new EulerIntegrator();
-            collisionDetector = new CollisionDetector();
             contactResolver = new ContactResolver();
             ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();
@@ -21,7 +19,6 @@ namespace Physics {
 
         public PhysicsEngine(Collection<IPhysicsEntity> physicsObjects) {
             eulerIntegrator = new EulerIntegrator();
-            collisionDetector = new CollisionDetector();
             contactResolver = new ContactResolver();
             ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();
@@ -37,6 +34,12 @@ namespace Physics {
 
             List<Collision2D> collisions = CollisionDetector.DetectCollisions(PhysicsWorld.GetPhysicsEntityArray());
             contactResolver.ResolveContacts(collisions);
+
+            PhysicsStatistics.PhysicsEntities = PhysicsWorld.Count;
+            PhysicsStatistics.TotalFixedSteps += 1;
+            PhysicsStatistics.CollisionsThisStep = collisions.Count;
+            PhysicsStatistics.TotalCollisions += PhysicsStatistics.CollisionsThisStep;
+            PhysicsStatistics.AverageCollisionsPerStep = (double)PhysicsStatistics.TotalCollisions / PhysicsStatistics.TotalFixedSteps;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace PhysicsEngine2D {
             Setup();
             EnableInput(false);
 
-            SceneManager sceneManager = new(SceneView);
+            SceneManager sceneManager = new(this, SceneView);
             sceneEngine = new SceneEngine(sceneManager);
             sceneLoader = new SceneLoader(sceneManager, SceneFade);
             StartSimulation();
@@ -38,6 +38,16 @@ namespace PhysicsEngine2D {
             sceneEngine.StartTime();
         }
         #endregion
+
+        public void Update() {
+            if (TotalPhysicsStepsText == null)
+                return;
+            PhysicsEntitiesText.Text = PhysicsStatistics.PhysicsEntities.ToString();
+            TotalPhysicsStepsText.Text = PhysicsStatistics.TotalFixedSteps.ToString();
+            TotalCollisionsText.Text = PhysicsStatistics.TotalCollisions.ToString();
+            CollisionsThisStepText.Text = PhysicsStatistics.CollisionsThisStep.ToString();
+            AverageCollisionsThisStepText.Text = Math.Round(PhysicsStatistics.AverageCollisionsPerStep, 3).ToString();
+        }
 
         public void TimeButton_Click(object sender, RoutedEventArgs e) {
             if (sceneEngine.IsRunning)
@@ -63,6 +73,8 @@ namespace PhysicsEngine2D {
 
             int sceneIndex = PickSimulationCB.SelectedIndex;
             SceneLoader.Scene enumValue = (SceneLoader.Scene)Enum.ToObject(typeof(SceneLoader.Scene), sceneIndex);
+            PhysicsStatistics.ResetStatistics();
+            Update();
 
             Task sceneLoadTask = sceneLoader.LoadSceneAsync(enumValue);
             await sceneLoadTask;

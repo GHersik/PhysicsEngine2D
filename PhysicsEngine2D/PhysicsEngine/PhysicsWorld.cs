@@ -5,6 +5,8 @@ using PhysicsLibrary;
 namespace Physics {
     public class PhysicsWorld : IEnumerable<IPhysicsEntity> {
 
+        public int Count => physicsEntities.Count;
+
         private HashSet<IPhysicsEntity> physicsEntities = new();
 
         public PhysicsWorld() {
