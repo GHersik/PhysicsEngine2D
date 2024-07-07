@@ -9,6 +9,7 @@ namespace PhysicsLibrary {
         public static double AverageCollisionsPerStep { get; set; } = 0;
 
         public static void ResetStatistics() {
+            PhysicsEntities = 0;
             TotalFixedSteps = 0;
             TotalCollisions = 0;
             CollisionsThisStep = 0;

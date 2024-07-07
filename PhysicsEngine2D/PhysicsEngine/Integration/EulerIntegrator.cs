@@ -1,7 +1,7 @@
 ﻿using PhysicsLibrary;
 
 namespace Physics {
-    internal class EulerIntegrator {
+    internal class EulerIntegrator : IIntegrator {
 
         public void Integrate(IPhysicsEntity physicsEntity) {
             ConsumeForces(physicsEntity.Body);
@@ -15,7 +15,7 @@ namespace Physics {
         }
 
         void ConsumeForces(Body rigidBody) {
-            Vector2 resultingAcc = rigidBody.Acceleration;
+            Vector2 resultingAcc = Vector2.Zero;
             resultingAcc.AddScaledVector(rigidBody.ForceAccumulator, rigidBody.InverseMass);
             rigidBody.TotalForce = resultingAcc;
             rigidBody.Velocity.AddScaledVector(resultingAcc, PhysicsSettings.FixedTimeStep);

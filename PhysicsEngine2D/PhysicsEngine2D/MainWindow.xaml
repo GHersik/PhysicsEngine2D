@@ -19,7 +19,7 @@
 
         <!--Title-->
         <TextBlock FontSize="16" Foreground="#FFF1F1F1"   Canvas.Top="50" TextAlignment="Center"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="500" Canvas.Left="480" FontFamily="Cascadia Code ExtraLight"><Run Language="pl-pl" Text="SIMULATION BOUNDARIES"/></TextBlock>
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"  FontWeight="DemiBold"   Canvas.Top="100"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="370" Canvas.Left="105" FontSize="14"><Run Language="pl-pl" Text="PHYSICS SETTINGS"/></TextBlock>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"  FontWeight="DemiBold"   Canvas.Top="78"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="17" VerticalAlignment="Center" Width="370" Canvas.Left="105" FontSize="14"><Run Language="pl-pl" Text="PHYSICS SETTINGS"/></TextBlock>
 
         <!--Buttons-->
         <Button Click="Generate_Click" x:Name="GenerateButton" Canvas.Left="820" Canvas.Top="636" Width="120" Height="30" Background="#FF4988CB" BorderBrush="#FFF1F1F1" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF1F1F1" FontWeight="Bold" FontFamily="Cascadia Mono ExtraLight" Content="GENERATE" />
@@ -64,16 +64,15 @@
         </ComboBox>
 
         <!--SceneView-->
-        <Canvas Name="SceneView" Height="500" Width="500" Background="Transparent" Focusable="True" 
+        <Canvas Name="SceneView" Height="500" Width="500" Background="Transparent" MouseLeftButtonDown ="SceneView_MouseLeftButtonDown" Focusable="True" 
            VerticalAlignment="Top" HorizontalAlignment="Center" Canvas.Top="94" Canvas.Left="480"/>
         <TextBlock Name="canvasMatrixTop" Foreground="#FFF1F1F1"   Canvas.Top="77" TextAlignment="Center" Canvas.Left="467" TextWrapping="WrapWithOverflow" Height="18" Width="55" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Consolas" FontWeight="ExtraLight"><Run Language="pl-pl" Text="(0, 0)"/></TextBlock>
 
         <!--Fade-->
-        <Rectangle Name="SceneFade" Width="500" Height="500" Canvas.Left="480" StrokeThickness="1" Stroke="#FFF1F1F1" Canvas.Top="94" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF3F74AD" Panel.ZIndex="10"/>
+        <Rectangle Name="SceneFade" Width="500" Height="500" Canvas.Left="480" StrokeThickness="1" Stroke="#FFF1F1F1" Canvas.Top="94" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF3F74AD" Panel.ZIndex="10" IsHitTestVisible="False"/>
 
-        <Image Source="/Resources/Images/Boundaries.png" Canvas.Left="460" Canvas.Top="74" Width="540" HorizontalAlignment="Center" VerticalAlignment="Top" Height="540"/>
-
-        <Image Source="/Resources/Images/Grid.png" Canvas.Left="480" Canvas.Top="94" Width="500" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.2"/>
+        <Image Source="/Resources/Images/Boundaries.png" Canvas.Left="460" Canvas.Top="74" Width="540" HorizontalAlignment="Center" VerticalAlignment="Top" Height="540" IsHitTestVisible="False"/>
+        <Image Source="/Resources/Images/Grid.png" Canvas.Left="480" Canvas.Top="94" Width="500" HorizontalAlignment="Left" VerticalAlignment="Center" Opacity="0.2" IsHitTestVisible="False"/>
         <TextBlock Foreground="#FFF1F1F1"   Canvas.Top="596" TextAlignment="Center" Canvas.Left="909" TextWrapping="WrapWithOverflow" Height="17" Width="84" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="UltraLight"><Run Text="("/><Run Text="50"/><Run Text="0,"/><Run Text=" 500)"/></TextBlock>
 
 
@@ -82,13 +81,10 @@
         <Rectangle StrokeDashArray="1,1"  
                        Stroke="#FFF1F1F1"  
                        StrokeThickness="2"  
-                       Width="364" Height="165" Canvas.Left="70" Canvas.Top="133" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"  FontWeight="DemiBold"   Canvas.Top="327"  TextWrapping="WrapWithOverflow" Height="17" Width="370" Canvas.Left="105" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Text="PHYSICS "/><Run Language="pl-pl" Text="STATISTICS"/></TextBlock>
+                       Width="364" Height="165" Canvas.Left="70" Canvas.Top="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"  FontWeight="DemiBold"   Canvas.Top="292"  TextWrapping="WrapWithOverflow" Height="17" Width="370" Canvas.Left="105" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="PHYSICS "/><Run Language="pl-pl" Text="STATISTICS"/></TextBlock>
         <Line X2="160" Stroke="#FFF1F1F1" Canvas.Left="321" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="477" Canvas.Top="28" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="805" Canvas.Top="704" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Line X2="160" Stroke="#FFF1F1F1" Canvas.Left="808" Canvas.Top="706" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="964" Canvas.Top="704" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="974" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Line X2="40" Stroke="#FFF1F1F1" Canvas.Left="976" Canvas.Top="44" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="1014" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -100,54 +96,69 @@
                 </LinearGradientBrush>
             </Line.Stroke>
         </Line>
-        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="113" Canvas.Top="629" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Line X2="40" Stroke="#FFF1F1F1" Canvas.Left="115" Canvas.Top="631" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="153" Canvas.Top="629" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Line Stroke="#FFF1F1F1" Canvas.Left="155" Canvas.Top="633" Y2="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="153" Canvas.Top="651" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Line X2="40" Stroke="#FFF1F1F1" Canvas.Left="115" Canvas.Top="631" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="411" Canvas.Top="680" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Line X2="40" Stroke="#FFF1F1F1" Canvas.Left="413" Canvas.Top="682" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="451" Canvas.Top="680" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Line Stroke="#FFF1F1F1" Canvas.Left="453" Canvas.Top="684" Y2="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Ellipse Fill="#FFF1F1F1" Width="4" Height="4" Canvas.Left="451" Canvas.Top="702" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Line X2="40" Stroke="#FFF1F1F1" Canvas.Left="413" Canvas.Top="682" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Rectangle StrokeDashArray="1,1"  
             Stroke="#FFF1F1F1"  
             StrokeThickness="2"  
-            Width="293" Height="134" Canvas.Left="70" Canvas.Top="364" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            Width="293" Height="134" Canvas.Left="70" Canvas.Top="314" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!--TopLeftControls-->
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="149"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="pl-pl" Text="GRAVITY"/></TextBlock>
-        <Slider Canvas.Left="208" Canvas.Top="147" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderGravityX" Maximum="20" Minimum="-20" SmallChange="1" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" AutoToolTipPrecision="0"/>
-        <Slider Canvas.Left="274" Canvas.Top="147" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderGravityY" Maximum="20" Minimum="-20" SmallChange="1" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" AutoToolTipPrecision="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBlock x:Name="GravityText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="149"  TextWrapping="WrapWithOverflow" Height="14" Width="76" Canvas.Left="339" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Left" VerticalAlignment="Center" Text="(0,0)"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="116"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="GRAVITY"/></TextBlock>
+        <Slider Canvas.Left="208" Canvas.Top="114" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderGravityX" Maximum="20" Minimum="-20" SmallChange="1" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" AutoToolTipPrecision="0"/>
+        <Slider Canvas.Left="274" Canvas.Top="114" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderGravityY" Maximum="20" Minimum="-20" SmallChange="1" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" AutoToolTipPrecision="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="GravityText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="116"  TextWrapping="WrapWithOverflow" Height="14" Width="76" Canvas.Left="339" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Center" VerticalAlignment="Center" Text="(0,0)"/>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="179"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="pl-pl" Text="TIMESTEP"/></TextBlock>
-        <Slider Canvas.Left="274" Canvas.Top="177" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderTimeStep" Value="0.02" Maximum="0.1" Minimum="0.01" SmallChange="0.01" LargeChange="0.01" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" TickFrequency="0.01" IsMoveToPointEnabled="True" AutoToolTipPrecision="0"/>
-        <TextBlock Name="TimeStepText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="179"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Right" FontWeight="UltraLight"><Run Language="pl-pl" Text="0.02"/></TextBlock>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="146"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="TIMESTEP"/></TextBlock>
+        <Slider Canvas.Left="274" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderTimeStep" Value="0.02" Maximum="0.1" Minimum="0.01" SmallChange="0.01" LargeChange="0.01" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" TickFrequency="0.01" IsMoveToPointEnabled="True" AutoToolTipPrecision="0"/>
+        <TextBlock Name="TimeStepText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="146"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Right" FontWeight="UltraLight"><Run Language="pl-pl" Text="0.02"/></TextBlock>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="209"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="pl-pl" Text="DEFAULT CONTACT OFFSET"/></TextBlock>
-        <Slider Canvas.Left="274" Canvas.Top="207" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderContactOffset" Value="0.01" Maximum="3" HorizontalAlignment="Left" VerticalAlignment="Top" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" LargeChange="0.1" IsMoveToPointEnabled="True" TickFrequency="0.1"/>
-        <TextBlock Name="ContactOffsetText" Foreground="#FFF1F1F1" FontFamily="Consolas" Canvas.Top="209"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="pl-pl" Text="0.1"/></TextBlock>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="176"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="DEFAULT CONTACT OFFSET"/></TextBlock>
+        <Slider Canvas.Left="274" Canvas.Top="174" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderContactOffset" Value="0.01" Maximum="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" LargeChange="0.1" IsMoveToPointEnabled="True" TickFrequency="0.1"/>
+        <TextBlock Name="ContactOffsetText" Foreground="#FFF1F1F1" FontFamily="Consolas" Canvas.Top="176"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="0.1"/></TextBlock>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="238"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="pl-pl" Text="VELOCITY THRESHOLD"/></TextBlock>
-        <Slider Canvas.Left="274" Canvas.Top="236" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderVelocityThreshold" Value="0.2" Maximum="6" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" LargeChange="0.4" IsMoveToPointEnabled="True" TickFrequency="0.2" HorizontalAlignment="Left" VerticalAlignment="Top" SmallChange="0.2"/>
-        <TextBlock Name="VelocityThresholdText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="238"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="pl-pl" Text="1"/></TextBlock>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="205"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="VELOCITY THRESHOLD"/></TextBlock>
+        <Slider Canvas.Left="274" Canvas.Top="203" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderVelocityThreshold" Value="0.2" Maximum="6" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" LargeChange="0.4" IsMoveToPointEnabled="True" TickFrequency="0.2" HorizontalAlignment="Center" VerticalAlignment="Center" SmallChange="0.2"/>
+        <TextBlock Name="VelocityThresholdText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="205"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="1"/></TextBlock>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="265"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="pl-pl" Text="LINEAR SLEEP TOLERANCE"/></TextBlock>
-        <Slider Canvas.Left="274" Canvas.Top="263" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderSleepTolerance" Value="0.01" Maximum="3" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" LargeChange="0.1" IsMoveToPointEnabled="True" TickFrequency="0.1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBlock x:Name="SleepToleranceText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="265"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Left" VerticalAlignment="Top" Text="0.1"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="232"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="LINEAR SLEEP TOLERANCE"/></TextBlock>
+        <Slider Canvas.Left="274" Canvas.Top="230" Width="60" Foreground="#FFF1F1F1" ValueChanged="SliderSleepTolerance" Value="0.01" Maximum="3" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" LargeChange="0.1" IsMoveToPointEnabled="True" TickFrequency="0.1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="SleepToleranceText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="232"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="361" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0.1"/>
 
         <!--Statistics-->
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="379"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="PHYSICS ENTITIES"/></TextBlock>
-        <TextBlock Name="PhysicsEntitiesText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="379"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="329"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="PHYSICS ENTITIES"/></TextBlock>
+        <TextBlock Name="PhysicsEntitiesText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="329"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="402"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="TOTAL "/><Run Language="pl-pl" Text="PHYSICS STEPS"/></TextBlock>
-        <TextBlock Name="TotalPhysicsStepsText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="402"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="352"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="TOTAL "/><Run Language="pl-pl" Text="PHYSICS STEPS"/></TextBlock>
+        <TextBlock Name="TotalPhysicsStepsText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="352"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="426"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="TOTAL COLLISIONS"/></TextBlock>
-        <TextBlock Name="TotalCollisionsText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="426"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="376"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="TOTAL COLLISIONS"/></TextBlock>
+        <TextBlock Name="TotalCollisionsText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="376"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="448"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="COLLISIONS THIS STEP"/></TextBlock>
-        <TextBlock Name="CollisionsThisStepText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="448"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="398"  TextWrapping="WrapWithOverflow" Height="14" Width="158" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="COLLISIONS THIS STEP"/></TextBlock>
+        <TextBlock Name="CollisionsThisStepText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="398"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="468"  TextWrapping="WrapWithOverflow" Height="14" Width="200" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="pl-pl" Text="AVERAGE COLLISIONS PER STEP"/></TextBlock>
-        <TextBlock Name="AverageCollisionsThisStepText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="468"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="418"  TextWrapping="WrapWithOverflow" Height="14" Width="200" Canvas.Left="89" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="AVERAGE COLLISIONS PER STEP"/></TextBlock>
+        <TextBlock Name="AverageCollisionsThisStepText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="418"  TextWrapping="WrapWithOverflow" Height="14" Width="54" Canvas.Left="283" TextAlignment="Right" FontWeight="UltraLight" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"  FontWeight="DemiBold"   Canvas.Top="478"  TextWrapping="WrapWithOverflow" Height="17" Width="370" Canvas.Left="105" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="PHYSICS OBJECT"/><LineBreak/><Run Language="pl-pl"/></TextBlock>
+        <Rectangle StrokeDashArray="1,1"  
+            Stroke="#FFF1F1F1"  
+            StrokeThickness="2"  
+            Width="271" Height="122" Canvas.Left="70" Canvas.Top="500" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="518"  TextWrapping="WrapWithOverflow" Height="14" Width="126" Canvas.Left="90" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="POSITION"/></TextBlock>
+        <TextBlock Name="EntityPositionText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="518"  TextWrapping="WrapWithOverflow" Height="14" Width="131" Canvas.Left="189" TextAlignment="Right" FontWeight="UltraLight" Text="(0,0)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="542"  TextWrapping="WrapWithOverflow" Height="14" Width="126" Canvas.Left="90" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="VELOCITY"/></TextBlock>
+        <TextBlock Name="EntityVelocityText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="542"  TextWrapping="WrapWithOverflow" Height="14" Width="131" Canvas.Left="189" TextAlignment="Right" FontWeight="UltraLight" Text="(0,0)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="568"  TextWrapping="WrapWithOverflow" Height="14" Width="126" Canvas.Left="90" HorizontalAlignment="Center" VerticalAlignment="Center" Text="FORCES LAST FRAME"/>
+        <TextBlock Name="EntityTotalForcesText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="568"  TextWrapping="WrapWithOverflow" Height="14" Width="104" Canvas.Left="216" TextAlignment="Right" FontWeight="UltraLight" Text="(0,0)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Foreground="#FFF1F1F1" FontFamily="Cascadia Mono ExtraLight"   Canvas.Top="590"  TextWrapping="WrapWithOverflow" Height="14" Width="126" Canvas.Left="90" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="MASS"/></TextBlock>
+        <TextBlock x:Name="EntityMassText" Foreground="#FFF1F1F1" FontFamily="Consolas"   Canvas.Top="590"  TextWrapping="WrapWithOverflow" Height="14" Width="104" Canvas.Left="216" TextAlignment="Right" FontWeight="UltraLight" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="pl-pl" Text="0"/></TextBlock>
     </Canvas>
 
     <!--Settings-->

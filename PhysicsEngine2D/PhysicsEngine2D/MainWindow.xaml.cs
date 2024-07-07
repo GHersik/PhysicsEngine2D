@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using PhysicsLibrary;
 using SimulationWindow;
 
@@ -12,6 +13,7 @@ namespace PhysicsEngine2D {
 
         readonly SceneEngine sceneEngine;
         readonly SceneLoader sceneLoader;
+        readonly PhysicsObjectTracker physicsObjectTracker;
 
         #region Initialization
         public MainWindow() {
@@ -22,6 +24,7 @@ namespace PhysicsEngine2D {
             SceneManager sceneManager = new(this, SceneView);
             sceneEngine = new SceneEngine(sceneManager);
             sceneLoader = new SceneLoader(sceneManager, SceneFade);
+            physicsObjectTracker = new(EntityPositionText, EntityVelocityText, EntityTotalForcesText, EntityMassText);
             StartSimulation();
         }
 
@@ -47,6 +50,7 @@ namespace PhysicsEngine2D {
             TotalCollisionsText.Text = PhysicsStatistics.TotalCollisions.ToString();
             CollisionsThisStepText.Text = PhysicsStatistics.CollisionsThisStep.ToString();
             AverageCollisionsThisStepText.Text = Math.Round(PhysicsStatistics.AverageCollisionsPerStep, 3).ToString();
+            physicsObjectTracker.FixedUpdate();
         }
 
         public void TimeButton_Click(object sender, RoutedEventArgs e) {
@@ -71,6 +75,7 @@ namespace PhysicsEngine2D {
             SetSimulationTime(false);
             EnableInput(false);
 
+            physicsObjectTracker.ResetTrackedObject();
             int sceneIndex = PickSimulationCB.SelectedIndex;
             SceneLoader.Scene enumValue = (SceneLoader.Scene)Enum.ToObject(typeof(SceneLoader.Scene), sceneIndex);
             PhysicsStatistics.ResetStatistics();
@@ -130,6 +135,11 @@ namespace PhysicsEngine2D {
             TimeButton.IsEnabled = value;
             GenerateButton.IsEnabled = value;
             PickSimulationCB.IsEnabled = value;
+        }
+
+        void SceneView_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            if (e != null && e.OriginalSource != null && e.OriginalSource is IRenderer)
+                physicsObjectTracker.SetNewObjectToTrack((IRenderer)e.OriginalSource);
         }
     }
 }

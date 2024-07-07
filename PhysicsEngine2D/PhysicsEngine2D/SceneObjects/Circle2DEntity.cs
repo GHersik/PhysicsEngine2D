@@ -14,7 +14,7 @@ namespace SimulationWindow {
 
         public Circle2DEntity(Vector2 position, double radius, SolidColorBrush color) {
             Transform = new PhysicsLibrary.Transform(position);
-            Renderer = new Circle2D(radius, color);
+            Renderer = new Circle2D(this, radius, color);
             Collider = new CircleCollider2D(this, radius);
             Body = new Body();
         }

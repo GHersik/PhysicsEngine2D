@@ -8,7 +8,7 @@ namespace PhysicsLibrary {
         public static double FixedTimeStep { get; private set; } = 0.02;
         public static Vector2 Gravity { get; private set; } = NoGravity;
         public static double DefaultContactOffset { get; private set; } = 0.1;
-        public static double VelocityThreshold { get; private set; } = 1;
+        public static double VelocityThreshold { get; private set; } = 30;
         public static double LinearSleepTolerance { get; private set; } = 0.1;
 
 

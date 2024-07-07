@@ -12,7 +12,7 @@ namespace SimulationWindow {
 
         public Box2DEntity(Vector2 position, double width, double height, SolidColorBrush color) {
             Transform = new PhysicsLibrary.Transform(position);
-            Renderer = new Box2D(width, height, color);
+            Renderer = new Box2D(this, width, height, color);
             Collider = new BoxCollider2D(this, new Vector2(-width / 2, -height / 2), new Vector2(width / 2, height / 2));
             Body = new Body();
         }

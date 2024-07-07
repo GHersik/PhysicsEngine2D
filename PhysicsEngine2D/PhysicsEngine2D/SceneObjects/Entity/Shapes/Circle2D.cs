@@ -7,23 +7,26 @@ namespace SimulationWindow {
     public class Circle2D : Shape, IRenderer {
 
         public UIElement UIElement => this;
+        public Entity AttachedEntity => attachedEntity;
 
+        readonly Entity attachedEntity;
         readonly double radius;
 
-        public Circle2D(double radius, SolidColorBrush color) {
+        public Circle2D(Entity attachedEntity, double radius, SolidColorBrush color) {
+            this.attachedEntity = attachedEntity;
             this.radius = radius;
             Width = radius * 2;
             Height = radius * 2;
             Fill = color;
         }
 
-        public Circle2D(double radius) : this(radius, ColorSettings.YellowBrush) { }
+        public Circle2D(Entity attachedEntity, double radius) : this(attachedEntity, radius, ColorSettings.YellowBrush) { }
 
-        public Circle2D() : this(6, ColorSettings.YellowBrush) { }
+        public Circle2D(Entity attachedEntity) : this(attachedEntity, 6, ColorSettings.YellowBrush) { }
 
         protected override Geometry DefiningGeometry {
             get {
-                return new EllipseGeometry(new Rect(0, 0, Width - 1, Height - 1));
+                return new EllipseGeometry(new Rect(0, 0, Width - 2, Height - 2));
             }
         }
 

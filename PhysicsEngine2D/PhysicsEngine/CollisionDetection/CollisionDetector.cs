@@ -3,13 +3,13 @@
 namespace Physics {
     internal class CollisionDetector {
 
-        public static List<Collision2D> DetectCollisions(ICollection<IPhysicsEntity> physicsEntities) {
+        public List<Collision2D> DetectCollisions(ICollection<IPhysicsEntity> physicsEntities) {
             IPhysicsEntity[] collisions = physicsEntities.ToArray();
             List<Collision2D> collisionsDetected = BroadPhase(collisions);
             return collisionsDetected;
         }
 
-        static List<Collision2D> BroadPhase(IPhysicsEntity[] physicsEntities) {
+        List<Collision2D> BroadPhase(IPhysicsEntity[] physicsEntities) {
             List<Collision2D> collisionsToResolve = new();
             if (physicsEntities.Length < 1)
                 return collisionsToResolve;
@@ -27,7 +27,7 @@ namespace Physics {
 
         //}
 
-        static bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
+        bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
             collisionData = null;
             if (physicsEntityA.Body.InverseMass == 0 && physicsEntityB.Body.InverseMass == 0)
                 return false;
