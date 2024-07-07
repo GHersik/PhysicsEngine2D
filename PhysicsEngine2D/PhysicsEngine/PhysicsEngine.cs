@@ -11,7 +11,6 @@ namespace Physics {
         CollisionDetector collisionDetector;
         ContactResolver contactResolver;
 
-
         public PhysicsEngine() {
             ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();

@@ -137,6 +137,41 @@ namespace SimulationWindow {
             return scene;
         }
 
+        public static SceneData Gravity() {
+            SceneData scene = new();
+
+            Circle2DEntity bigCircle = new(new(250, 100), 60, ColorSettings.TransparentBrush);
+            bigCircle.Body.Mass = 20;
+            bigCircle.Body.Damping = 1;
+            bigCircle.Body.Restitution = 1;
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(bigCircle);
+
+            return scene;
+        }
+
+        public static SceneData EnergyConservation() {
+            SceneData scene = new();
+
+            Circle2DEntity smallCircle = new(new(150, 250), 24, ColorSettings.TransparentBrush);
+            smallCircle.Body.Mass = 4;
+            smallCircle.Body.Restitution = 1;
+            smallCircle.Body.AddForce(new(15, 0), ForceMode.VelocityChange);
+            smallCircle.Body.Damping = 1;
+            smallCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(smallCircle);
+
+            Circle2DEntity bigCircle = new(new(350, 250), 60, ColorSettings.TransparentBrush);
+            bigCircle.Body.Mass = 20;
+            bigCircle.Body.Restitution = 1;
+            bigCircle.Body.Damping = 1;
+            bigCircle.Body.AddForce(new(-5, 0), ForceMode.VelocityChange);
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(bigCircle);
+
+            return scene;
+        }
+
         public static SceneData ImpossibleScenarios() {
             SceneData scene = new();
 

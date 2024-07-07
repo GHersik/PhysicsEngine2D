@@ -6,6 +6,7 @@ namespace Physics {
         public List<Collision2D> DetectCollisions(ICollection<IPhysicsEntity> physicsEntities) {
             IPhysicsEntity[] collisions = physicsEntities.ToArray();
             List<Collision2D> collisionsDetected = BroadPhase(collisions);
+            NarrowPhase();
             return collisionsDetected;
         }
 
@@ -23,9 +24,9 @@ namespace Physics {
             return collisionsToResolve;
         }
 
-        //void NarrowPhase() {
+        void NarrowPhase() {
 
-        //}
+        }
 
         bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
             collisionData = null;

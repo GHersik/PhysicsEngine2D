@@ -31,6 +31,7 @@ namespace Physics {
                 ResolveEntities(entityA, entityB, contacts);
         }
 
+        #region ResolveSingleBody
         void ResolveEntity(IPhysicsEntity entity, List<ContactPoint2D> contacts) {
             Vector2 impulse = CalculateSingleEntityImpulse(entity.Body, contacts);
             entity.Body.AddForce(impulse, ForceMode.VelocityChange);
@@ -58,7 +59,9 @@ namespace Physics {
             Vector2 correction = CalculateSeparationCorrection(contacts);
             entity.Transform.position += correction;
         }
+        #endregion
 
+        #region ResolveBodies
         void ResolveEntities(IPhysicsEntity entityA, IPhysicsEntity entityB, List<ContactPoint2D> contacts) {
             Vector2 twoBodyImpulse = CalculateBodiesImpulse(entityA.Body, entityB.Body, contacts);
             entityA.Body.AddForce(-twoBodyImpulse, ForceMode.Impulse);
@@ -106,6 +109,7 @@ namespace Physics {
             }
             return maxSeparation;
         }
+        #endregion
 
         bool EvaluateVelocityThreshold(Vector2 velocity) {
             if (Math.Abs(velocity.x * PhysicsSettings.FixedTimeStep) < PhysicsSettings.VelocityThreshold && Math.Abs(velocity.y * PhysicsSettings.FixedTimeStep) < PhysicsSettings.VelocityThreshold)

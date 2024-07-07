@@ -84,7 +84,6 @@ namespace PhysicsEngine2D {
             Task sceneLoadTask = sceneLoader.LoadSceneAsync(enumValue);
             await sceneLoadTask;
             EnableInput(true);
-            SetSimulationTime(true);
         }
 
         void SliderGravityX(object sender, RoutedPropertyChangedEventArgs<double> e) {
