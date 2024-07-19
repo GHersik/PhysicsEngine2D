@@ -43,7 +43,6 @@ namespace Physics {
             double restitution = body.Restitution;
             if (EvaluateVelocityThreshold(body.Velocity)) {
                 restitution = 0;
-                body.AddForce(-body.TotalForce, ForceMode.Acceleration);
             }
             foreach (var contact in contacts) {
                 double relativeVelocityAlongNormal = Vector2.Dot(body.Velocity, contact.Normal);
@@ -76,8 +75,6 @@ namespace Physics {
             double massOverSum = 1 / bodyA.Mass + 1 / bodyB.Mass;
             if (EvaluateVelocityThreshold(relativeVelocity)) {
                 restitution = 0;
-                bodyA.AddForce(-bodyA.TotalForce, ForceMode.Acceleration);
-                bodyB.AddForce(-bodyB.TotalForce, ForceMode.Acceleration);
             }
             foreach (var contact in contacts) {
                 double relativeVelocityAlongNormal = Vector2.Dot(relativeVelocity, contact.Normal);

@@ -19,15 +19,6 @@ namespace PhysicsLibrary {
             Vector2 boxMax = AttachedEntity.Transform.position + MaxPoint;
             double clampedX = Math.Max(boxMin.x, Math.Min(point.x, boxMax.x));
             double clampedY = Math.Max(boxMin.y, Math.Min(point.y, boxMax.y));
-
-            if (point.x < boxMin.x || point.x > boxMax.x) {
-                clampedY = point.y;
-                clampedY = Math.Max(boxMin.y, Math.Min(clampedY, boxMax.y));
-            }
-            else if (point.y < boxMin.y || point.y > boxMax.y) {
-                clampedX = point.x;
-                clampedX = Math.Max(boxMin.x, Math.Min(clampedX, boxMax.x));
-            }
             return new Vector2(clampedX, clampedY);
         }
     }

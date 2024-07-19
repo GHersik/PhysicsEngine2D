@@ -22,7 +22,6 @@ namespace SimulationWindow {
 
         public void SetNewObjectToTrack(IRenderer renderer) {
             EvaluateNewObject(renderer);
-            DisplayObjectProperties();
         }
 
         void EvaluateNewObject(IRenderer newRenderer) {
@@ -30,8 +29,12 @@ namespace SimulationWindow {
                 return;
             if (renderer != null)
                 renderer.SetBounds(ColorSettings.WhiteBrush, 3);
-            if (newRenderer != null)
+            if (newRenderer != null) {
                 newRenderer.SetBounds(ColorSettings.YellowBrush, 3);
+                DisplayObjectProperties(newRenderer);
+            }
+            else
+                ResetProperties();
 
             renderer = newRenderer;
         }
@@ -42,13 +45,11 @@ namespace SimulationWindow {
         }
 
         public void FixedUpdate() {
-            DisplayObjectProperties();
+            if (renderer != null)
+                DisplayObjectProperties(renderer);
         }
 
-        void DisplayObjectProperties() {
-            if (renderer == null)
-                return;
-
+        void DisplayObjectProperties(IRenderer renderer) {
             TrackVectorProperty(positionTextBlock, renderer.AttachedEntity.Transform.position);
             TrackVectorProperty(velocityTextBlock, renderer.AttachedEntity.Body.Velocity);
             TrackVectorProperty(totalForcesTextBlock, renderer.AttachedEntity.Body.TotalForce * PhysicsSettings.FixedTimeStep);

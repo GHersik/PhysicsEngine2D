@@ -100,15 +100,17 @@ namespace SimulationWindow {
         public static SceneData Tunneling() {
             SceneData scene = new();
 
-            Circle2DEntity bigCircle = new(new(100, 250), 20, ColorSettings.TransparentBrush);
+            Circle2DEntity bigCircle = new(new(100, 250), 40, ColorSettings.TransparentBrush);
             bigCircle.Body.Mass = 20;
             bigCircle.Body.Damping = 1;
             bigCircle.Body.Restitution = .7;
-            bigCircle.Body.AddForce(new(25000, 0), ForceMode.Impulse);
+            bigCircle.Body.AddForce(new(2500, 0), ForceMode.VelocityChange);
             bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
             scene.AddEntity(bigCircle);
 
-            Box2DEntity boxEntity = new(new(360, 250), 40, 100, ColorSettings.TransparentBrush);
+            Box2DEntity boxEntity = new(new(360, 250), 40, 200, ColorSettings.TransparentBrush);
+            boxEntity.Body.Mass = 20;
+            boxEntity.Body.Restitution = 1;
             boxEntity.Body.SetKinematic(true);
             boxEntity.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
             scene.AddEntity(boxEntity);
@@ -143,7 +145,6 @@ namespace SimulationWindow {
             Circle2DEntity bigCircle = new(new(250, 100), 60, ColorSettings.TransparentBrush);
             bigCircle.Body.Mass = 20;
             bigCircle.Body.Damping = 1;
-            bigCircle.Body.Restitution = 1;
             bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
             scene.AddEntity(bigCircle);
 

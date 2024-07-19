@@ -79,10 +79,10 @@ namespace PhysicsEngine2D {
             int sceneIndex = PickSimulationCB.SelectedIndex;
             SceneLoader.Scene enumValue = (SceneLoader.Scene)Enum.ToObject(typeof(SceneLoader.Scene), sceneIndex);
             PhysicsStatistics.ResetStatistics();
-            Update();
 
             Task sceneLoadTask = sceneLoader.LoadSceneAsync(enumValue);
             await sceneLoadTask;
+            Update();
             EnableInput(true);
         }
 
@@ -139,6 +139,8 @@ namespace PhysicsEngine2D {
         void SceneView_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             if (e != null && e.OriginalSource != null && e.OriginalSource is IRenderer)
                 physicsObjectTracker.SetNewObjectToTrack((IRenderer)e.OriginalSource);
+            else
+                physicsObjectTracker.SetNewObjectToTrack(null);
         }
     }
 }
