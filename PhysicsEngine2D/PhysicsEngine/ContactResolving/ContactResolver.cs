@@ -115,8 +115,8 @@ namespace Physics {
         }
 
         void SendCollisionMessages(Collision2D contact) {
-            contact.ColliderA.AttachedEntity.OnCollisionEnter2D(contact);
-            contact.ColliderB.AttachedEntity.OnCollisionEnter2D(contact);
+            contact.ColliderA.AttachedEntity?.OnCollisionEnter2D(contact);
+            contact.ColliderB.AttachedEntity?.OnCollisionEnter2D(contact);
         }
     }
 }
