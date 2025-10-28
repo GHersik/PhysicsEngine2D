@@ -7,29 +7,46 @@ namespace Physics {
         public PhysicsWorld PhysicsWorld { get; private set; }
         public BodyForceRegistry ForceRegistry { get; private set; }
 
+<<<<<<< HEAD
         readonly EulerIntegrator eulerIntegrator;
         readonly ContactResolver contactResolver;
 
         public PhysicsEngine() {
             eulerIntegrator = new EulerIntegrator();
             contactResolver = new ContactResolver();
+=======
+        IIntegrator integrator;
+        CollisionDetector collisionDetector;
+        ContactResolver contactResolver;
+
+        public PhysicsEngine() {
+>>>>>>> development
             ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();
+            integrator = new EulerIntegrator();
+            contactResolver = new ContactResolver();
+            collisionDetector = new CollisionDetector();
         }
 
         public PhysicsEngine(Collection<IPhysicsEntity> physicsObjects) {
+<<<<<<< HEAD
             eulerIntegrator = new EulerIntegrator();
             contactResolver = new ContactResolver();
+=======
+>>>>>>> development
             ForceRegistry = new BodyForceRegistry();
             PhysicsWorld = new PhysicsWorld();
             PhysicsWorld.ReplaceRegistry(physicsObjects);
+            integrator = new EulerIntegrator();
+            contactResolver = new ContactResolver();
+            collisionDetector = new CollisionDetector();
         }
 
         public void FixedUpdate() {
             foreach (var physicsEntity in PhysicsWorld) {
                 physicsEntity.Body.AddForce(PhysicsSettings.Gravity, ForceMode.Acceleration);
                 ForceRegistry.UpdateForces();
-                eulerIntegrator.Integrate(physicsEntity);
+                integrator.Integrate(physicsEntity);
             }
 
             List<Collision2D> collisions = CollisionDetector.DetectCollisions(PhysicsWorld.GetPhysicsEntityArray());

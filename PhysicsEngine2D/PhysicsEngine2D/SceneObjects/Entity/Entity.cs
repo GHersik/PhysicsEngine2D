@@ -17,7 +17,11 @@ namespace SimulationWindow {
         public Collider2D Collider { get; protected set; }
 
         public Entity() {
+<<<<<<< HEAD
             this.Renderer = new Circle2D();
+=======
+            this.Renderer = new Circle2D(this);
+>>>>>>> development
             this.Transform = new Transform();
             this.Body = new Body();
             this.Collider = new CircleCollider2D(this);

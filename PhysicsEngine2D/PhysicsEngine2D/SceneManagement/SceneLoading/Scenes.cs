@@ -10,7 +10,10 @@ namespace SimulationWindow {
 
     public static class Scenes {
 
+<<<<<<< HEAD
         //SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(80, 255), (byte)rnd.Next(80, 255), (byte)rnd.Next(80, 255)));
+=======
+>>>>>>> development
         static readonly Random rnd = new();
 
         public static SceneData Ambient() {
@@ -24,12 +27,19 @@ namespace SimulationWindow {
                     circle.Body.Mass = massAndRadius;
                     circle.Body.Damping = 1;
                     circle.Body.AddForce(new Vector2(rnd.Next(-200, 200), rnd.Next(-200, 200)), ForceMode.Impulse);
+<<<<<<< HEAD
+=======
+                    circle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+>>>>>>> development
                     scene.AddEntity(circle);
                 }
 
             AddWalls(scene);
+<<<<<<< HEAD
             //PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
             //PhysicsSettings.SetFixedTimeStep(.03);
+=======
+>>>>>>> development
             return scene;
         }
 
@@ -39,6 +49,7 @@ namespace SimulationWindow {
             for (int i = 1; i < 18; i++)
                 for (int j = 1; j < 8; j++) {
                     Vector2 position = new(i * 28, j * 28);
+<<<<<<< HEAD
                     Circle2DEntity circle = new(position, 4, ColorSettings.YellowBrush);
                     circle.Body.Mass = 4;
                     circle.Body.Damping = 1;
@@ -53,6 +64,23 @@ namespace SimulationWindow {
             AddWalls(scene);
             //PhysicsSettings.SetGravity(Vector2.Zero);
             //PhysicsSettings.SetFixedTimeStep(.02);
+=======
+                    Circle2DEntity circle = new(position, 4, ColorSettings.WhiteBrush);
+                    circle.Body.Mass = 4;
+                    circle.Body.Damping = 1;
+                    circle.Body.AddForce(new Vector2(rnd.Next(-300, 300), rnd.Next(-300, 300)), ForceMode.Impulse);
+                    circle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+                    circle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+                    scene.AddEntity(circle);
+                }
+
+            Circle2DEntity bigCircle = new(new Vector2(250, 400), 20, ColorSettings.WhiteBrush);
+            bigCircle.Body.Mass = 20;
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(bigCircle);
+
+            AddWalls(scene);
+>>>>>>> development
             return scene;
         }
 
@@ -63,17 +91,28 @@ namespace SimulationWindow {
             bigCircle.Body.Mass = 20;
             bigCircle.Body.Damping = .9;
             bigCircle.Body.Restitution = .7;
+<<<<<<< HEAD
             bigCircle.Renderer.SetBounds(ColorSettings.YellowBrush, 1.5);
+=======
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+>>>>>>> development
             scene.AddEntity(bigCircle);
 
             Box2DEntity boxEntity = new(new(250, 400), 100, 40, ColorSettings.TransparentBrush);
             boxEntity.Body.SetKinematic(true);
+<<<<<<< HEAD
             boxEntity.Renderer.SetBounds(ColorSettings.YellowBrush, 3);
             scene.AddEntity(boxEntity);
 
             AddWalls(scene);
             //PhysicsSettings.SetGravity(new Vector2(0, 200));
             //PhysicsSettings.SetFixedTimeStep(.01);
+=======
+            boxEntity.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(boxEntity);
+
+            AddWalls(scene);
+>>>>>>> development
             return scene;
         }
 
@@ -97,14 +136,18 @@ namespace SimulationWindow {
             scene.AddEntity(whiteBall);
 
             AddWalls(scene);
+<<<<<<< HEAD
             //PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
             //PhysicsSettings.SetFixedTimeStep(.01);
+=======
+>>>>>>> development
             return scene;
         }
 
         public static SceneData Tunneling() {
             SceneData scene = new();
 
+<<<<<<< HEAD
             Circle2DEntity bigCircle = new(new(100, 250), 20, ColorSettings.TransparentBrush);
             bigCircle.Body.Mass = 20;
             bigCircle.Body.Damping = 1;
@@ -121,6 +164,24 @@ namespace SimulationWindow {
             AddWalls(scene);
             //PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
             //PhysicsSettings.SetFixedTimeStep(.07);
+=======
+            Circle2DEntity bigCircle = new(new(100, 250), 40, ColorSettings.TransparentBrush);
+            bigCircle.Body.Mass = 20;
+            bigCircle.Body.Damping = 1;
+            bigCircle.Body.Restitution = .7;
+            bigCircle.Body.AddForce(new(2500, 0), ForceMode.VelocityChange);
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(bigCircle);
+
+            Box2DEntity boxEntity = new(new(360, 250), 40, 200, ColorSettings.TransparentBrush);
+            boxEntity.Body.Mass = 20;
+            boxEntity.Body.Restitution = 1;
+            boxEntity.Body.SetKinematic(true);
+            boxEntity.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(boxEntity);
+
+            AddWalls(scene);
+>>>>>>> development
             return scene;
         }
 
@@ -132,17 +193,62 @@ namespace SimulationWindow {
             bigCircle.Body.Damping = 1;
             bigCircle.Body.Restitution = .7;
             bigCircle.Body.AddForce(new(11000, 0), ForceMode.Impulse);
+<<<<<<< HEAD
             bigCircle.Renderer.SetBounds(ColorSettings.YellowBrush, 1.5);
+=======
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+>>>>>>> development
             scene.AddEntity(bigCircle);
 
             Box2DEntity boxEntity = new(new(360, 280), 100, 40, ColorSettings.TransparentBrush);
             boxEntity.Body.SetKinematic(true);
+<<<<<<< HEAD
             boxEntity.Renderer.SetBounds(ColorSettings.YellowBrush, 3);
             scene.AddEntity(boxEntity);
 
             AddWalls(scene);
             //PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
             //PhysicsSettings.SetFixedTimeStep(.07);
+=======
+            boxEntity.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(boxEntity);
+
+            AddWalls(scene);
+            return scene;
+        }
+
+        public static SceneData Gravity() {
+            SceneData scene = new();
+
+            Circle2DEntity bigCircle = new(new(250, 100), 60, ColorSettings.TransparentBrush);
+            bigCircle.Body.Mass = 20;
+            bigCircle.Body.Damping = 1;
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(bigCircle);
+
+            return scene;
+        }
+
+        public static SceneData EnergyConservation() {
+            SceneData scene = new();
+
+            Circle2DEntity smallCircle = new(new(150, 250), 24, ColorSettings.TransparentBrush);
+            smallCircle.Body.Mass = 4;
+            smallCircle.Body.Restitution = 1;
+            smallCircle.Body.AddForce(new(15, 0), ForceMode.VelocityChange);
+            smallCircle.Body.Damping = 1;
+            smallCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(smallCircle);
+
+            Circle2DEntity bigCircle = new(new(350, 250), 60, ColorSettings.TransparentBrush);
+            bigCircle.Body.Mass = 20;
+            bigCircle.Body.Restitution = 1;
+            bigCircle.Body.Damping = 1;
+            bigCircle.Body.AddForce(new(-5, 0), ForceMode.VelocityChange);
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(bigCircle);
+
+>>>>>>> development
             return scene;
         }
 
@@ -154,17 +260,28 @@ namespace SimulationWindow {
             bigCircle.Body.Damping = 1;
             bigCircle.Body.Restitution = .7;
             bigCircle.Body.AddForce(new(10000, 0), ForceMode.Impulse);
+<<<<<<< HEAD
             bigCircle.Renderer.SetBounds(ColorSettings.YellowBrush, 1.5);
+=======
+            bigCircle.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+>>>>>>> development
             scene.AddEntity(bigCircle);
 
             Box2DEntity boxEntity = new(new(360, 250), 40, 100, ColorSettings.TransparentBrush);
             boxEntity.Body.SetKinematic(true);
+<<<<<<< HEAD
             boxEntity.Renderer.SetBounds(ColorSettings.YellowBrush, 3);
             scene.AddEntity(boxEntity);
 
             AddWalls(scene);
             //PhysicsSettings.SetGravity(PhysicsSettings.NoGravity);
             //PhysicsSettings.SetFixedTimeStep(.07);
+=======
+            boxEntity.Renderer.SetBounds(ColorSettings.WhiteBrush, 3);
+            scene.AddEntity(boxEntity);
+
+            AddWalls(scene);
+>>>>>>> development
             return scene;
         }
 
@@ -181,8 +298,11 @@ namespace SimulationWindow {
                 }
 
             AddWalls(scene);
+<<<<<<< HEAD
             //PhysicsSettings.SetGravity(PhysicsSettings.EarthGravity);
             //PhysicsSettings.SetFixedTimeStep(.02);
+=======
+>>>>>>> development
             return scene;
         }
 

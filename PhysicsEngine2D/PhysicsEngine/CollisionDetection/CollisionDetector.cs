@@ -9,7 +9,11 @@ namespace Physics {
             return collisionsDetected;
         }
 
+<<<<<<< HEAD
         static List<Collision2D> BroadPhase(IPhysicsEntity[] physicsEntities) {
+=======
+        List<Collision2D> BroadPhase(IPhysicsEntity[] physicsEntities) {
+>>>>>>> development
             List<Collision2D> collisionsToResolve = new();
             if (physicsEntities.Length < 1)
                 return collisionsToResolve;
@@ -23,11 +27,15 @@ namespace Physics {
             return collisionsToResolve;
         }
 
+<<<<<<< HEAD
         //void NarrowPhase() {
 
         //}
 
         static bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
+=======
+        bool DetectCollision(IPhysicsEntity physicsEntityA, IPhysicsEntity physicsEntityB, out Collision2D collisionData) {
+>>>>>>> development
             collisionData = null;
             if (physicsEntityA.Body.InverseMass == 0 && physicsEntityB.Body.InverseMass == 0)
                 return false;

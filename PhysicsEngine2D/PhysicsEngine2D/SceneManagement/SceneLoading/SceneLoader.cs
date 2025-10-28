@@ -16,6 +16,11 @@ namespace SimulationWindow {
             BilliardSample,
             Tunneling,
             MarginalBounds,
+<<<<<<< HEAD
+=======
+            Gravity,
+            EnergyConservation,
+>>>>>>> development
             LargeSet
         }
 
@@ -63,6 +68,11 @@ namespace SimulationWindow {
                 case Scene.Tunneling: return Scenes.Tunneling();
                 case Scene.MarginalBounds: return Scenes.MarginalBounds();
                 case Scene.LargeSet: return Scenes.LargeSet();
+<<<<<<< HEAD
+=======
+                case Scene.Gravity: return Scenes.Gravity();
+                case Scene.EnergyConservation: return Scenes.EnergyConservation();
+>>>>>>> development
                 default: return Scenes.Ambient();
             }
         }

@@ -57,10 +57,15 @@ namespace SimulationWindow {
         }
 
         public void Update() {
+<<<<<<< HEAD
             mainWindow.Update();
+=======
+>>>>>>> development
             SceneRenderer.DrawScene(sceneData);
             foreach (Entity entity in sceneData)
                 entity.Update();
+
+            mainWindow.Update();
         }
     }
 }

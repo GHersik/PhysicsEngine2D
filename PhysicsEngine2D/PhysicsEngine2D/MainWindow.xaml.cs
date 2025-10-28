@@ -3,6 +3,10 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+<<<<<<< HEAD
+=======
+using System.Windows.Controls;
+>>>>>>> development
 using PhysicsLibrary;
 using SimulationWindow;
 
@@ -12,6 +16,10 @@ namespace PhysicsEngine2D {
 
         readonly SceneEngine sceneEngine;
         readonly SceneLoader sceneLoader;
+<<<<<<< HEAD
+=======
+        readonly PhysicsObjectTracker physicsObjectTracker;
+>>>>>>> development
 
         #region Initialization
         public MainWindow() {
@@ -22,6 +30,7 @@ namespace PhysicsEngine2D {
             SceneManager sceneManager = new(this, SceneView);
             sceneEngine = new SceneEngine(sceneManager);
             sceneLoader = new SceneLoader(sceneManager, SceneFade);
+            physicsObjectTracker = new(EntityPositionText, EntityVelocityText, EntityTotalForcesText, EntityMassText);
             StartSimulation();
         }
 
@@ -47,6 +56,10 @@ namespace PhysicsEngine2D {
             TotalCollisionsText.Text = PhysicsStatistics.TotalCollisions.ToString();
             CollisionsThisStepText.Text = PhysicsStatistics.CollisionsThisStep.ToString();
             AverageCollisionsThisStepText.Text = Math.Round(PhysicsStatistics.AverageCollisionsPerStep, 3).ToString();
+<<<<<<< HEAD
+=======
+            physicsObjectTracker.FixedUpdate();
+>>>>>>> development
         }
 
         public void TimeButton_Click(object sender, RoutedEventArgs e) {
@@ -71,15 +84,19 @@ namespace PhysicsEngine2D {
             SetSimulationTime(false);
             EnableInput(false);
 
+            physicsObjectTracker.ResetTrackedObject();
             int sceneIndex = PickSimulationCB.SelectedIndex;
             SceneLoader.Scene enumValue = (SceneLoader.Scene)Enum.ToObject(typeof(SceneLoader.Scene), sceneIndex);
             PhysicsStatistics.ResetStatistics();
+<<<<<<< HEAD
             Update();
+=======
+>>>>>>> development
 
             Task sceneLoadTask = sceneLoader.LoadSceneAsync(enumValue);
             await sceneLoadTask;
+            Update();
             EnableInput(true);
-            SetSimulationTime(true);
         }
 
         void SliderGravityX(object sender, RoutedPropertyChangedEventArgs<double> e) {
@@ -130,6 +147,13 @@ namespace PhysicsEngine2D {
             TimeButton.IsEnabled = value;
             GenerateButton.IsEnabled = value;
             PickSimulationCB.IsEnabled = value;
+        }
+
+        void SceneView_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            if (e != null && e.OriginalSource != null && e.OriginalSource is IRenderer)
+                physicsObjectTracker.SetNewObjectToTrack((IRenderer)e.OriginalSource);
+            else
+                physicsObjectTracker.SetNewObjectToTrack(null);
         }
     }
 }

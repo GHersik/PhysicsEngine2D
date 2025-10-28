@@ -8,10 +8,21 @@ namespace SimulationWindow {
 
         public UIElement UIElement => this;
 
+<<<<<<< HEAD
         readonly double width;
         readonly double height;
 
         public Box2D(double width, double height, SolidColorBrush color) {
+=======
+        public Entity AttachedEntity => attachedEntity;
+
+        readonly Entity attachedEntity;
+        readonly double width;
+        readonly double height;
+
+        public Box2D(Entity attachedEntity, double width, double height, SolidColorBrush color) {
+            this.attachedEntity = attachedEntity;
+>>>>>>> development
             this.width = width;
             this.height = height;
             Width = width;
@@ -19,9 +30,15 @@ namespace SimulationWindow {
             Fill = color;
         }
 
+<<<<<<< HEAD
         public Box2D(double width, double height) : this(width, height, ColorSettings.YellowBrush) { }
 
         public Box2D() : this(10, 10, ColorSettings.YellowBrush) { }
+=======
+        public Box2D(Entity attachedEntity, double width, double height) : this(attachedEntity, width, height, ColorSettings.YellowBrush) { }
+
+        public Box2D(Entity attachedEntity) : this(attachedEntity, 10, 10, ColorSettings.YellowBrush) { }
+>>>>>>> development
 
         protected override Geometry DefiningGeometry {
             get {
