@@ -25,6 +25,10 @@ The project simulates real-time physical interactions between objects using cust
 
 #### Controls
 
+- Track Physics Object — left mouse click on any physics object to track its physical properties
+
+<br>
+
 ###### :arrow_forward: Buttons
 
 - Start Time/Stop Time — toggle current simulation
